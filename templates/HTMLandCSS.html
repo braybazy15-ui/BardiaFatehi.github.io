@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره HTML & CSS | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #1e293b;
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e0f2fe;
+        }
+
+        /* بخش هیرو دوره */
+        .course-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .course-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(30, 64, 175, 0.75));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* بخش معرفی دوره */
+        .course-intro {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .instructor-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+        }
+
+        .instructor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #2563eb;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+
+        .instructor-name {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor-bio {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* بخش مشخصات دوره */
+        .course-specs {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+        }
+
+        .spec-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec-title {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-value {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* بخش وضعیت دوره */
+        .course-status {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            text-align: center;
+        }
+
+        .status-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.2);
+            border: 3px solid #f59e0b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-title {
+            font-size: 2.2rem;
+            color: #d97706;
+            margin-bottom: 1rem;
+        }
+
+        .status-description {
+            color: #92400e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .notify-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        /* وضعیت دوره */
+        .status-badge {
+            background: #dc2626;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .status-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        
+.course-description {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.course-title {
+    font-size: 2.2rem;
+    color: #6d0000;
+    margin-bottom: 1.5rem;
+    text-align: right;
+    position: relative;
+}
+
+.course-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, #6d0000, #dc2626);
+    border-radius: 2px;
+}
+
+.description-content {
+    line-height: 1.8;
+}
+
+.description-content p {
+    color: #475569;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    line-height: 1.9;
+}
+
+.highlight-keyword {
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    margin: 0 0.2rem;
+    font-size: 1.15rem;
+}
+
+.highlight-keyword.primary {
+    background: linear-gradient(135deg, #fee2e2, #fef2f2);
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.highlight-keyword.secondary {
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.availability-notice {
+    background: linear-gradient(135deg, #fef3c7, #fef7cd);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-right: 4px solid #f59e0b;
+    margin-top: 1.5rem;
+}
+
+.availability-notice p {
+    color: #92400e;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.notice-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.availability-notice strong {
+    color: #92400e;
+}
+
+@media (max-width: 768px) {
+    .course-description {
+        padding: 1.5rem;
+    }
+    
+    .course-title {
+        font-size: 1.8rem;
+    }
+    
+    .description-content p {
+        font-size: 1rem;
+        text-align: right;
+    }
+    
+    .highlight-keyword {
+        font-size: 1.05rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">آکادمی برنامه نویسی بردیا فاتحی</div>
+                <div class="nav-links">
+                    <a href="/">صفحه اصلی</a>
+                    <a href="/Moshavereh">مشاوره رایگان</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش هیرو دوره -->
+    <section class="course-hero">
+        <img src="/static/doreh4.jpg" alt="دوره HTML & CSS" class="course-hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <div class="status-badge">⛔ دوره ناموجود</div>
+                <h1>دوره HTML & CSS</h1>
+                <p>آموزش طراحی و ساخت صفحات وب با HTML و CSS</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش معرفی دوره -->
+    <section class="course-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="course-description">
+                    <h2 class="course-title">درباره این دوره</h2>
+                    <div class="description-content">
+                        <p>
+                            این دوره برای یادگیری 
+                            <span class="highlight-keyword primary">HTML</span> 
+                            و 
+                            <span class="highlight-keyword secondary">CSS</span> 
+                            طراحی شده است. این دو تکنولوژی 
+                            <span class="highlight-keyword primary">پایه و اساس</span> 
+                            طراحی 
+                            <span class="highlight-keyword secondary">صفحات وب</span> 
+                            می‌باشند.
+                        </p>
+                        <p>
+                            در این دوره با 
+                            <span class="highlight-keyword primary">تگ‌های اصلی HTML</span> 
+                            و 
+                            <span class="highlight-keyword secondary">ویژگی‌های CSS</span> 
+                            آشنا می‌شوید و یاد می‌گیرید چگونه 
+                            <span class="highlight-keyword primary">صفحات وب زیبا</span> 
+                            و 
+                            <span class="highlight-keyword secondary">واکنش‌گرا</span> 
+                            ایجاد کنید.
+                        </p>
+                        <div class="availability-notice">
+                            <p>
+                                <span class="notice-icon">⏳</span>
+                                <strong>توجه:</strong> این دوره در حال حاضر در دسترس نیست. می‌توانید در لیست انتظار ثبت نام کنید.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructor-card">
+                    <img src="/static/MyProfile.jpg" alt="بردیا فاتحی" class="instructor-image">
+                    <div class="instructor-name">بردیا فاتحی</div>
+                    <div class="instructor-bio">
+                        مدرس برنامه نویسی با علاقه به آموزش مفاهیم پایه
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مشخصات دوره -->
+    <section class="course-specs">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #1e293b; margin-bottom: 3rem;">مشخصات دوره</h2>
+            
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-icon">📅</div>
+                    <div class="spec-title">تاریخ انتشار</div>
+                    <div class="spec-value">به زودی</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-icon">🔄</div>
+                    <div class="spec-title">وضعیت دوره</div>
+                    <div class="spec-value">ناموجود</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-icon">📺</div>
+                    <div class="spec-title">تعداد قسمت‌ها</div>
+                    <div class="spec-value">در حال تولید</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-icon">⏱️</div>
+                    <div class="spec-title">مدت زمان دوره</div>
+                    <div class="spec-value">در حال تولید</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-icon">🎓</div>
+                    <div class="spec-title">سطح دوره</div>
+                    <div class="spec-value">مقدماتی</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-icon">🆓</div>
+                    <div class="spec-title">پشتیبانی</div>
+                    <div class="spec-value">دارد</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش وضعیت دوره -->
+    <section class="course-status">
+        <div class="container">
+            <div class="status-content">
+                <div class="status-icon">⏳</div>
+                <h2 class="status-title">دوره در حال آماده‌سازی است</h2>
+                <p class="status-description">
+                    این دوره در حال حاضر در دسترس نیست و در حال تکمیل می‌باشد. 
+                    می‌توانید در لیست انتظار ثبت نام کنید تا پس از انتشار مطلع شوید.
+                </p>
+                <a href="http://rubika.ir/BardiyaFatehi" class="notify-btn">
+                    📩 اطلاع‌رسانی هنگام انتشار
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © ۲۰۲۵</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+</body>
+</html>
