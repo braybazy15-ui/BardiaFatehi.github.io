@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاوره رایگان برنامه نویسی | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #1e293b;
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e0f2fe;
+        }
+
+        /* بخش اصلی */
+        .consultation-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.05));
+        }
+
+        .consultation-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .consultation-title {
+            font-size: 2.8rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .consultation-subtitle {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* بخش مزایا */
+        .benefits {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* بخش ارتباط */
+        .contact-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: #2563eb;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .contact-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* بخش سوالات متداول */
+        .faq {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: bold;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: #64748b;
+            line-height: 1.6;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* بخش CTA */
+        .cta-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: white;
+            color: #059669;
+            padding: 15px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .consultation-title {
+                font-size: 2.2rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">آکادمی برنامه نویسی بردیا فاتحی</div>
+                <div class="nav-links">
+                    <a href="/">صفحه اصلی</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش اصلی -->
+    <section class="consultation-hero">
+        <div class="container">
+            <div class="consultation-icon">💬</div>
+            <h1 class="consultation-title">مشاوره رایگان برنامه نویسی</h1>
+            <p class="consultation-subtitle">
+                برای دریافت مشاوره تخصصی و انتخاب مسیر درست برنامه نویسی، 
+                با ما در ارتباط باشید. پاسخگوی سوالات شما هستیم.
+            </p>
+        </div>
+    </section>
+
+    <!-- بخش مزایا -->
+    <section class="benefits">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.2rem; color: #1e293b; margin-bottom: 1rem;">
+                چرا مشاوره رایگان؟
+            </h2>
+            <p style="text-align: center; color: #64748b; font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem;">
+                مشاوره برنامه نویسی به شما کمک می‌کند از سردرگمی خارج شوید و مسیر یادگیری خود را به درستی انتخاب کنید
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-title">انتخاب مسیر درست</div>
+                    <div class="benefit-description">
+                        کمک می‌کنیم بر اساس علاقه و بازار کار، بهترین مسیر برنامه نویسی را انتخاب کنید
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <div class="benefit-title">صرفه‌جویی در زمان</div>
+                    <div class="benefit-description">
+                        از اتلاف وقت برای یادگیری مطالب غیرضروری جلوگیری می‌کنیم
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💼</div>
+                    <div class="benefit-title">مشاوره بازار کار</div>
+                    <div class="benefit-description">
+                        اطلاعات به‌روز از نیازهای بازار کار و مهارت‌های پرتقاضا
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <div class="benefit-title">منابع آموزشی</div>
+                    <div class="benefit-description">
+                        معرفی بهترین منابع و مسیرهای یادگیری برای هر زبان برنامه نویسی
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ارتباط -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.2rem; color: #1e293b; margin-bottom: 1rem;">
+                از چه طریقی می‌توانید با ما در ارتباط باشید؟
+            </h2>
+            <p style="text-align: center; color: #64748b; font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem;">
+                برای دریافت مشاوره رایگان، از طریق پلتفرم‌های زیر با ما در ارتباط باشید
+            </p>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">💜</div>
+                    <div class="contact-title">روبیکا</div>
+                    <div class="contact-description">
+                        برای مشاوره سریع و پاسخگویی فوری، از طریق روبیکا با ما در ارتباط باشید
+                    </div>
+                    <a href="http://rubika.ir/BardiyaFatehi" class="contact-link">
+                        ارتباط در روبیکا
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-title">تلگرام</div>
+                    <div class="contact-description">
+                        برای مشاوره تخصصی و پرسش سوالات برنامه نویسی در تلگرام پیام دهید
+                    </div>
+                    <a href="http://t.me/BardiyaFatehi" class="contact-link">
+                        ارتباط در تلگرام
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش سوالات متداول -->
+    <section class="faq">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.2rem; color: #1e293b; margin-bottom: 2rem;">
+                سوالات متداول
+            </h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    مشاوره واقعاً رایگان است؟
+                    <span>➕</span>
+                </div>
+                <div class="faq-answer">
+                    بله، مشاوره اولیه کاملاً رایگان است. ما معتقدیم هرکس باید بتواند بدون هزینه، مسیر درست برنامه نویسی را پیدا کند.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    چه سوالاتی می‌توانم بپرسم؟
+                    <span>➕</span>
+                </div>
+                <div class="faq-answer">
+                    می‌توانید در مورد انتخاب زبان برنامه نویسی، مسیر یادگیری، بازار کار، منابع آموزشی، پروژه‌ها و هر سوال دیگری مربوط به برنامه نویسی سوال بپرسید.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    چه زمانی پاسخ می‌دهید؟
+                    <span>➕</span>
+                </div>
+                <div class="faq-answer">
+                    معمولاً در کمتر از ۲۴ ساعت پاسخ می‌دهیم. در ساعات اداری پاسخگویی سریع‌تر انجام می‌شود.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    آیا برای مبتدیان هم مشاوره می‌دهید؟
+                    <span>➕</span>
+                </div>
+                <div class="faq-answer">
+                    قطعاً! برای مبتدیان راهنمایی کامل از صفر تا صد ارائه می‌دهیم و کمک می‌کنیم بهترین نقطه شروع را پیدا کنید.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">آماده شروع مسیر برنامه نویسی هستید؟</h2>
+            <p class="cta-description">
+                همین حالا با ما در ارتباط باشید و مشاوره رایگان دریافت کنید
+            </p>
+            <div class="cta-buttons">
+                <a href="http://rubika.ir/BardiyaFatehi" class="cta-button">
+                    💜 شروع در روبیکا
+                </a>
+                <a href="http://t.me/BardiyaFatehi" class="cta-button">
+                    📱 شروع در تلگرام
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © ۲۰۲۵</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // اسکریپت ساده برای باز کردن سوالات متداول
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                
+                // بستن همه پاسخ‌ها
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.style.display = 'none';
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '➕';
+                });
+                
+                // باز کردن پاسخ فعلی اگر بسته بود
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    question.querySelector('span').textContent = '➖';
+                }
+            });
+        });
+
+        // بستن همه پاسخ‌ها در ابتدا
+        document.querySelectorAll('.faq-answer').forEach(answer => {
+            answer.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

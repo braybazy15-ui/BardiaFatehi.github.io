@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نقشه راه برنامه نویس Front-End در ۲۰۲۵ | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #1e293b;
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e0f2fe;
+        }
+
+        /* بخش مقاله */
+        .article {
+            padding: 3rem 0;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .roadmap-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+
+        /* نقشه راه */
+        .roadmap {
+            margin: 3rem 0;
+        }
+
+        .roadmap-phase {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f8fafc;
+            border-right: 4px solid;
+            position: relative;
+        }
+
+        .phase-1 { border-color: #ef4444; }
+        .phase-2 { border-color: #f59e0b; }
+        .phase-3 { border-color: #10b981; }
+        .phase-4 { border-color: #3b82f6; }
+        .phase-5 { border-color: #8b5cf6; }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-number {
+            background: #1e293b;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+        .phase-title {
+            font-size: 1.6rem;
+            color: #1e293b;
+        }
+
+        .phase-duration {
+            background: #64748b;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-title {
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .essential {
+            border-color: #ef4444;
+        }
+
+        .important {
+            border-color: #f59e0b;
+        }
+
+        .advanced {
+            border-color: #3b82f6;
+        }
+
+        /* بخش بازار کار */
+        .job-market {
+            background: linear-gradient(135deg, #f0f4ff, #e0ebff);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .salary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .salary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .salary-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .salary-level {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* جدول تکنولوژی‌ها */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-table th,
+        .tech-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tech-table th {
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tech-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .priority-high { color: #ef4444; font-weight: bold; }
+        .priority-medium { color: #f59e0b; font-weight: bold; }
+        .priority-low { color: #64748b; }
+
+        /* نتیجه‌گیری */
+        .conclusion {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            padding: 2rem;
+            border-radius: 10px;
+            border-right: 4px solid #059669;
+            margin-top: 2rem;
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .salary-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .phase-duration {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">آکادمی برنامه نویسی بردیا فاتحی</div>
+                <div class="nav-links">
+                    <a href="/">صفحه اصلی</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش مقاله -->
+    <main class="article">
+        <div class="container">
+            <div class="article-header">
+                <div class="roadmap-icon">🗺️</div>
+                <h1 class="article-title">نقشه راه برنامه نویس Front-End در ۲۰۲۵</h1>
+                <div class="article-meta">نوشته شده توسط بردیا فاتحی | به‌روزرسانی ۲۰۲۵</div>
+            </div>
+
+            <div class="article-content">
+                <!-- مقدمه -->
+                <div class="article-section">
+                    <p>
+                        دنیای Front-End Development با سرعت بالایی در حال تغییر است. 
+                        در سال ۲۰۲۵، مهارت‌های مورد نیاز یک توسعه‌دهنده فرانت‌اند بسیار گسترده‌تر و تخصصی‌تر شده است. 
+                        این نقشه راه به شما کمک می‌کند مسیر درست را برای تبدیل شدن به یک توسعه‌دهنده فرانت‌اند حرفه‌ای پیدا کنید.
+                    </p>
+                </div>
+
+                <!-- فاز ۱: مبانی -->
+                <div class="roadmap">
+                    <div class="roadmap-phase phase-1">
+                        <div class="phase-header">
+                            <div class="phase-number">۱</div>
+                            <h2 class="phase-title">فاز اول: مبانی و پایه‌ها (۳-۴ ماه)</h2>
+                            <div class="phase-duration">مبتدی</div>
+                        </div>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-card essential">
+                                <div class="skill-icon">🌐</div>
+                                <div class="skill-title">HTML5 + Semantic HTML</div>
+                                <div class="skill-level">ضروری - سطح پایه</div>
+                            </div>
+                            
+                            <div class="skill-card essential">
+                                <div class="skill-icon">🎨</div>
+                                <div class="skill-title">CSS3 + Flexbox/Grid</div>
+                                <div class="skill-level">ضروری - سطح متوسط</div>
+                            </div>
+                            
+                            <div class="skill-card essential">
+                                <div class="skill-icon">⚡</div>
+                                <div class="skill-title">JavaScript ES6+</div>
+                                <div class="skill-level">ضروری - سطح پایه</div>
+                            </div>
+                            
+                            <div class="skill-card important">
+                                <div class="skill-icon">📱</div>
+                                <div class="skill-title">Responsive Design</div>
+                                <div class="skill-level">مهم - Mobile First</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فاز ۲: پیشرفته -->
+                    <div class="roadmap-phase phase-2">
+                        <div class="phase-header">
+                            <div class="phase-number">۲</div>
+                            <h2 class="phase-title">فاز دوم: توسعه پیشرفته (۴-۶ ماه)</h2>
+                            <div class="phase-duration">متوسط</div>
+                        </div>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-card essential">
+                                <div class="skill-icon">⚛️</div>
+                                <div class="skill-title">React.js + Hooks</div>
+                                <div class="skill-level">ضروری - بازار کار</div>
+                            </div>
+                            
+                            <div class="skill-card important">
+                                <div class="skill-icon">📦</div>
+                                <div class="skill-title">State Management</div>
+                                <div class="skill-level">مهم - Redux/Zustand</div>
+                            </div>
+                            
+                            <div class="skill-card important">
+                                <div class="skill-icon">🚀</div>
+                                <div class="skill-title">Next.js 14+</div>
+                                <div class="skill-level">مهم - Full Stack FE</div>
+                            </div>
+                            
+                            <div class="skill-card important">
+                                <div class="skill-icon">🎯</div>
+                                <div class="skill-title">TypeScript</div>
+                                <div class="skill-level">مهم - Enterprise Level</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فاز ۳: ابزارها -->
+                    <div class="roadmap-phase phase-3">
+                        <div class="phase-header">
+                            <div class="phase-number">۳</div>
+                            <h2 class="phase-title">فاز سوم: ابزارها و اکوسیستم (۲-۳ ماه)</h2>
+                            <div class="phase-duration">پیشرفته</div>
+                        </div>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-card important">
+                                <div class="skill-icon">🛠️</div>
+                                <div class="skill-title">Git + GitHub</div>
+                                <div class="skill-level">مهم - Collaboration</div>
+                            </div>
+                            
+                            <div class="skill-card important">
+                                <div class="skill-icon">📐</div>
+                                <div class="skill-title">CSS Frameworks</div>
+                                <div class="skill-level">مهم - Tailwind CSS</div>
+                            </div>
+                            
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">🧪</div>
+                                <div class="skill-title">Testing (Jest, Cypress)</div>
+                                <div class="skill-level">تخصصی - QA</div>
+                            </div>
+                            
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">⚡</div>
+                                <div class="skill-title">Build Tools (Vite, Webpack)</div>
+                                <div class="skill-level">تخصصی - Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فاز ۴: تخصصی -->
+                    <div class="roadmap-phase phase-4">
+                        <div class="phase-header">
+                            <div class="phase-number">۴</div>
+                            <h2 class="phase-title">فاز چهارم: مهارت‌های تخصصی (۳-۴ ماه)</h2>
+                            <div class="phase-duration">حرفه‌ای</div>
+                        </div>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">📊</div>
+                                <div class="skill-title">Performance Optimization</div>
+                                <div class="skill-level">تخصصی - Core Web Vitals</div>
+                            </div>
+                            
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">🔒</div>
+                                <div class="skill-title">Security Best Practices</div>
+                                <div class="skill-level">تخصصی - Web Security</div>
+                            </div>
+                            
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">♿</div>
+                                <div class="skill-title">Web Accessibility (A11y)</div>
+                                <div class="skill-level">تخصصی - Inclusive Design</div>
+                            </div>
+                            
+                            <div class="skill-card advanced">
+                                <div class="skill-icon">📱</div>
+                                <div class="skill-title">PWA + Mobile Apps</div>
+                                <div class="skill-level">تخصصی - Cross Platform</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بخش تکنولوژی‌های ۲۰۲۵ -->
+                <div class="article-section">
+                    <h2 class="section-title">تکنولوژی‌های داغ Front-End در ۲۰۲۵</h2>
+                    
+                    <table class="tech-table">
+                        <thead>
+                            <tr>
+                                <th>تکنولوژی</th>
+                                <th>اولویت</th>
+                                <th>کاربرد اصلی</th>
+                                <th>یادگیری</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>React 18+</td>
+                                <td class="priority-high">بسیار بالا</td>
+                                <td>توسعه اپلیکیشن‌های بزرگ</td>
+                                <td>۴-۶ هفته</td>
+                            </tr>
+                            <tr>
+                                <td>Next.js 14+</td>
+                                <td class="priority-high">بسیار بالا</td>
+                                <td>Full Stack Front-End</td>
+                                <td>۳-۴ هفته</td>
+                            </tr>
+                            <tr>
+                                <td>TypeScript</td>
+                                <td class="priority-high">بسیار بالا</td>
+                                <td>پروژه‌های Enterprise</td>
+                                <td>۴-۵ هفته</td>
+                            </tr>
+                            <tr>
+                                <td>Tailwind CSS</td>
+                                <td class="priority-high">بسیار بالا</td>
+                                <td>استایل‌دهی سریع</td>
+                                <td>۲-۳ هفته</td>
+                            </tr>
+                            <tr>
+                                <td>Vue.js 3</td>
+                                <td class="priority-medium">متوسط</td>
+                                <td>پروژه‌های متوسط</td>
+                                <td>۵-۶ هفته</td>
+                            </tr>
+                            <tr>
+                                <td>Svelte</td>
+                                <td class="priority-medium">متوسط</td>
+                                <td>پرفورمنس بالا</td>
+                                <td>۳-۴ هفته</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- بخش بازار کار -->
+                <div class="job-market">
+                    <h2 class="section-title">بازار کار Front-End در ۲۰۲۵</h2>
+                    
+                    <div class="salary-cards">
+                        <div class="salary-card">
+                            <div class="salary-amount">۱۲-۱۸M</div>
+                            <div class="salary-level">توسعه‌دهنده Junior</div>
+                        </div>
+                        <div class="salary-card">
+                            <div class="salary-amount">۲۰-۳۰M</div>
+                            <div class="salary-level">توسعه‌دهنده Mid-Level</div>
+                        </div>
+                        <div class="salary-card">
+                            <div class="salary-amount">۳۵-۵۰M</div>
+                            <div class="salary-level">توسعه‌دهنده Senior</div>
+                        </div>
+                        <div class="salary-card">
+                            <div class="salary-amount">۶۰M+</div>
+                            <div class="salary-level">Lead/Architect</div>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        <strong>شرکت‌های پیشرو:</strong> دیجی‌کالا، اسنپ، تپسی، Amazon, Google, Netflix
+                        <br>
+                        <strong>مهارت‌های پرتقاضا:</strong> React, TypeScript, Next.js, Performance Optimization
+                    </p>
+                </div>
+
+                <!-- بخش نتیجه‌گیری -->
+                <div class="conclusion">
+                    <h2 style="color: #059669; margin-bottom: 1rem;">جمع‌بندی نهایی</h2>
+                    <p>
+                        مسیر تبدیل شدن به یک توسعه‌دهنده Front-End در سال ۲۰۲۵ نیازمند <strong>یادگیری مستمر و تطبیق با تکنولوژی‌های جدید</strong> است. 
+                        تمرکز خود را روی React Ecosystem بگذارید و مهارت‌های Full Stack Front-End را توسعه دهید.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>نکته طلایی:</strong> پروژه‌محور یاد بگیرید و یک پورتفولیو قوی بسازید. 
+                        در دنیای Front-End، مهارت‌های عملی شما از مدارک دانشگاهی مهم‌تر است.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © ۲۰۲۵</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+</body>
+</html>
