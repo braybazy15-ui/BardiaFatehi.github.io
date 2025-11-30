@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پشتیبانی اختصاصی برنامه نویسی | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #1e293b;
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d1fae5;
+        }
+
+        /* بخش هیرو */
+        .service-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .service-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.9), rgba(4, 120, 87, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* بخش معرفی سرویس */
+        .service-intro {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .instructor-card {
+            background: #f0fdf4;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bbf7d0;
+        }
+
+        .instructor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #059669;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+
+        .instructor-name {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor-bio {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* بخش خدمات */
+        .service-features {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #059669;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* بخش نحوه کار */
+        .how-it-works {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            background: #059669;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+
+        /* بخش ثبت نام */
+        .registration {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            text-align: center;
+        }
+
+        .price-section {
+            background: white;
+            color: #1e293b;
+            padding: 2rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .creator {
+            color: #34d399;
+            font-weight: bold;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn.telegram {
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">آکادمی برنامه نویسی بردیا فاتحی</div>
+                <div class="nav-links">
+                    <a href="/">صفحه اصلی</a>
+                    <a href="/Moshavereh">مشاوره رایگان</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش هیرو سرویس -->
+    <section class="service-hero">
+        <img src="/static/doreh6.jpg" alt="پشتیبانی اختصاصی برنامه نویسی" class="service-hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>پشتیبانی اختصاصی برنامه نویسی</h1>
+                <p>یک ماه همراهی تخصصی برای حل تمام چالش‌های برنامه نویسی شما</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش معرفی سرویس -->
+    <section class="service-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div>
+                    <h2 style="font-size: 2.2rem; color: #1e293b; margin-bottom: 1.5rem;">پشتیبانی شخصی برای رشد شما</h2>
+                    <p style="color: #475569; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        این سرویس برای افرادی طراحی شده که می‌خواهند با راهنمایی مستقیم و پاسخ سریع به سوالات، 
+                        سرعت یادگیری و پیشرفت خود را چندین برابر کنند.
+                    </p>
+                    <p style="color: #475569; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        در طول یک ماه، به تمام سوالات برنامه نویسی شما پاسخ می‌دهم، در پروژه‌هایتان راهنمایی می‌کنم 
+                        و برای حل مشکلات کدنویسی در کنار شما هستم.
+                    </p>
+                    <div style="background: #f0f4ff; padding: 1.5rem; border-radius: 10px; border-right: 4px solid #059669;">
+                        <p style="color: #1e293b; margin: 0;">
+                            <strong>ویژگی خاص:</strong> پاسخگویی سریع در کمتر از ۱۲ ساعت از طریق روبیکا و تلگرام
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="instructor-card">
+                    <img src="/static/MyProfile.jpg" alt="بردیا فاتحی" class="instructor-image">
+                    <div class="instructor-name">بردیا فاتحی</div>
+                    <div class="instructor-bio">
+                        علاقه‌مند به آموزش برنامه نویسی و کمک به رشد کدآموزان. 
+                        تجربه کار با پایتون، طراحی وب و حل چالش‌های برنامه نویسی.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش خدمات -->
+    <section class="service-features">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #1e293b; margin-bottom: 3rem;">خدمات پشتیبانی</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">پاسخ به سوالات برنامه نویسی</h3>
+                    <p class="feature-description">
+                        پاسخ دقیق و کاربردی به تمام سوالات مربوط به پایتون، طراحی وب، الگوریتم و هر موضوع برنامه نویسی دیگر
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">رفع خطاهای کدنویسی</h3>
+                    <p class="feature-description">
+                        آنالیز و رفع خطاها، دیباگ کردن کدها و ارائه راه حل‌های بهینه برای مشکلات فنی
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">راهنمایی در انجام پروژه</h3>
+                    <p class="feature-description">
+                        مشاوره و راهنمایی مرحله به مرحله برای انجام پروژه‌های شخصی و دانشگاهی
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">مشاوره مسیر یادگیری</h3>
+                    <p class="feature-description">
+                        راهنمایی برای انتخاب بهترین مسیر یادگیری با توجه به هدف و علاقه شما
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">معرفی منابع آموزشی</h3>
+                    <p class="feature-description">
+                        معرفی بهترین منابع، دوره‌ها و ابزارهای مورد نیاز برای پیشرفت در برنامه نویسی
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">پشتیبانی سریع</h3>
+                    <p class="feature-description">
+                        پاسخگویی در کمتر از ۱۲ ساعت از طریق پیام‌رسان‌های روبیکا و تلگرام
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش نحوه کار -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #1e293b; margin-bottom: 3rem;">نحوه استفاده از سرویس</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">۱</div>
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">خرید سرویس</h3>
+                    <p style="color: #64748b;">از طریق دکمه‌های زیر برای خرید سرویس اقدام کنید</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">۲</div>
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">ارتباط مستقیم</h3>
+                    <p style="color: #64748b;">پس از خرید، در روبیکا یا تلگرام با هم در ارتباط خواهیم بود</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">۳</div>
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">شروع پشتیبانی</h3>
+                    <p style="color: #64748b;">سوالات خود را بپرسید و در کمتر از ۱۲ ساعت پاسخ دریافت کنید</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">۴</div>
+                    <h3 style="color: #1e293b; margin-bottom: 1rem;">پشتیبانی ۳۰ روزه</h3>
+                    <p style="color: #64748b;">به مدت یک ماه کامل از پشتیبانی اختصاصی بهره‌مند شوید</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ثبت نام -->
+    <section class="registration">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">همین حالا پشتیبانی اختصاصی دریافت کنید</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                برای خرید این سرویس، از طریق راه‌های زیر با من در ارتباط باشید
+            </p>
+            
+            <div class="price-section">
+                <div class="price">500,000 تومان</div>
+                <div style="color: #64748b;">هزینه یک ماه پشتیبانی اختصاصی</div>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                <h3 style="color: #1e293b; margin-bottom: 1.5rem;">📞 برای خرید پیام دهید</h3>
+                
+                <div class="contact-buttons">
+                    <a href="http://rubika.ir/BardiyaFatehi" class="contact-btn">
+                        💜 روبیکا
+                    </a>
+                    
+                    <a href="http://t.me/BardiyaFatehi" class="contact-btn telegram">
+                        📱 تلگرام
+                    </a>
+                </div>
+
+                <div style="margin-top: 1.5rem; color: #64748b; font-size: 0.9rem;">
+                    پس از ارسال پیام، در کمتر از ۱۲ ساعت پاسخ داده خواهد شد
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                ⚡ تضمین بازگشت وجه در صورت عدم رضایت
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © 2025</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+</body>
+</html>

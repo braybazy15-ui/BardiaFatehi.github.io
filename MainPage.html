@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آکادمی برنامه نویسی بردیا فاتحی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            color: #1e293b;
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e0f2fe;
+            transform: translateY(-2px);
+        }
+
+        /* بخش هیرو */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(30, 64, 175, 0.9)), url('/static/cover.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        /* بخش معرفی */
+        .intro {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* بخش دوره‌ها */
+        .courses {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.2);
+            border-color: #2563eb;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 2rem;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .course-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features li {
+            padding: 0.5rem 0;
+            color: #475569;
+        }
+
+        .course-features li::before {
+            content: "✓ ";
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        .course-btn {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .course-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        /* بخش مشاوره */
+        .consultation {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            text-align: center;
+        }
+
+        .consultation h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .consultation p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .consultation-btn {
+            background: white;
+            color: #059669;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .consultation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* بخش نظرات */
+        .testimonials {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            border-right: 4px solid #2563eb;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        /* بخش مقالات */
+        .articles {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .article-excerpt {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #1d4ed8;
+        }
+
+        /* فوتر */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- بخش هیرو -->
+    <section class="hero">
+        <div class="container">
+            <h1>آکادمی برنامه نویسی بردیا فاتحی</h1>
+            <p>یادگیری برنامه نویسی را با متدهای مدرن و پروژه‌محور شروع کنید. تبدیل علاقه به مهارت، مهارت به درآمد</p>
+        </div>
+    </section>
+
+    <!-- بخش معرفی -->
+    <section class="intro">
+        <div class="container">
+            <div class="intro-content">
+                <h2 style="color: #a30000;">چرا آکادمی برنامه نویسی بردیا فاتحی؟</h2>
+                <p style="font-size: 1.7rem; color: #1d4ed8;">
+                    خیلی از دانشجوها سال‌ها وقتشون رو صرف آموزش‌هایی می‌کنن که تو دنیای واقعی کمتر به کارشون میاد و آخرش هم وارد مسیری می‌شن که شاید با علاقه‌شون فاصله داشته باشه. 
+                </p>
+                <p style="font-size: 1.7rem; color: #1d4ed8;">
+                    ما تو آکادمی برنامه نویسی بردیا فاتحی سعی کردیم همه چیز رو جوری آماده کنیم که توی کمترین زمان، برنامه‌نویسی رو کاربردی یاد بگیرید و بتونید کسب‌وکار خودتون رو راه بندازید.
+                </p>
+                <p style="font-size: 1.7rem; color: #1d4ed8;">
+                    دوره‌های ما بر اساس نیازهای واقعی بازار کار طراحی شده و توسط مدرس با تجربه، بردیا فاتحی، ارائه می‌شوند.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش دوره‌ها -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">🎓 دوره‌های آموزشی حرفه‌ای</h2>
+            <div class="courses-grid">
+                <!-- دوره پایتون مقدماتی -->
+                <div class="course-card">
+                    <img src="/static/doreh5.jpg" alt="دوره مقدماتی پایتون" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی برنامه نویسی با پایتون</h3>
+                        <p class="course-description">
+                            یادگیری اصول برنامه نویسی با پایتون، از صفر تا سطح حرفه‌ای. این دوره مناسب افرادی است که می‌خواهند برنامه نویسی را به صورت اصولی و کاربردی یاد بگیرند.
+                        </p>
+                        <ul class="course-features">
+                            <li>آموزش ۰ تا ۱۰۰ پایتون</li>
+                            <li>پروژه‌های عملی</li>
+                            <li>آموزش دقیق و حرفه‌ای</li>
+                            <li>پشتیبانی مستقیم از مدرس</li>
+                            <li>دسترسی مادام العمر به محتوا</li>
+                        </ul>
+                        <div class="course-price" style="color: #01b118;">300,000 تومان</div>
+                        <a href="PythonMogademati" class="course-btn">ثبت نام در دوره</a>
+                    </div>
+                </div>
+
+                <!-- پشتیبانی اختصاصی -->
+                <div class="course-card">
+                    <img src="/static/doreh6.jpg" alt="پشتیبانی اختصاصی" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">پشتیبانی اختصاصی یک ماهه</h3>
+                        <p class="course-description">
+                            پاسخگویی تخصصی به تمام سوالات برنامه‌نویسی و طراحی سایت شما. حل مشکلات، راهنمایی در پروژه‌ها و مشاوره تخصصی به صورت روزانه.
+                        </p>
+                        <ul class="course-features">
+                            <li>پاسخگویی سریع و تخصصی</li>
+                            <li>پشتیبانی از تمامی مباحث برنامه‌نویسی</li>
+                            <li>راهنمایی در انجام پروژه‌ها</li>
+                            <li>مشاوره انتخاب مسیر یادگیری</li>
+                            <li>رفع خطاها و مشکلات کدنویسی</li>
+                        </ul>
+                        <div class="course-price" style="color: #01b118;">500,000 تومان</div>
+                        <a href="Poshtibani" class="course-btn">تهیه پشتیبانی</a>
+                        <p style="font-size: 14px; color: #888; margin-top: 10px;">پاسخگو در روبیکا و تلگرام</p>
+                    </div>
+                </div>
+
+                <!-- دوره CSS -->
+                <div class="course-card">
+                    <img src="/static/doreh2.jpg" alt="دوره CSS" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی CSS و طراحی وب</h3>
+                        <p class="course-description">
+                            تسلط کامل بر استایل‌دهی مدرن وب با CSS. یادگیری Flexbox, Grid, Animations و طراحی ریسپانسیو برای ایجاد وبسایت‌های زیبا و کاربرپسند.
+                        </p>
+                        <ul class="course-features">
+                            <li>آموزش سطح مقدماتی</li>
+                            <li>انیمیشن‌های CSS</li>
+                            <li>طراحی ریسپانسیو برای همه دستگاه‌ها</li>
+                            <li>پروژه‌های واقعی طراحی</li>
+                            <li>مهارت‌های مورد نیاز بازار کار</li>
+                        </ul>
+                        <div class="course-price">ناموجود</div>
+                        <a href="CSS" class="course-btn">ثبت نام در دوره</a>
+                    </div>
+                </div>
+
+                <!-- دوره HTML -->
+                <div class="course-card">
+                    <img src="/static/doreh3.jpg" alt="دوره HTML" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی HTML و ساختار وب</h3>
+                        <p class="course-description">
+                            یادگیری کامل تگ‌های HTML5 و ساختار استاندارد صفحات وب. پایه‌ای ترین و مهمترین قدم برای ورود به دنیای برنامه نویسی وب.
+                        </p>
+                        <ul class="course-features">
+                            <li>آموزش کامل HTML5</li>
+                            <li>ساختار استاندارد وب</li>
+                            <li>آشنایی با بخش مقدماتی</li>
+                            <li>فرم‌ها و المان‌های مدرن</li>
+                            <li>آمادگی برای فریمورک‌ها</li>
+                        </ul>
+                        <div class="course-price">ناموجود</div>
+                        <a href="HTML" class="course-btn">ثبت نام در دوره</a>
+                    </div>
+                </div>
+
+                <!-- دوره CSS & HTML -->
+                <div class="course-card">
+                    <img src="/static/doreh4.jpg" alt="دوره CSS و HTML" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی Front-End (HTML + CSS)</h3>
+                        <p class="course-description">
+                            دوره کامل طراحی وب با ترکیب HTML و CSS. ساخت وبسایت‌های حرفه‌ای از صفر تا صد با جدیدترین تکنیک‌های طراحی.
+                        </p>
+                        <ul class="course-features">
+                            <li>ترکیب HTML و CSS</li>
+                            <li>ساخت چندین پروژه واقعی</li>
+                            <li>آموزش طراحی مقدماتی</li>
+                            <li>آمادگی برای ورود به بازار کار</li>
+                            <li>رزومه‌سازی حرفه‌ای</li>
+                        </ul>
+                        <div class="course-price">ناموجود</div>
+                        <a href="HTMLandCSS" class="course-btn">ثبت نام در دوره</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مشاوره -->
+    <section class="consultation" id="consultation">
+        <div class="container">
+            <h2>مشاوره رایگان برنامه نویسی</h2>
+            <p>برای انتخاب مسیر درست برنامه نویسی و دریافت راهنمایی تخصصی، با ما در ارتباط باشید</p>
+            <a href="Moshavereh" class="consultation-btn">دریافت مشاوره رایگان</a>
+        </div>
+    </section>
+
+    <!-- بخش نظرات -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">💬 نظرات دانشجویان ما</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "دوره پایتون بردیا فاتحی واقعا تحول‌آفرین بود. از صفر تونستم برنامه نویسی رو یاد بگیرم."
+                    </p>
+                    <div class="testimonial-author">- محمد رضایی (دانشجوی دوره پایتون)</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "با دوره CSS آکادمی تونستم توی ۳ ماه مهارت‌های طراحی وب رو کامل یاد بگیرم و پروژه‌های واقعی انجام بدم. پشتیبانی عالی بود."
+                    </p>
+                    <div class="testimonial-author">- سارا محمدی (دانشجوی دوره CSS)</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "دوره Front-End کاملا کاربردی و مطابق با نیازهای بازار کار بود. الان می‌تونم وبسایت‌های حرفه‌ای طراحی کنم و درآمد خوبی داشته باشم."
+                    </p>
+                    <div class="testimonial-author">- علی کریمی (دانشجوی دوره Front-End)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مقالات -->
+    <section class="articles" id="articles">
+        <div class="container">
+            <h2 class="section-title">📚 مقالات تخصصی برنامه نویسی</h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3 class="article-title">برنامه نویسی چیست و چرا باید یاد بگیریم؟</h3>
+                    <p class="article-excerpt">آشنایی با مفاهیم پایه برنامه نویسی، مزایای یادگیری و چگونگی شروع این مسیر پرچالش اما جذاب...</p>
+                    <a href="whatsProgram" class="read-more">ادامه مطلب →</a>
+                </div>
+                <div class="article-card">
+                    <h3 class="article-title">چرا پایتون محبوب‌ترین زبان برنامه نویسی است؟</h3>
+                    <p class="article-excerpt">بررسی مزایای زبان پایتون، کاربردهای آن در هوش مصنوعی، وب و علم داده و آینده شغلی این زبان...</p>
+                    <a href="Magale2" class="read-more">ادامه مطلب →</a>
+                </div>
+                <div class="article-card">
+                    <h3 class="article-title">نقشه راه برنامه نویس Front-End در ۲۰۲۵</h3>
+                    <p class="article-excerpt">راهنمای قدم به قدم برای تبدیل شدن به یک برنامه نویس Front-End حرفه‌ای با جدیدترین تکنولوژی‌ها...</p>
+                    <a href="Magale3" class="read-more">ادامه مطلب →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © ۲۰۲۵</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+</body>
+</html>
