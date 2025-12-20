@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پشتیبانی اختصاصی برنامه نویسی | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -211,6 +212,175 @@
             font-weight: bold;
         }
 
+        /* بخش سوالات متداول */
+        .faq-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .faq-title {
+            font-size: 2.8rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .faq-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            border-radius: 2px;
+        }
+
+        .faq-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-accordion {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            padding: 1.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question h3 {
+            font-size: 1.3rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .faq-arrow {
+            color: #059669;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #f8fafc;
+        }
+
+        .faq-answer.active {
+            padding: 1.8rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+            color: #059669;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px solid #a7f3d0;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .contact-link.telegram {
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+        }
+
+        .payment-steps {
+            background: #f0f9ff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-right: 4px solid #0ea5e9;
+        }
+
+        .payment-steps ol {
+            padding-right: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .payment-steps li {
+            margin-bottom: 0.8rem;
+            color: #475569;
+        }
+
+        .payment-steps li:last-child {
+            margin-bottom: 0;
+        }
+
         /* بخش ثبت نام */
         .registration {
             padding: 4rem 0;
@@ -262,6 +432,133 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            
+            .faq-title {
+                font-size: 2.2rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+            
+            .faq-question {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .faq-answer.active {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .contact-link {
+                justify-content: center;
+            }
+        }
+
+        .service-description {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-title {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            text-align: right;
+            position: relative;
+        }
+
+        .service-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            border-radius: 2px;
+        }
+
+        .description-content {
+            line-height: 1.8;
+        }
+
+        .description-content p {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            line-height: 1.9;
+        }
+
+        .highlight-keyword {
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            margin: 0 0.2rem;
+            font-size: 1.15rem;
+        }
+
+        .highlight-keyword.primary {
+            background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+
+        .highlight-keyword.secondary {
+            background: linear-gradient(135deg, #fef3c7, #fef7cd);
+            color: #d97706;
+            border: 1px solid #fcd34d;
+        }
+
+        .special-feature {
+            background: linear-gradient(135deg, #ecfdf5, #f0fdf9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-right: 4px solid #059669;
+            margin-top: 1.5rem;
+        }
+
+        .special-feature p {
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .feature-icon-text {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .special-feature strong {
+            color: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .service-description {
+                padding: 1.5rem;
+            }
+            
+            .service-title {
+                font-size: 1.8rem;
+            }
+            
+            .description-content p {
+                font-size: 1rem;
+                text-align: right;
+            }
+            
+            .highlight-keyword {
+                font-size: 1.05rem;
+            }
         }
 
         .contact-buttons {
@@ -293,110 +590,6 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
-
-        
-.service-description {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
-}
-
-.service-title {
-    font-size: 2.2rem;
-    color: #1e293b;
-    margin-bottom: 1.5rem;
-    text-align: right;
-    position: relative;
-}
-
-.service-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    right: 0;
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(135deg, #059669, #10b981);
-    border-radius: 2px;
-}
-
-.description-content {
-    line-height: 1.8;
-}
-
-.description-content p {
-    color: #475569;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: justify;
-    line-height: 1.9;
-}
-
-.highlight-keyword {
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
-    margin: 0 0.2rem;
-    font-size: 1.15rem;
-}
-
-.highlight-keyword.primary {
-    background: linear-gradient(135deg, #d1fae5, #ecfdf5);
-    color: #059669;
-    border: 1px solid #a7f3d0;
-}
-
-.highlight-keyword.secondary {
-    background: linear-gradient(135deg, #fef3c7, #fef7cd);
-    color: #d97706;
-    border: 1px solid #fcd34d;
-}
-
-.special-feature {
-    background: linear-gradient(135deg, #ecfdf5, #f0fdf9);
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-right: 4px solid #059669;
-    margin-top: 1.5rem;
-}
-
-.special-feature p {
-    color: #1e293b;
-    margin: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-}
-
-.feature-icon {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-}
-
-.special-feature strong {
-    color: #dc2626;
-}
-
-@media (max-width: 768px) {
-    .service-description {
-        padding: 1.5rem;
-    }
-    
-    .service-title {
-        font-size: 1.8rem;
-    }
-    
-    .description-content p {
-        font-size: 1rem;
-        text-align: right;
-    }
-    
-    .highlight-keyword {
-        font-size: 1.05rem;
-    }
-}
 
     </style>
 </head>
@@ -454,7 +647,7 @@
                         </p>
                         <div class="special-feature">
                             <p>
-                                <span class="feature-icon">⚡</span>
+                                <span class="feature-icon-text">⚡</span>
                                 <strong>ویژگی خاص:</strong> پاسخگویی سریع در کمتر از ۱۲ ساعت از طریق روبیکا و تلگرام
                             </p>
                         </div>
@@ -563,6 +756,148 @@
         </div>
     </section>
 
+    <!-- بخش سوالات متداول -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title">سوالات متداول</h2>
+                <p class="faq-subtitle">پاسخ به پرتکرارترین سوالات درباره سرویس پشتیبانی اختصاصی</p>
+            </div>
+            
+            <div class="faq-accordion">
+                <!-- سوال ۱ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(1)">
+                        <h3>نحوه خرید و شروع پشتیبانی چگونه است؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-1">
+                        <p>برای خرید سرویس باید به پشتیبانی در <span class="highlight">روبیکا</span> یا <span class="highlight">تلگرام</span> پیام دهید. پس از پرداخت مبلغ، بلافاصله پشتیبانی شما شروع می‌شود.</p>
+                        
+                        <div class="contact-info">
+                            <a href="http://rubika.ir/BardiyaFatehi" class="contact-link">
+                                <i class="fas fa-comment-dots"></i>
+                                روبیکا
+                            </a>
+                            <a href="http://t.me/BardiyaFatehi" class="contact-link telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                                تلگرام
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- سوال ۲ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(2)">
+                        <h3>پشتیبانی شامل چه موضوعاتی می‌شود؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-2">
+                        <p>پشتیبانی شامل تمام موضوعات مرتبط با برنامه نویسی می‌شود:</p>
+                        <ul style="padding-right: 1.5rem; margin-top: 1rem; color: #475569;">
+                            <li>پاسخ به سوالات پایه و پیشرفته پایتون</li>
+                            <li>رفع خطاهای کدنویسی و دیباگ</li>
+                            <li>راهنمایی در انجام پروژه‌های شخصی و دانشگاهی</li>
+                            <li>مشاوره مسیر یادگیری و پیشرفت</li>
+                            <li>معرفی منابع آموزشی مناسب</li>
+                            <li>حل چالش‌های الگوریتمی</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- سوال ۳ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(3)">
+                        <h3>مدت زمان پاسخگویی چقدر است؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-3">
+                        <p>من متعهد می‌شوم که به تمام سوالات شما در <span class="highlight">کمتر از ۱۲ ساعت</span> پاسخ دهم. در بیشتر موارد، پاسخ‌ها در عرض چند ساعت ارسال می‌شوند.</p>
+                        <p>سوالات فوری و پیچیده ممکن است نیاز به زمان بیشتری برای تحلیل و ارائه پاسخ دقیق داشته باشند.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۴ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(4)">
+                        <h3>آیا محدودیتی در تعداد سوالات وجود دارد؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-4">
+                        <p>خیر، در طول <span class="highlight">یک ماه پشتیبانی</span>، هیچ محدودیتی در تعداد سوالات وجود ندارد. شما می‌توانید به تعداد لازم سوال بپرسید و پاسخ دریافت کنید.</p>
+                        <p>هدف این سرویس، حل کامل مشکلات و پاسخ به تمام سوالات شما در زمینه برنامه نویسی است.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۵ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(5)">
+                        <h3>نحوه پرداخت هزینه سرویس چگونه است؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-5">
+                        <p>پس از تماس از طریق روبیکا یا تلگرام، شماره کارت برای شما ارسال خواهد شد. مراحل پرداخت به صورت زیر است:</p>
+                        
+                        <div class="payment-steps">
+                            <ol>
+                                <li>ارسال پیام به پشتیبانی از طریق روبیکا یا تلگرام</li>
+                                <li>دریافت شماره کارت و مبلغ دقیق سرویس</li>
+                                <li>واریز مبلغ به حساب اعلام شده</li>
+                                <li>ارسال رسید پرداخت به پشتیبانی</li>
+                                <li>شروع بلافاصله پشتیبانی پس از واریز</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- سوال ۶ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(6)">
+                        <h3>آیا پشتیبانی فقط برای پایتون است یا زبان‌های دیگر هم شامل می‌شود؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-6">
+                        <p>تمرکز اصلی بر روی <span class="highlight">پایتون</span> است، اما سوالات مربوط به مبانی برنامه نویسی، الگوریتم، طراحی وب (HTML, CSS, JavaScript) و مباحث پایه‌ای دیگر زبان‌ها نیز پوشش داده می‌شود.</p>
+                        <p>برای سوالات تخصصی در زبان‌های دیگر، تا حد امکان راهنمایی ارائه می‌شود.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۷ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(7)">
+                        <h3>آیا می‌توانم پروژه‌های بزرگ را برای طراحی ارسال کنم؟</h3>
+                        <div class="faq-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-7">
+                        <p>متاسفانه خیر، می‌توانید پروژه‌های خود را فقط برای راهنمایی ارسال کنید. من در موارد زیر به شما کمک می کنم نه انجام پروژه:</p>
+                        <ul style="padding-right: 1.5rem; margin-top: 1rem; color: #475569;">
+                            <li>آنالیز معماری پروژه</li>
+                            <li>پیشنهاد بهبود کد و ساختار</li>
+                            <li>رفع خطاهای پیچیده</li>
+                            <li>راهنمایی در انتخاب تکنولوژی‌های مناسب</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">من فقط می توانم در پروژه هایتان کمک و راهنمایی کنم، اما نمی توانم آن را برایتان طراحی کنم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- بخش ثبت نام -->
     <section class="registration">
         <div class="container">
@@ -577,15 +912,15 @@
             </div>
 
             <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
-                <h3 style="color: #1e293b; margin-bottom: 1.5rem;">📞 برای خرید پیام دهید</h3>
+                <h3 style="color: #1e293b; margin-bottom: 1.5rem;">برای خرید پیام دهید</h3>
                 
                 <div class="contact-buttons">
                     <a href="http://rubika.ir/BardiyaFatehi" class="contact-btn">
-                        💜 روبیکا
+                        روبیکا
                     </a>
                     
                     <a href="http://t.me/BardiyaFatehi" class="contact-btn telegram">
-                        📱 تلگرام
+                        تلگرام
                     </a>
                 </div>
 
@@ -595,7 +930,7 @@
             </div>
 
             <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
-                ⚡ تضمین بازگشت وجه در صورت عدم رضایت
+                پاسخگویی سریع و حل تمام چالش‌های برنامه نویسی شما
             </div>
         </div>
     </section>
@@ -608,6 +943,37 @@
             <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
         </div>
     </footer>
-</body>
 
+    <script>
+        // تابع برای باز و بسته کردن پاسخ سوالات
+        function toggleAnswer(id) {
+            const answer = document.getElementById(`answer-${id}`);
+            const icon = answer.previousElementSibling.querySelector('.faq-arrow i');
+            
+            // بستن همه پاسخ‌های دیگر
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item.id !== `answer-${id}`) {
+                    item.classList.remove('active');
+                    const otherIcon = item.previousElementSibling.querySelector('.faq-arrow i');
+                    otherIcon.className = 'fas fa-chevron-down';
+                }
+            });
+            
+            // باز یا بسته کردن پاسخ فعلی
+            answer.classList.toggle('active');
+            
+            // تغییر آیکون
+            if (answer.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+        
+        // باز کردن اولین سوال به صورت پیش‌فرض
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAnswer(1);
+        });
+    </script>
+</body>
 </html>

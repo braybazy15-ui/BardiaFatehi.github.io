@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دوره مقدماتی برنامه نویسی با پایتون | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -224,6 +225,175 @@
             right: 0;
         }
 
+        /* بخش سوالات متداول */
+        .faq-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .faq-title {
+            font-size: 2.8rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .faq-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border-radius: 2px;
+        }
+
+        .faq-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-accordion {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            padding: 1.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question h3 {
+            font-size: 1.3rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            color: #2563eb;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #f8fafc;
+        }
+
+        .faq-answer.active {
+            padding: 1.8rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            color: #1d4ed8;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .contact-link.rubika {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+        }
+
+        .payment-steps {
+            background: #f0f9ff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-right: 4px solid #0ea5e9;
+        }
+
+        .payment-steps ol {
+            padding-right: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .payment-steps li {
+            margin-bottom: 0.8rem;
+            color: #475569;
+        }
+
+        .payment-steps li:last-child {
+            margin-bottom: 0;
+        }
+
         /* بخش ثبت نام */
         .registration {
             padding: 4rem 0;
@@ -280,15 +450,89 @@
             font-weight: bold;
         }
 
-        /* وضعیت دوره */
-        .status-badge {
-            background: #f59e0b;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1rem;
+        /* بخش معرفی دوره */
+        .course-description {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .course-title {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            text-align: right;
+            position: relative;
+        }
+
+        .course-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border-radius: 2px;
+        }
+
+        .description-content {
+            line-height: 1.8;
+        }
+
+        .description-content p {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            line-height: 1.9;
+        }
+
+        .highlight-keyword {
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            margin: 0 0.2rem;
+            font-size: 1.15rem;
+        }
+
+        .highlight-keyword.primary {
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .highlight-keyword.secondary {
+            background: linear-gradient(135deg, #fee2e2, #fef2f2);
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #f0f4ff, #f8faff);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-right: 4px solid #2563eb;
+            margin-top: 1.5rem;
+        }
+
+        .important-note p {
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .note-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .important-note strong {
+            color: #dc2626;
         }
 
         /* ریسپانسیو */
@@ -305,112 +549,48 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            
+            .faq-title {
+                font-size: 2.2rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+            
+            .faq-question {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .faq-answer.active {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .contact-link {
+                justify-content: center;
+            }
+            
+            .course-description {
+                padding: 1.5rem;
+            }
+            
+            .course-title {
+                font-size: 1.8rem;
+            }
+            
+            .description-content p {
+                font-size: 1rem;
+                text-align: right;
+            }
+            
+            .highlight-keyword {
+                font-size: 1.05rem;
+            }
         }
-
-        
-.course-description {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
-}
-
-.course-title {
-    font-size: 2.2rem;
-    color: #1e293b;
-    margin-bottom: 1.5rem;
-    text-align: right;
-    position: relative;
-}
-
-.course-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    right: 0;
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    border-radius: 2px;
-}
-
-.description-content {
-    line-height: 1.8;
-}
-
-.description-content p {
-    color: #475569;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: justify;
-    line-height: 1.9;
-}
-
-.highlight-keyword {
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
-    margin: 0 0.2rem;
-    font-size: 1.15rem;
-}
-
-.highlight-keyword.primary {
-    background: linear-gradient(135deg, #dbeafe, #eff6ff);
-    color: #1d4ed8;
-    border: 1px solid #bfdbfe;
-}
-
-.highlight-keyword.secondary {
-    background: linear-gradient(135deg, #fee2e2, #fef2f2);
-    color: #dc2626;
-    border: 1px solid #fecaca;
-}
-
-.important-note {
-    background: linear-gradient(135deg, #f0f4ff, #f8faff);
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-right: 4px solid #2563eb;
-    margin-top: 1.5rem;
-}
-
-.important-note p {
-    color: #1e293b;
-    margin: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-}
-
-.note-icon {
-    font-size: 1.3rem;
-    flex-shrink: 0;
-}
-
-.important-note strong {
-    color: #dc2626;
-}
-
-@media (max-width: 768px) {
-    .course-description {
-        padding: 1.5rem;
-    }
-    
-    .course-title {
-        font-size: 1.8rem;
-    }
-    
-    .description-content p {
-        font-size: 1rem;
-        text-align: right;
-    }
-    
-    .highlight-keyword {
-        font-size: 1.05rem;
-    }
-}
-
     </style>
 </head>
 <body>
@@ -432,7 +612,6 @@
         <img src="/static/doreh1.jpg" alt="دوره مقدماتی پایتون" class="course-hero-image">
         <div class="hero-overlay">
             <div class="hero-content">
-                <div class="status-badge">🔄 در حال تکمیل</div>
                 <h1>دوره مقدماتی برنامه نویسی با پایتون</h1>
                 <p>یادگیری برنامه نویسی را از صفر شروع کنید و به یک برنامه نویس تبدیل شوید</p>
             </div>
@@ -476,6 +655,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 
                 <div class="instructor-card">
                     <img src="/static/MyProfile.jpg" alt="بردیا فاتحی" class="instructor-image">
@@ -498,7 +678,7 @@
                 <div class="spec-card">
                     <div class="spec-icon">📅</div>
                     <div class="spec-title">تاریخ بروزرسانی</div>
-                    <div class="spec-value">۱۴۰۴/۹/۸</div>
+                    <div class="spec-value">1404/9/29</div>
                 </div>
                 
                 <div class="spec-card">
@@ -583,61 +763,160 @@
         </div>
     </section>
 
-    <!-- بخش ثبت نام -->
-    <!-- بخش ثبت نام -->
-<section class="registration">
-    <div class="container">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">همین حالا ثبت نام کنید</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-            برای ثبت نام در دوره، از طریق راه‌های زیر با ما در ارتباط باشید
-        </p>
-        
-        <div class="price-section">
-            <div class="price">300,000 تومان</div>
-            <div style="color: #64748b;">هزینه سرمایه‌گذاری روی آینده شما</div>
-        </div>
-
-        <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
-            <h3 style="color: #1e293b; margin-bottom: 1.5rem;">📞 برای ثبت نام پیام دهید</h3>
+    <!-- بخش سوالات متداول -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title">سوالات متداول</h2>
+                <p class="faq-subtitle">پاسخ به پرتکرارترین سوالات درباره دوره مقدماتی پایتون</p>
+            </div>
             
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="http://rubika.ir/BardiyaFatehi" 
-                   style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); 
-                          color: white; 
-                          padding: 15px 30px; 
-                          border-radius: 25px; 
-                          text-decoration: none; 
-                          font-weight: bold;
-                          display: flex;
-                          align-items: center;
-                          gap: 0.5rem;">
-                    💜 روبیکا
-                </a>
+            <div class="faq-accordion">
+                <!-- سوال ۱ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(1)">
+                        <h3>کجا باید ثبت نام کنم؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-1">
+                        <p>برای ثبت نام در دوره باید به پشتیبانی در <span class="highlight">روبیکا</span> یا <span class="highlight">تلگرام</span> پیام دهید. پس از پرداخت مبلغ، شما را در یک گروه اختصاصی عضو خواهیم کرد.</p>
+                        
+                        <div class="contact-info">
+                            <a href="http://rubika.ir/BardiyaFatehi" class="contact-link rubika">
+                                <i class="fas fa-comment-dots"></i>
+                                روبیکا
+                            </a>
+                            <a href="http://t.me/BardiyaFatehi" class="contact-link">
+                                <i class="fab fa-telegram-plane"></i>
+                                تلگرام
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 
-                <a href="http://t.me/BardiyaFatehi" 
-                   style="background: linear-gradient(135deg, #2563EB, #1D4ED8); 
-                          color: white; 
-                          padding: 15px 30px; 
-                          border-radius: 25px; 
-                          text-decoration: none; 
-                          font-weight: bold;
-                          display: flex;
-                          align-items: center;
-                          gap: 0.5rem;">
-                    📱 تلگرام
-                </a>
-            </div>
-
-            <div style="margin-top: 1.5rem; color: #64748b; font-size: 0.9rem;">
-                پس از ارسال پیام، در کمتر از ۲۴ ساعت پاسخ داده خواهد شد
+                <!-- سوال ۲ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(2)">
+                        <h3>کجا می توانم ویدیوهای دوره را ببینم؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-2">
+                        <p>بعد از واریز مبلغ و ثبت نام، شما را در یک <span class="highlight">گروه اختصاصی</span> عضو می‌کنیم. تمامی ویدیوهای دوره، تمرین‌ها و پروژه‌ها در این گروه به صورت منظم منتشر می‌شود.</p>
+                        <p>همچنین دسترسی به فایل‌های تمرین، سورس کد پروژه‌ها و جزوات آموزشی نیز در همین گروه ارائه می‌شود.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۳ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(3)">
+                        <h3>نحوه پرداخت هزینه دوره چگونه است؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-3">
+                        <p>پس از تماس از طریق روبیکا یا تلگرام، شماره کارت برای شما ارسال خواهد شد. مراحل پرداخت به صورت زیر است:</p>
+                        
+                        <div class="payment-steps">
+                            <ol>
+                                <li>ارسال پیام به پشتیبانی از طریق روبیکا یا تلگرام</li>
+                                <li>دریافت شماره کارت و مبلغ دقیق دوره</li>
+                                <li>واریز مبلغ به حساب اعلام شده</li>
+                                <li>ارسال رسید پرداخت به پشتیبانی</li>
+                                <li>عضویت در گروه اختصاصی دوره در کمتر از ۲۴ ساعت</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- سوال ۴ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(4)">
+                        <h3>آیا دوره پیش‌نیاز خاصی دارد؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-4">
+                        <p>خیر، این دوره به گونه‌ای طراحی شده که نیاز به <span class="highlight">هیچ پیش‌نیاز و دانش قبلی</span> ندارد. حتی اگر تا به حال یک خط کد هم ننوشته‌اید، این دوره برای شما مناسب است.</p>
+                        <p>تمام مباحث از پایه و به زبان ساده آموزش داده می‌شود. تنها چیزی که نیاز دارید یک کامپیوتر و انگیزه یادگیری است.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۵ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(5)">
+                        <h3>مدت زمان پشتیبانی دوره چقدر است؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-5">
+                        <p>پشتیبانی این دوره به مدت <span class="highlight">یک ماه</span> به صورت فعال است. در این مدت می‌توانید سوالات خود را در گروه بپرسید و پاسخ دریافت کنید.</p>
+                        <p>پس از اتمام دوره یک ماهه، همچنان به فایل‌های دوره دسترسی خواهید داشت و می‌توانید از آنها استفاده کنید.</p>
+                    </div>
+                </div>
+                
+                
+                <!-- سوال ۷ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(7)">
+                        <h3>آیا این دوره به روزرسانی می‌شود؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-7">
+                        <p>بله، این دوره به صورت <span class="highlight">مداوم در حال تکمیل و به‌روزرسانی</span> است. با ثبت نام در دوره، به تمامی محتوای آینده نیز دسترسی خواهید داشت.</p>
+                        <p>هر ماه بخش‌های جدیدی به دوره اضافه می‌شود و تمامی اعضا به صورت رایگان به این به‌روزرسانی‌ها دسترسی پیدا می‌کنند.</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
-            ⚡ تضمین بازگشت وجه در صورت عدم رضایت
+    <!-- بخش ثبت نام -->
+    <section class="registration">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">همین حالا ثبت نام کنید</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                برای ثبت نام در دوره، از طریق راه‌های زیر با ما در ارتباط باشید
+            </p>
+            
+            <div class="price-section">
+                <div class="price">300,000 تومان</div>
+                <div style="color: #64748b;">هزینه سرمایه‌گذاری روی آینده شما</div>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                <h3 style="color: #1e293b; margin-bottom: 1.5rem;">برای ثبت نام پیام دهید</h3>
+                
+                <div class="contact-info" style="justify-content: center;">
+                    <a href="http://rubika.ir/BardiyaFatehi" class="contact-link rubika">
+                        <i class="fas fa-comment-dots"></i>
+                        روبیکا
+                    </a>
+                    
+                    <a href="http://t.me/BardiyaFatehi" class="contact-link">
+                        <i class="fab fa-telegram-plane"></i>
+                        تلگرام
+                    </a>
+                </div>
+
+                <div style="margin-top: 1.5rem; color: #64748b; font-size: 0.9rem;">
+                    پس از ارسال پیام، در کمتر از ۲۴ ساعت پاسخ داده خواهد شد
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                تضمین بازگشت وجه در صورت عدم رضایت
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- فوتر -->
     <footer class="footer">
@@ -647,5 +926,37 @@
             <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
         </div>
     </footer>
+
+    <script>
+        // تابع برای باز و بسته کردن پاسخ سوالات
+        function toggleAnswer(id) {
+            const answer = document.getElementById(`answer-${id}`);
+            const icon = answer.previousElementSibling.querySelector('.faq-icon i');
+            
+            // بستن همه پاسخ‌های دیگر
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item.id !== `answer-${id}`) {
+                    item.classList.remove('active');
+                    const otherIcon = item.previousElementSibling.querySelector('.faq-icon i');
+                    otherIcon.className = 'fas fa-chevron-down';
+                }
+            });
+            
+            // باز یا بسته کردن پاسخ فعلی
+            answer.classList.toggle('active');
+            
+            // تغییر آیکون
+            if (answer.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+        
+        // باز کردن اولین سوال به صورت پیش‌فرض
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAnswer(1);
+        });
+    </script>
 </body>
 </html>
