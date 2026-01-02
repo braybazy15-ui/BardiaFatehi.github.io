@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آکادمی برنامه نویسی بردیا فاتحی | آموزش برنامه نویسی از صفر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --secondary-dark: #047857;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #475569;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            background-color: #ffffff;
+            color: var(--dark);
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+        }
+    
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    
+        .logo i {
+            font-size: 1.8rem;
+        }
+    
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+    
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+    
+        .nav-links a:hover {
+            color: #dbeafe;
+            transform: translateY(-2px);
+        }
+    
+        /* هیرو */
+        .hero {
+            background: linear-gradient(rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)),
+                        url('/static/cover.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+    
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+    
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+    
+        .hero-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+    
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    
+        /* بخش‌های اصلی */
+        section {
+            padding: 5rem 0;
+        }
+    
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+    
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 2px;
+        }
+    
+        /* معرفی */
+        .intro {
+            background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+            position: relative;
+        }
+    
+        .intro-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    
+        .intro-text {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+    
+        .intro-text p {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+    
+        /* دوره‌ها */
+        .courses {
+            background: var(--light);
+        }
+    
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+    
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+    
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+        }
+    
+        /* استایل مخصوص دوره ناموجود */
+        .course-card.unavailable {
+            filter: grayscale(1);
+            opacity: 0.95;
+        }
+    
+        .course-card.unavailable::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.03), rgba(0,0,0,0.05));
+            z-index: 1;
+            border-radius: 15px;
+        }
+    
+        .course-card.unavailable .course-image {
+            filter: grayscale(1) brightness(0.95);
+        }
+    
+        .course-card.unavailable .course-title {
+            color: #666;
+        }
+    
+        .course-card.unavailable .course-description {
+            color: #888;
+        }
+    
+        .course-card.unavailable .course-features li {
+            color: #777;
+        }
+    
+        .course-card.unavailable .course-features li i {
+            color: #aaa;
+        }
+    
+        .course-card.unavailable .course-price {
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            color: #64748b;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+    
+        .course-card.unavailable .course-btn {
+            background: linear-gradient(135deg, #94a3b8, #64748b);
+            cursor: not-allowed;
+            position: relative;
+        }
+    
+        .course-card.unavailable .course-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    
+        /* بج ناموجود */
+        .unavailable-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    
+        .course-card.unavailable:hover {
+            transform: translateY(-5px);
+            filter: grayscale(0.8);
+            opacity: 0.9;
+        }
+    
+        /* استایل مخصوص دوره‌های "به زودی" */
+        .course-card.soon {
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .course-card.soon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
+            z-index: 1;
+            border-radius: 15px;
+        }
+    
+        .course-card.soon .course-image {
+            filter: brightness(0.98);
+        }
+    
+        .course-card.soon .course-title {
+            color: #7c2d12;
+        }
+    
+        .course-card.soon .course-description {
+            color: #92400e;
+        }
+    
+        .course-card.soon .course-features li {
+            color: #92400e;
+        }
+    
+        .course-card.soon .course-features li i {
+            color: #f59e0b;
+        }
+    
+        .course-card.soon .course-price {
+            background: linear-gradient(45deg, #fef3c7, #fde68a);
+            color: #92400e;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+    
+        .course-card.soon .course-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            position: relative;
+        }
+    
+        .course-card.soon:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.2);
+        }
+    
+        /* بج "به زودی" */
+        .soon-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            animation: soonPulse 2s infinite;
+        }
+    
+        @keyframes soonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    
+        .course-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+    
+        .course-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            min-height: 3.5rem;
+        }
+    
+        .course-description {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+    
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+    
+        .course-features li {
+            padding: 0.3rem 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+    
+        .course-features li i {
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+    
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--danger);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    
+        .course-btn {
+            display: block;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 12px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+    
+        .course-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+    
+        .course-btn.soon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+    
+        /* بخش نظردهی */
+        .testimonials-section {
+            background: white;
+        }
+    
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+    
+        @media (max-width: 768px) {
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        .testimonial-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+    
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+    
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+    
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+    
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+    
+        .rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+    
+        .rating input {
+            display: none;
+        }
+    
+        .rating label {
+            font-size: 1.8rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+    
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: var(--warning);
+        }
+    
+        .submit-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
+        }
+    
+        .testimonials-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+    
+        .testimonial-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-right: 4px solid var(--primary);
+        }
+    
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--dark);
+        }
+    
+        .testimonial-rating {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+    
+        .testimonial-date {
+            font-size: 0.9rem;
+            color: var(--text);
+            width: 100%;
+        }
+    
+        .testimonial-text {
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+    
+        .testimonial-course {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    
+        /* مشاوره */
+        .consultation {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+    
+        .consultation-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    
+        .consultation h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+    
+        .consultation-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+    
+        .consultation-btn {
+            display: inline-block;
+            background: white;
+            color: var(--secondary);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+    
+        .consultation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+    
+        @media (max-width: 768px) {
+            .consultation {
+                padding: 3rem 0;
+            }
+            
+            .consultation h2 {
+                font-size: 1.8rem;
+            }
+            
+            .consultation-text {
+                font-size: 1rem;
+            }
+            
+            .consultation-btn {
+                padding: 0.8rem 2rem;
+            }
+        }
+    
+        /* مقالات */
+        .articles {
+            background: var(--light);
+        }
+    
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+    
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+    
+        .article-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            min-height: 3.5rem;
+            color: #1D4ED8;
+        }
+    
+        .article-excerpt {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+    
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    
+        .read-more:hover {
+            color: var(--primary-dark);
+            gap: 10px;
+        }
+    
+        /* ارتباط */
+        .contact {
+            background: var(--dark);
+            color: white;
+        }
+    
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+    
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+    
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+    
+        .contact-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            flex-grow: 1;
+        }
+    
+        .contact-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    
+        .rubika-btn { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+        .telegram-btn { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+        .bot-btn { background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); }
+        .aparat-btn { background: linear-gradient(135deg, #dc2626, #ef4444); }
+    
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        .contact-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+    
+        /* فوتر */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: auto;
+        }
+    
+        .footer p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+    
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+    
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .intro-text {
+                padding: 2rem;
+            }
+            
+            .intro-text p {
+                font-size: 1.1rem;
+                text-align: right;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        /* اسکرولبار */
+        .testimonials-list::-webkit-scrollbar {
+            width: 8px;
+        }
+    
+        .testimonials-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+    
+        .testimonials-list::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+    
+        .testimonials-list::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    آکادمی برنامه نویسی بردیا فاتحی
+                </div>
+                <div class="nav-links">
+                    <a href="#courses">دوره‌ها</a>
+                    <a href="#testimonials">نظرات</a>
+                    <a href="#articles">مقالات</a>
+                    <a href="#contact">تماس</a>
+                    <a href="Moshavereh">مشاوره</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- هیرو -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> برترین آموزش‌های برنامه‌نویسی
+                </div>
+                <h1>آکادمی برنامه نویسی بردیا فاتحی</h1>
+                <p>یادگیری برنامه نویسی را با متدهای مدرن و پروژه‌محور شروع کنید. 
+                تبدیل علاقه به مهارت، مهارت به درآمد</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- معرفی -->
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i> چرا آکادمی برنامه نویسی بردیا فاتحی؟
+            </h2>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <p>
+                        خیلی از دانشجوها سال‌ها وقتشون رو صرف آموزش‌هایی می‌کنن که تو دنیای واقعی کمتر به کارشون میاد 
+                        و آخرش هم وارد مسیری می‌شن که شاید با <span style="color: #970000;">علاقه‌شون</span> فاصله داشته باشه.
+                    </p>
+                    <p>
+                        ما تو آکادمی <span style="color: #25ce03;">برنامه نویسی بردیا فاتحی</span> سعی کردیم همه چیز رو جوری آماده کنیم که توی کمترین زمان، 
+                        برنامه‌نویسی رو کاربردی یاد بگیرید و بتونید کسب‌وکار خودتون رو راه بندازید.
+                    </p>
+                    <p>
+                        دوره‌های ما بر اساس نیازهای واقعی بازار کار طراحی شده و توسط مدرس با تجربه، بردیا فاتحی، 
+                        ارائه می‌شوند.
+                    </p>
+                    <p>
+                        تو آکادمی فاتحی، هرچیزی برای یادگیری <span style="color: #1D4ED8;">برنامه نویسی</span> و رسیدن به <span style="color: #a10000;">درآمد</span> نیاز داری رو برات آماده کردیم.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- دوره‌ها -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i> دوره‌های آموزشی حرفه‌ای
+            </h2>
+            <div class="courses-grid">
+                <!-- دوره ۱ -->
+                <div class="course-card unavailable">
+                    <div class="unavailable-badge">ناموجود</div>
+                    <img src="/static/doreh5.jpg" alt="دوره پایتون" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره VIP برنامه نویسی با پایتون</h3>
+                        <p class="course-description">یادگیری اصول برنامه نویسی از صفر با پایتون. مناسب برای افراد مبتدی که می‌خواهند وارد دنیای برنامه نویسی شوند.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> آموزش کامل پایتون از صفر</li>
+                            <li><i class="fas fa-check-circle"></i> پروژه‌های عملی و کاربردی</li>
+                            <li><i class="fas fa-check-circle"></i> پشتیبانی مستقیم از مدرس</li>
+                            <li><i class="fas fa-check-circle"></i> دسترسی مادام‌العمر به محتوا</li>
+                            <li><i class="fas fa-check-circle"></i> آموزش مفاهیم پایه برنامه نویسی</li>
+                        </ul>
+                        <div class="course-price">ناموجود</div>
+                        <a href="PythonMogademati" class="course-btn">ثبت نام در دوره</a>
+                    </div>
+                </div>
+
+                <!-- دوره ۲ -->
+                <div class="course-card">
+                    <img src="/static/doreh6.jpg" alt="پشتیبانی" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">پشتیبانی اختصاصی یک ماهه</h3>
+                        <p class="course-description">پاسخگویی تخصصی به سوالات برنامه‌نویسی و راهنمایی در پروژه‌ها. مناسب برای کسانی که نیاز به راهنمایی دارند.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> پاسخگویی سریع در کمتر از ۱۲ ساعت</li>
+                            <li><i class="fas fa-check-circle"></i> رفع خطاهای کدنویسی</li>
+                            <li><i class="fas fa-check-circle"></i> راهنمایی در انجام پروژه‌ها</li>
+                            <li><i class="fas fa-check-circle"></i> مشاوره مسیر یادگیری</li>
+                            <li><i class="fas fa-check-circle"></i> پشتیبانی از طریق روبیکا و تلگرام</li>
+                        </ul>
+                        <div class="course-price" style="color: #03ad28;">300,000 تومان</div>
+                        <a href="Poshtibani" class="course-btn">خرید پشتیبانی</a>
+                    </div>
+                </div>
+
+                <!-- دوره ۳ -->
+                <div class="course-card soon">
+                    <div class="soon-badge">به زودی</div>
+                    <img src="/static/doreh2.jpg" alt="دوره CSS" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی CSS و طراحی وب</h3>
+                        <p class="course-description">تسلط بر استایل‌دهی مدرن وب با CSS. یادگیری کامل Flexbox, Grid و طراحی ریسپانسیو.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> آموزش کامل CSS3</li>
+                            <li><i class="fas fa-check-circle"></i> Flexbox و Grid Layout</li>
+                            <li><i class="fas fa-check-circle"></i> انیمیشن‌های پیشرفته CSS</li>
+                            <li><i class="fas fa-check-circle"></i> طراحی ریسپانسیو برای همه دستگاه‌ها</li>
+                            <li><i class="fas fa-check-circle"></i> پروژه‌های عملی طراحی وبسایت</li>
+                        </ul>
+                        <div class="course-price">به زودی</div>
+                        <a href="CSS" class="course-btn soon">اطلاع از شروع دوره</a>
+                    </div>
+                </div>
+
+                <!-- دوره ۴ -->
+                <div class="course-card soon">
+                    <div class="soon-badge">به زودی</div>
+                    <img src="/static/doreh3.jpg" alt="دوره HTML" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی HTML و ساختار وب</h3>
+                        <p class="course-description">یادگیری کامل HTML5 و ساختار استاندارد صفحات وب. پایه‌ای‌ترین قدم برای ورود به دنیای طراحی وب.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> آموزش کامل HTML5</li>
+                            <li><i class="fas fa-check-circle"></i> ساختار استاندارد سئو</li>
+                            <li><i class="fas fa-check-circle"></i> فرم‌ها و المان‌های مدرن</li>
+                            <li><i class="fas fa-check-circle"></i> سمانتیک و دسترسی‌پذیری</li>
+                            <li><i class="fas fa-check-circle"></i> آمادگی برای یادگیری فریمورک‌ها</li>
+                        </ul>
+                        <div class="course-price">به زودی</div>
+                        <a href="HTML" class="course-btn soon">اطلاع از شروع دوره</a>
+                    </div>
+                </div>
+
+                <!-- دوره ۵ -->
+                <div class="course-card soon">
+                    <div class="soon-badge">به زودی</div>
+                    <img src="/static/doreh4.jpg" alt="دوره Front-End" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">دوره مقدماتی Front-End (HTML + CSS)</h3>
+                        <p class="course-description">دوره کامل طراحی وب با ترکیب HTML و CSS. ساخت وبسایت‌های حرفه‌ای از صفر تا صد.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> ترکیب HTML و CSS در پروژه‌های واقعی</li>
+                            <li><i class="fas fa-check-circle"></i> ساخت چندین پروژه کامل</li>
+                            <li><i class="fas fa-check-circle"></i> آموزش طراحی UI/UX مقدماتی</li>
+                            <li><i class="fas fa-check-circle"></i> آمادگی برای ورود به بازار کار</li>
+                            <li><i class="fas fa-check-circle"></i> رزومه‌سازی حرفه‌ای</li>
+                        </ul>
+                        <div class="course-price">به زودی</div>
+                        <a href="HTMLandCSS" class="course-btn soon">اطلاع از شروع دوره</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نظرات و ثبت نظر -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-comments"></i> نظرات کدآموزان
+            </h2>
+            <div class="testimonials-container">
+                <!-- فرم ثبت نظر -->
+                <div class="testimonial-form">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--dark); text-align: center;">
+                        <i class="fas fa-edit"></i> نظر خود را ثبت کنید
+                    </h3>
+                    <form id="comment-form">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> نام و نام خانوادگی</label>
+                            <input type="text" id="name" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="course"><i class="fas fa-book"></i> دوره ثبت‌نام شده</label>
+                            <select id="course" required>
+                                <option value="">یک دوره را انتخاب کنید</option>
+                                <option value="پایتون مقدماتی">دوره پایتون مقدماتی</option>
+                                <option value="پشتیبانی اختصاصی">پشتیبانی اختصاصی</option>
+                                <option value="CSS">دوره CSS</option>
+                                <option value="HTML">دوره HTML</option>
+                                <option value="Front-End">دوره Front-End</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-star"></i> امتیازدهی</label>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5">★</label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4">★</label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3">★</label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2">★</label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1">★</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comment"><i class="fas fa-comment"></i> نظر شما</label>
+                            <textarea id="comment" required placeholder="تجربه خود از دوره را با دیگران به اشتراک بگذارید..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> ارسال نظر
+                        </button>
+                    </form>
+                </div>
+
+                <!-- لیست نظرات -->
+                <div class="testimonials-list">
+                    <div class="testimonial-item">
+                        <div class="testimonial-header">
+                            <div class="testimonial-author">محمد رضایی</div>
+                            <div class="testimonial-rating">★★★★★</div>
+                            <div class="testimonial-date">1404/9/15</div>
+                        </div>
+                        <p class="testimonial-text">"دوره پایتون بردیا فاتحی واقعا تحول‌آفرین بود. از صفر تونستم برنامه نویسی رو یاد بگیرم و الان پروژه‌های شخصی خودم رو می‌نویسم. نحوه تدریس بسیار عالی و پروژه‌محوره."</p>
+                        <div class="testimonial-course">
+                            <i class="fas fa-graduation-cap"></i> دوره: پایتون مقدماتی
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-item">
+                        <div class="testimonial-header">
+                            <div class="testimonial-author">سارا محمدی</div>
+                            <div class="testimonial-rating">★★★★★</div>
+                            <div class="testimonial-date">1404/9/10</div>
+                        </div>
+                        <p class="testimonial-text">"واقعا دوره خوبی بود، نحوه تدریس از استاد های دانشگاه هم بهتره. پشتیبانی آقای فاتحی عالیه، همیشه در دسترسن و سوالات رو کامل جواب میدن. ممنون از آموزش‌های کاربردی."</p>
+                        <div class="testimonial-course">
+                            <i class="fas fa-graduation-cap"></i> دوره: پایتون مقدماتی
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-item">
+                        <div class="testimonial-header">
+                            <div class="testimonial-author">علی کریمی</div>
+                            <div class="testimonial-rating">★★★★☆</div>
+                            <div class="testimonial-date">1404/9/5</div>
+                        </div>
+                        <p class="testimonial-text">"واقعا عالی تدریس می کنند، من که کامل بخش مقدماتی پایتون رو یاد گرفتم و الان دارم پروژه‌های کوچیک میزنم. فقط کاش ویدیوهای بیشتری اضافه بشه. در کل راضیم."</p>
+                        <div class="testimonial-course">
+                            <i class="fas fa-graduation-cap"></i> دوره: پایتون مقدماتی
+                        </div>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <div class="testimonial-header">
+                            <div class="testimonial-author">فاطمه احمدی</div>
+                            <div class="testimonial-rating">★★★★★</div>
+                            <div class="testimonial-date">۱۴۰۴/۰۹/۲۸</div>
+                        </div>
+                        <p class="testimonial-text">"پشتیبانی اختصاصی واقعا ارزشش رو داشت. توی یک ماه کلی مشکل کدنویسی رو حل کردم و پروژه دانشگاهیم رو کامل کردم. پاسخگویی سریع و دقیق بود. پیشنهاد می‌کنم."</p>
+                        <div class="testimonial-course">
+                            <i class="fas fa-graduation-cap"></i> دوره: پشتیبانی اختصاصی
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--درباره مدرس-->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-user-tie"></i> درباره من
+            </h2>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/static/MyProfile.jpg" alt="بردیا فاتحی - مدرس برنامه نویسی" class="profile-image">
+                    <div class="profile-badge">
+                        <i class="fas fa-code"></i>
+                        <span>مدرس برنامه‌نویسی</span>
+                    </div>
+                </div>
+                
+                <div class="about-text">
+                    <h3 class="about-name">بردیا فاتحی</h3>
+                    <p class="about-intro">مدرس برنامه‌نویسی، طراح وب و مؤسس آکادمی فاتحی</p>
+                    
+                    <div class="about-description">
+                        <p>سلام، من <strong>بردیا فاتحی</strong> هستم. بیش از 1 سال است که در زمینه برنامه‌نویسی و طراحی وب فعالیت می‌کنم و عاشق اشتراک‌گذاری دانش و تجربیاتم با دیگران هستم.</p>
+                        
+                        <p>به عنوان مؤسس <strong>آکادمی فاتحی</strong>، مأموریت من این است که برنامه‌نویسی را به ساده‌ترین و کاربردی‌ترین روش به دانشجویان آموزش دهم. من معتقدم که هر کسی با انگیزه کافی می‌تواند برنامه‌نویس شود و در این مسیر پیشرفت کند.</p>
+                        
+                        <p>تاکنون بیش از <strong>50 ساعت</strong> ویدیو آموزشی تولید کرده‌ام که چندین نفر از طریق آنها وارد دنیای برنامه‌نویسی شده‌اند. رویکرد آموزشی من <strong>پروژه‌محور</strong> و <strong>کاربردی</strong> است، به طوری که دانشجویان پس از پایان هر دوره می‌توانند پروژه‌های واقعی انجام دهند.</p>
+                        
+                        <p>تخصص اصلی من در زمینه‌های زیر است:</p>
+                    </div>
+                    
+                    <div class="skills-container">
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <span>پایتون (Python)</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5 & CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span>Front-End Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">50+</div>
+                            <div class="stat-label">ساعت آموزش</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="10">10+</div>
+                            <div class="stat-label">کدآموز</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="5">5+</div>
+                            <div class="stat-label">پروژه موفق</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="1">1+</div>
+                            <div class="stat-label">سال تجربه</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="connect-btn">
+                        <i class="fas fa-handshake"></i> ارتباط با من
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            /* درباره من - مدرن و حرفه‌ای */
+            .about-section {
+                padding: 5rem 0;
+                background: linear-gradient(135deg, #f8fafc 0%, #e6f0ff 100%);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .about-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 300px;
+                background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, transparent 100%);
+                border-radius: 50%;
+                transform: translate(30%, -30%);
+            }
+            
+            .about-section::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200px;
+                height: 200px;
+                background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, transparent 100%);
+                border-radius: 50%;
+                transform: translate(-30%, 30%);
+            }
+            
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 4rem;
+                align-items: center;
+                position: relative;
+                z-index: 1;
+            }
+            
+            @media (max-width: 992px) {
+                .about-content {
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                    text-align: center;
+                }
+            }
+            
+            .about-image {
+                position: relative;
+                perspective: 1000px;
+            }
+            
+            .profile-image {
+                width: 100%;
+                max-width: 350px;
+                border-radius: 20px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+                transform: rotateY(-10deg);
+                transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                border: 5px solid white;
+            }
+            
+            .about-image:hover .profile-image {
+                transform: rotateY(0deg) scale(1.05);
+                box-shadow: 0 30px 60px rgba(37, 99, 235, 0.25);
+            }
+            
+            .profile-badge {
+                position: absolute;
+                bottom: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                color: white;
+                padding: 0.8rem 1.5rem;
+                border-radius: 30px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+                animation: float 3s ease-in-out infinite;
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateX(-50%) translateY(0); }
+                50% { transform: translateX(-50%) translateY(-10px); }
+            }
+            
+            .about-text {
+                animation: slideInRight 0.8s ease 0.2s both;
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            .about-name {
+                font-size: 2.5rem;
+                color: var(--dark);
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            .about-intro {
+                font-size: 1.2rem;
+                color: var(--text);
+                margin-bottom: 2rem;
+                font-weight: 500;
+            }
+            
+            .about-description {
+                margin-bottom: 2.5rem;
+            }
+            
+            .about-description p {
+                margin-bottom: 1rem;
+                line-height: 1.8;
+                color: var(--dark);
+                font-size: 1.1rem;
+            }
+            
+            .about-description strong {
+                color: var(--primary);
+            }
+            
+            .skills-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin-bottom: 3rem;
+            }
+            
+            .skill-item {
+                background: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .skill-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+            
+            .skill-item i {
+                font-size: 1.5rem;
+                color: var(--primary);
+            }
+            
+            .skill-item span {
+                font-weight: 600;
+                color: var(--dark);
+            }
+            
+            .stats-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 3rem;
+            }
+            
+            .stat-item {
+                text-align: center;
+                padding: 1.5rem;
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .stat-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+                font-weight: 800;
+                color: var(--primary);
+                margin-bottom: 0.5rem;
+                position: relative;
+            }
+            
+            .stat-number::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                right: 50%;
+                transform: translateX(50%);
+                width: 30px;
+                height: 3px;
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                border-radius: 2px;
+            }
+            
+            .stat-label {
+                font-size: 0.95rem;
+                color: var(--text);
+                font-weight: 500;
+            }
+            
+            .connect-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.8rem;
+                background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+                color: white;
+                padding: 1rem 2.5rem;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+            }
+            
+            .connect-btn:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(5, 150, 105, 0.4);
+            }
+            
+            /* انیمیشن شمارنده */
+            @keyframes countUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .stat-number.animated {
+                animation: countUp 1s ease forwards;
+            }
+        </style>
+        
+        <script>
+            // انیمیشن شمارنده
+            document.addEventListener('DOMContentLoaded', function() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const number = entry.target;
+                            const target = parseInt(number.getAttribute('data-count'));
+                            const duration = 2000;
+                            const increment = target / (duration / 16);
+                            let current = 0;
+                            
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    current = target;
+                                    clearInterval(timer);
+                                }
+                                number.textContent = Math.floor(current) + (target > 100 ? '+' : '+');
+                            }, 16);
+                            
+                            number.classList.add('animated');
+                            observer.unobserve(number);
+                        }
+                    });
+                }, {
+                    threshold: 0.5
+                });
+                
+                statNumbers.forEach(number => {
+                    observer.observe(number);
+                });
+            });
+        </script>
+    </section>
+
+
+    <!-- مقالات -->
+    <section class="articles" id="articles">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-newspaper"></i> مقالات تخصصی برنامه نویسی
+            </h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3 class="article-title">برنامه نویسی چیست و چرا باید یاد بگیریم؟</h3>
+                    <p class="article-excerpt">
+                        آشنایی با مفاهیم پایه برنامه نویسی، مزایای یادگیری و چگونگی شروع این مسیر پرچالش اما جذاب. در این مقاله به بررسی اهمیت برنامه نویسی در دنیای امروز می‌پردازیم.
+                    </p>
+                    <a href="whatsProgram" class="read-more">
+                        مطالعه مقاله
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <div class="article-card">
+                    <h3 class="article-title">چرا پایتون محبوب‌ترین زبان برنامه نویسی است؟</h3>
+                    <p class="article-excerpt">
+                        بررسی مزایای زبان پایتون، کاربردهای آن در هوش مصنوعی، وب و علم داده و آینده شغلی این زبان. مقایسه پایتون با دیگر زبان‌های برنامه نویسی.
+                    </p>
+                    <a href="Magale2" class="read-more">
+                        مطالعه مقاله
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <div class="article-card">
+                    <h3 class="article-title">نقشه راه برنامه نویس Front-End در ۲۰۲۵</h3>
+                    <p class="article-excerpt">
+                        راهنمای قدم به قدم برای تبدیل شدن به یک برنامه نویس Front-End حرفه‌ای با جدیدترین تکنولوژی‌ها. معرفی منابع آموزشی و پروژه‌های تمرینی.
+                    </p>
+                    <a href="Magale3" class="read-more">
+                        مطالعه مقاله
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مشاوره -->
+    <section class="consultation" id="consultation">
+        <div class="container">
+            <div class="consultation-content">
+                <h2>مشاوره رایگان برنامه نویسی</h2>
+                <p class="consultation-text">
+                    اگه نمیدونی از کجا شروع کنی و کدوم دوره برات مناسبه؛ می‌تونی به پشتیبانی ما پیام بدی.
+                    ما کامل بهت یاد می‌دیم که چه کاری انجام بدی تا به یک برنامه‌نویس حرفه‌ای تبدیل بشی.
+                </p>
+                <a href="Moshavereh" class="consultation-btn">
+                    دریافت مشاوره رایگان
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ارتباط -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">
+                <i class="fas fa-phone-alt"></i> راه‌های ارتباط با ما
+            </h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon"></div>
+                    <h3>روبیکا</h3>
+                    <p>پاسخگویی سریع در روبیکا برای ثبت‌نام در دوره‌ها و پشتیبانی</p>
+                    <a href="http://rubika.ir/BardiyaFatehi" class="contact-btn rubika-btn">
+                        <i class="fas fa-paper-plane"></i> ارسال پیام
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon"></div>
+                    <h3>تلگرام</h3>
+                    <p>پشتیبانی و پاسخ به سوالات در تلگرام</p>
+                    <a href="http://t.me/BardiyaFatehi" class="contact-btn telegram-btn">
+                        <i class="fab fa-telegram-plane"></i> ارسال پیام
+                    </a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon"></div>
+                    <h3>ربات تلگرام</h3>
+                    <p>دستیار هوشمند برای اطلاعات دوره‌ها</p>
+                    <a href="http://t.me/BardiyaFatehiBot" class="contact-btn bot-btn">
+                        <i class="fas fa-robot"></i> شروع گفتگو
+                    </a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon"></div>
+                    <h3>آپارات</h3>
+                    <p>آموزش‌های ویدیویی رایگان و نمونه تدریس</p>
+                    <a href="http://aparat.com/BardiyaFatehi" class="contact-btn aparat-btn">
+                        <i class="fas fa-video"></i> مشاهده کانال
+                    </a>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <p style="opacity: 0.9; font-size: 1.1rem;">
+                    <i class="fas fa-bolt" style="color: #fbbf24;"></i>
+                    پاسخگویی در کمتر از ۱۲ ساعت
+                </p>
+                <p style="opacity: 0.8; font-size: 1rem; margin-top: 1rem;">
+                    برای ثبت‌نام در هر دوره، از طریق روبیکا یا تلگرام پیام دهید
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>آموزش برنامه نویسی از صفر تا بازار کار</p>
+            <p>تمامی حقوق محفوظ است © ۱۴۰۴</p>
+            <p class="creator">
+                طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // سیستم نظردهی
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const course = document.getElementById('course').value;
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const comment = document.getElementById('comment').value;
+            
+            if (!name || !course || !rating || !comment) {
+                alert('لطفا تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            // ایجاد ستاره‌های امتیاز
+            let stars = '';
+            for (let i = 0; i < 5; i++) {
+                stars += i < rating ? '★' : '☆';
+            }
+            
+            // تاریخ جاری
+            const now = new Date();
+            const date = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
+            
+            // ایجاد نظر جدید
+            const testimonialItem = document.createElement('div');
+            testimonialItem.className = 'testimonial-item';
+            testimonialItem.innerHTML = `
+                <div class="testimonial-header">
+                    <div class="testimonial-author">${name}</div>
+                    <div class="testimonial-rating">${stars}</div>
+                    <div class="testimonial-date">${date}</div>
+                </div>
+                <p class="testimonial-text">"${comment}"</p>
+                <div class="testimonial-course">
+                    <i class="fas fa-graduation-cap"></i> دوره: ${course}
+                </div>
+            `;
+            
+            // اضافه کردن نظر به ابتدای لیست
+            const testimonialsList = document.querySelector('.testimonials-list');
+            testimonialsList.prepend(testimonialItem);
+            
+            // نمایش پیام موفقیت
+            alert('✅ نظر شما با موفقیت ثبت شد!');
+            
+            // ریست فرم
+            document.getElementById('comment-form').reset();
+            
+            // ذخیره در localStorage
+            const comments = JSON.parse(localStorage.getItem('comments') || '[]');
+            comments.unshift({
+                name,
+                course,
+                rating,
+                comment,
+                date
+            });
+            localStorage.setItem('comments', JSON.stringify(comments));
+        });
+
+        // بارگذاری نظرات ذخیره شده
+        document.addEventListener('DOMContentLoaded', function() {
+            const comments = JSON.parse(localStorage.getItem('comments') || '[]');
+            const testimonialsList = document.querySelector('.testimonials-list');
+            
+            comments.forEach(comment => {
+                let stars = '';
+                for (let i = 0; i < 5; i++) {
+                    stars += i < comment.rating ? '★' : '☆';
+                }
+                
+                const testimonialItem = document.createElement('div');
+                testimonialItem.className = 'testimonial-item';
+                testimonialItem.innerHTML = `
+                    <div class="testimonial-header">
+                        <div class="testimonial-author">${comment.name}</div>
+                        <div class="testimonial-rating">${stars}</div>
+                        <div class="testimonial-date">${comment.date}</div>
+                    </div>
+                    <p class="testimonial-text">"${comment.comment}"</p>
+                    <div class="testimonial-course">
+                        <i class="fas fa-graduation-cap"></i> دوره: ${comment.course}
+                    </div>
+                `;
+                
+                testimonialsList.appendChild(testimonialItem);
+            });
+        });
+
+        // اسکرول نرم برای لینک‌ها
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
