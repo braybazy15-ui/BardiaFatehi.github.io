@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره VIP برنامه نویسی با پایتون | آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --secondary-dark: #047857;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #475569;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: var(--dark);
+            font-family: 'Vazir', 'Dana', sans-serif;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* هدر */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #dbeafe;
+        }
+
+        /* هیرو دوره */
+        .course-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .course-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(30, 64, 175, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* بخش معرفی دوره */
+        .course-intro {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .instructor-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .instructor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #2563eb;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+
+        .instructor-name {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor-bio {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* بخش مشخصات دوره */
+        .course-specs {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .spec-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-value {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .spec-value.unavailable {
+            color: var(--danger);
+            background: #fee2e2;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .spec-value.in-progress {
+            color: var(--warning);
+            background: #fef3c7;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* بخش سیلابس */
+        .syllabus {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .syllabus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .chapter-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            border-right: 4px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chapter-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            min-height: 3.5rem;
+        }
+
+        .chapter-topics {
+            list-style: none;
+        }
+
+        .chapter-topics li {
+            padding: 0.5rem 0;
+            color: var(--text);
+            position: relative;
+            padding-right: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .chapter-topics li:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-topics li::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* بخش سوالات متداول */
+        .faq-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .faq-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .faq-subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-accordion {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            padding: 1.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #f8fafc;
+        }
+
+        .faq-answer.active {
+            padding: 1.8rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            color: #1d4ed8;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .payment-steps {
+            background: #f0f9ff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-right: 4px solid #0ea5e9;
+        }
+
+        .payment-steps ol {
+            padding-right: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .payment-steps li {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .payment-steps li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* بخش مشاوره */
+        .consultation-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .status-box {
+            background: white;
+            color: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .status-title {
+            font-size: 1.5rem;
+            color: var(--danger);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-note {
+            color: var(--text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .consultation-btn {
+            background: white;
+            color: var(--secondary);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: inline-block;
+        }
+
+        .consultation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* بخش معرفی دوره */
+        .course-description {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .course-title {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: right;
+            position: relative;
+        }
+
+        .course-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .description-content {
+            line-height: 1.8;
+        }
+
+        .description-content p {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            line-height: 1.9;
+        }
+
+        .highlight-keyword {
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            margin: 0 0.2rem;
+            font-size: 1.15rem;
+        }
+
+        .highlight-keyword.primary {
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #f0f4ff, #f8faff);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-right: 4px solid #2563eb;
+            margin-top: 1.5rem;
+        }
+
+        .important-note p {
+            color: var(--dark);
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .important-note strong {
+            color: var(--danger);
+        }
+
+        /* فوتر */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .creator {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                text-align: center;
+            }
+            
+            .nav-links a {
+                margin: 0 0.75rem;
+                display: inline-block;
+            }
+            
+            .faq-title {
+                font-size: 2.2rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+            
+            .faq-question {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .faq-answer.active {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .contact-link {
+                justify-content: center;
+            }
+            
+            .course-description {
+                padding: 1.5rem;
+            }
+            
+            .course-title {
+                font-size: 1.8rem;
+            }
+            
+            .description-content p {
+                font-size: 1rem;
+                text-align: right;
+            }
+            
+            .highlight-keyword {
+                font-size: 1.05rem;
+            }
+            
+            .chapter-title {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">آکادمی برنامه نویسی بردیا فاتحی</div>
+                <div class="nav-links">
+                    <a href="/">صفحه اصلی</a>
+                    <a href="/Moshavereh">مشاوره رایگان</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش هیرو دوره -->
+    <section class="course-hero">
+        <img src="/static/doreh5.jpg" alt="دوره VIP پایتون" class="course-hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>دوره VIP برنامه نویسی با پایتون</h1>
+                <p>آموزش کامل و پروژه‌محور پایتون از صفر تا پیشرفته</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش معرفی دوره -->
+    <section class="course-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div>
+                    <div class="course-description">
+                        <h2 class="course-title">درباره دوره VIP پایتون</h2>
+                        <div class="description-content">
+                            <p>
+                                دوره <span class="highlight-keyword primary">VIP برنامه نویسی با پایتون</span> 
+                                یک دوره جامع و پروژه‌محور است که شما را از سطح کاملاً مبتدی به یک 
+                                <span class="highlight-keyword primary">برنامه نویس حرفه‌ای پایتون</span> 
+                                تبدیل می‌کند.
+                            </p>
+                            <p>
+                                این دوره بر اساس نیازهای واقعی بازار کار طراحی شده و شامل 
+                                <span class="highlight-keyword primary">۱۰ فصل آموزشی</span> 
+                                به همراه 
+                                <span class="highlight-keyword primary">پروژه‌های عملی</span> 
+                                است. در پایان دوره می‌توانید پروژه‌های واقعی بسازید و وارد بازار کار شوید.
+                            </p>
+                            <div class="important-note">
+                                <p>
+                                    این دوره در حال تکمیل است و به زودی بر روی پلتفرم رسمی منتشر خواهد شد.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructor-card">
+                    <img src="/static/MyProfile.jpg" alt="بردیا فاتحی" class="instructor-image">
+                    <div class="instructor-name">بردیا فاتحی</div>
+                    <div class="instructor-title">مدرس برنامه‌نویسی، طراح وب و مؤسس آکادمی فاتحی</div>
+                    
+                    <div class="instructor-bio">
+                        <div class="bio-section">
+                            <p class="bio-intro">سلام، من <strong>بردیا فاتحی</strong> هستم. بیش از <strong>۱ سال</strong> است که در زمینه برنامه‌نویسی و طراحی وب فعالیت می‌کنم و عاشق اشتراک‌گذاری دانش و تجربیاتم با دیگران هستم.</p>
+                        </div>
+                        
+                        <div class="bio-section">
+                            <p>به عنوان <strong>مؤسس آکادمی فاتحی</strong>، مأموریت من این است که برنامه‌نویسی را به <strong>ساده‌ترین و کاربردی‌ترین روش</strong> به دانشجویان آموزش دهم. من معتقدم که هر کسی با انگیزه کافی می‌تواند برنامه‌نویس شود و در این مسیر پیشرفت کند.</p>
+                        </div>
+                        
+                        <div class="bio-section">
+                            <p>تاکنون بیش از <strong>۵۰ ساعت ویدیو آموزشی</strong> تولید کرده‌ام که چندین نفر از طریق آنها وارد دنیای برنامه‌نویسی شده‌اند. رویکرد آموزشی من <strong>پروژه‌محور و کاربردی</strong> است، به طوری که دانشجویان پس از پایان هر دوره می‌توانند پروژه‌های واقعی انجام دهند.</p>
+                        </div>
+                        
+                        <div class="bio-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">1+</div>
+                                <div class="stat-label">سال تجربه</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">ساعت آموزش</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">∞</div>
+                                <div class="stat-label">انگیزه یادگیری</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                    .instructor-card {
+                        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+                        padding: 2.5rem;
+                        border-radius: 20px;
+                        text-align: center;
+                        border: 2px solid #e2e8f0;
+                        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                        max-width: 400px;
+                        margin: 0 auto;
+                    }
+                
+                    .instructor-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), rgba(5, 150, 105, 0.03));
+                        z-index: 1;
+                    }
+                
+                    .instructor-card:hover {
+                        transform: translateY(-10px) scale(1.02);
+                        box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
+                        border-color: #2563eb;
+                    }
+                
+                    .instructor-image {
+                        width: 160px;
+                        height: 160px;
+                        border-radius: 50%;
+                        border: 4px solid #2563eb;
+                        margin: 0 auto 1.5rem;
+                        object-fit: cover;
+                        position: relative;
+                        z-index: 2;
+                        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+                        transition: all 0.3s ease;
+                    }
+                
+                    .instructor-card:hover .instructor-image {
+                        transform: scale(1.05);
+                        box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
+                    }
+                
+                    .instructor-name {
+                        font-size: 1.8rem;
+                        color: #1e293b;
+                        margin-bottom: 0.5rem;
+                        font-weight: 700;
+                        position: relative;
+                        z-index: 2;
+                        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                    }
+                
+                    .instructor-title {
+                        font-size: 1.1rem;
+                        color: #64748b;
+                        margin-bottom: 2rem;
+                        position: relative;
+                        z-index: 2;
+                        font-weight: 500;
+                        line-height: 1.6;
+                        padding-bottom: 1.5rem;
+                        border-bottom: 2px dashed #e2e8f0;
+                    }
+                
+                    .instructor-bio {
+                        text-align: right;
+                        position: relative;
+                        z-index: 2;
+                    }
+                
+                    .bio-section {
+                        margin-bottom: 1.5rem;
+                        animation: fadeInUp 0.6s ease forwards;
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                
+                    .bio-section:nth-child(1) { animation-delay: 0.1s; }
+                    .bio-section:nth-child(2) { animation-delay: 0.2s; }
+                    .bio-section:nth-child(3) { animation-delay: 0.3s; }
+                
+                    @keyframes fadeInUp {
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                
+                    .bio-section p {
+                        color: #475569;
+                        line-height: 1.8;
+                        font-size: 1rem;
+                        margin: 0;
+                        text-align: justify;
+                    }
+                
+                    .bio-intro {
+                        background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+                        padding: 1.2rem;
+                        border-radius: 12px;
+                        border-right: 4px solid #2563eb;
+                        margin-bottom: 1.5rem !important;
+                    }
+                
+                    .bio-section strong {
+                        color: #2563eb;
+                        font-weight: 600;
+                        position: relative;
+                        padding: 0 2px;
+                    }
+                
+                    .bio-section strong::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        right: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+                        border-radius: 1px;
+                        opacity: 0.3;
+                    }
+                
+                    .bio-stats {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 1rem;
+                        margin-top: 2rem;
+                        padding-top: 2rem;
+                        border-top: 2px solid #e2e8f0;
+                    }
+                
+                    .stat-item {
+                        text-align: center;
+                        padding: 1rem;
+                        background: white;
+                        border-radius: 12px;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                        transition: all 0.3s ease;
+                        border: 1px solid #e2e8f0;
+                    }
+                
+                    .stat-item:hover {
+                        transform: translateY(-5px);
+                        border-color: #2563eb;
+                        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+                    }
+                
+                    .stat-number {
+                        font-size: 1.8rem;
+                        font-weight: 800;
+                        color: #2563eb;
+                        margin-bottom: 0.3rem;
+                        line-height: 1;
+                    }
+                
+                    .stat-label {
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        font-weight: 500;
+                    }
+                
+                    /* حاشیه دایره‌ای */
+                    .instructor-card::after {
+                        content: '';
+                        position: absolute;
+                        top: -50px;
+                        right: -50px;
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), transparent);
+                        z-index: 1;
+                    }
+                
+                    @media (max-width: 768px) {
+                        .instructor-card {
+                            padding: 2rem;
+                            max-width: 100%;
+                        }
+                        
+                        .instructor-image {
+                            width: 140px;
+                            height: 140px;
+                        }
+                        
+                        .instructor-name {
+                            font-size: 1.6rem;
+                        }
+                        
+                        .instructor-title {
+                            font-size: 1rem;
+                        }
+                        
+                        .bio-section p {
+                            font-size: 0.95rem;
+                        }
+                        
+                        .bio-stats {
+                            grid-template-columns: repeat(3, 1fr);
+                            gap: 0.8rem;
+                        }
+                        
+                        .stat-number {
+                            font-size: 1.6rem;
+                        }
+                    }
+                
+                    @media (max-width: 480px) {
+                        .instructor-card {
+                            padding: 1.5rem;
+                        }
+                        
+                        .bio-stats {
+                            grid-template-columns: 1fr;
+                            gap: 0.8rem;
+                        }
+                        
+                        .stat-item {
+                            padding: 0.8rem;
+                        }
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مشخصات دوره -->
+    <section class="course-specs">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: var(--dark); margin-bottom: 3rem;">مشخصات دوره</h2>
+            
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-title">آخرین بروزرسانی</div>
+                    <div class="spec-value">1404/10/12</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-title">وضعیت دوره</div>
+                    <div class="spec-value unavailable">ناموجود</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-title">تعداد قسمت‌ها</div>
+                    <div class="spec-value">۳۰ قسمت</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-title">مدت زمان دوره</div>
+                    <div class="spec-value in-progress">در حال تکمیل</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-title">سطح دوره</div>
+                    <div class="spec-value">مقدماتی تا متوسط</div>
+                </div>
+                
+                <div class="spec-card">
+                    <div class="spec-title">پشتیبانی</div>
+                    <div class="spec-value">یک ماه پشتیبانی تخصصی رایگان</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش سیلابس -->
+    <section class="syllabus">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: var(--dark); margin-bottom: 3rem;">سرفصل‌های دوره</h2>
+            
+            <div class="syllabus-grid">
+                <div class="chapter-card">
+                    <div class="chapter-number">۱</div>
+                    <h3 class="chapter-title">فصل اول: آشنایی و نصب</h3>
+                    <ul class="chapter-topics">
+                        <li>برنامه نویسی چیست</li>
+                        <li>چرا پایتون؟</li>
+                        <li>نصب پایتون و VS CODE</li>
+                        <li>اولین برنامه پایتونی</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۲</div>
+                    <h3 class="chapter-title">فصل دوم: متغیرها و داده‌ها</h3>
+                    <ul class="chapter-topics">
+                        <li>تعریف متغیر</li>
+                        <li>نوع داده‌ها</li>
+                        <li>قوانین نامگذاری</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۳</div>
+                    <h3 class="chapter-title">فصل سوم: ورودی و خروجی</h3>
+                    <ul class="chapter-topics">
+                        <li>گرفتن ورودی از کاربر</li>
+                        <li>فرمت دهی خروجی</li>
+                        <li>نمایش ترکیبی اطلاعات</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۴</div>
+                    <h3 class="chapter-title">فصل چهارم: عملگرها محاسباتی</h3>
+                    <ul class="chapter-topics">
+                        <li>عملگرهای ریاضی</li>
+                        <li>عملگرهای مقایسه‌ای</li>
+                        <li>اولویت عملگرها</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۵</div>
+                    <h3 class="chapter-title">فصل پنجم: شرط‌ها</h3>
+                    <ul class="chapter-topics">
+                        <li>ساختار if</li>
+                        <li>if - else</li>
+                        <li>if - else - elif</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۶</div>
+                    <h3 class="chapter-title">فصل ششم: حلقه for</h3>
+                    <ul class="chapter-topics">
+                        <li>حلقه for با range</li>
+                        <li>پیمایش رشته‌ها</li>
+                        <li>پیمایش لیست‌ها</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۷</div>
+                    <h3 class="chapter-title">فصل هفتم: حلقه while</h3>
+                    <ul class="chapter-topics">
+                        <li>حلقه while</li>
+                        <li>کنترل حلقه</li>
+                        <li>break , continue</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۸</div>
+                    <h3 class="chapter-title">فصل هشتم: لیست‌ها</h3>
+                    <ul class="chapter-topics">
+                        <li>ایجاد و مدیریت لیست</li>
+                        <li>دسترسی به عناصر</li>
+                        <li>متدهای لیست</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۹</div>
+                    <h3 class="chapter-title">فصل نهم: توابع</h3>
+                    <ul class="chapter-topics">
+                        <li>تعریف تابع</li>
+                        <li>پارامتر و آرگمان</li>
+                        <li>مقدار بازگشتی</li>
+                    </ul>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-number">۱۰</div>
+                    <h3 class="chapter-title">فصل دهم: پروژه نهایی</h3>
+                    <ul class="chapter-topics">
+                        <li>ترکیب تمامی مباحث</li>
+                        <li>اشکال زدایی</li>
+                        <li>ارائه پروژه</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش سوالات متداول -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title">سوالات متداول</h2>
+                <p class="faq-subtitle">پاسخ به پرتکرارترین سوالات درباره دوره VIP پایتون</p>
+            </div>
+            
+            <div class="faq-accordion">
+                <!-- سوال ۱ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(1)">
+                        <h3>وضعیت فعلی دوره چگونه است؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-1">
+                        <p>دوره VIP پایتون در حال حاضر <span class="highlight">ناموجود</span> است. این دوره در حال تکمیل و بروزرسانی است و به زودی بر روی پلتفرم رسمی منتشر خواهد شد.</p>
+                        <p>برای اطلاع از زمان شروع مجدد دوره، می‌توانید از طریق راه‌های ارتباطی با ما در تماس باشید.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۲ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(2)">
+                        <h3>این دوره برای چه کسانی مناسب است؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-2">
+                        <p>این دوره برای افرادی طراحی شده که می‌خواهند <span class="highlight">برنامه نویسی را از صفر یاد بگیرند</span>. حتی اگر تا به حال یک خط کد هم ننوشته‌اید، این دوره برای شما مناسب است.</p>
+                        <p>همچنین افرادی که آشنایی مقدماتی با برنامه نویسی دارند و می‌خواهند مهارت‌های خود را در پایتون تقویت کنند نیز می‌توانند از این دوره استفاده کنند.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۳ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(3)">
+                        <h3>پس از اتمام دوره چه مهارت‌هایی کسب می‌کنم؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-3">
+                        <p>پس از اتمام این دوره می‌توانید:</p>
+                        <ul style="padding-right: 1.5rem; color: var(--text);">
+                            <li>برنامه‌های پایتون بنویسید</li>
+                            <li>مسائل پیچیده را با الگوریتم‌های مناسب حل کنید</li>
+                            <li>با مفاهیم پایه‌ای برنامه نویسی آشنا شوید</li>
+                            <li>پروژه‌های عملی پیاده‌سازی کنید</li>
+                            <li>برای یادگیری فریمورک‌های پیشرفته آماده شوید</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- سوال ۴ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(4)">
+                        <h3>آیا دوره پشتیبانی دارد؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-4">
+                        <p>بله، این دوره شامل <span class="highlight">یک ماه پشتیبانی تخصصی رایگان</span> است. در این مدت می‌توانید سوالات خود را بپرسید و راهنمایی دریافت کنید.</p>
+                        <p>پشتیبانی شامل پاسخ به سوالات درسی، راهنمایی در انجام پروژه‌ها و رفع اشکالات کدنویسی است.</p>
+                    </div>
+                </div>
+                
+                <!-- سوال ۵ -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(5)">
+                        <h3>آیا محتوای دوره به روزرسانی می‌شود؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer" id="answer-5">
+                        <p>بله، این دوره به صورت مداوم در حال <span class="highlight">بروزرسانی و تکمیل</span> است. آخرین بروزرسانی در تاریخ ۱۴۰۴/۱۰/۱۲ انجام شده است.</p>
+                        <p>این دوره قرار است به سایت رسمی منتقل شود و با ویژگی‌های جدید و محتوای تکمیلی در دسترس قرار گیرد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مشاوره -->
+    <section class="consultation-section">
+        <div class="container">
+            <div class="status-box">
+                <div class="status-title">ناموجود</div>
+                <div style="color: var(--text);">این دوره در حال تکمیل و بروزرسانی است</div>
+            </div>
+            
+            <p class="status-note" style="color: white; ">
+                دوره VIP پایتون در حال تکمیل است و به زودی بر روی پلتفرم رسمی منتشر خواهد شد.
+                برای اطلاع از زمان شروع مجدد دوره و دریافت مشاوره رایگان، با ما در ارتباط باشید.
+            </p>
+
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                <h3 style="color: white; margin-bottom: 1.5rem;">برای مشاوره رایگان پیام دهید</h3>
+                
+                <div class="contact-info" style="justify-content: center;">
+                    <a href="http://rubika.ir/BardiyaFatehi" class="contact-link">
+                        روبیکا
+                    </a>
+                    
+                    <a href="http://t.me/BardiyaFatehi" class="contact-link">
+                        تلگرام
+                    </a>
+                </div>
+
+                <div style="margin-top: 1.5rem; color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+                    پاسخگویی در کمتر از ۱۲ ساعت
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                این دوره قرار است بر روی سایت رسمی منتشر شود
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>آکادمی برنامه نویسی بردیا فاتحی</p>
+            <p>تمامی حقوق محفوظ است © ۱۴۰۴</p>
+            <p class="creator">طراحی و توسعه توسط: <span class="creator">بردیا فاتحی</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // تابع برای باز و بسته کردن پاسخ سوالات
+        function toggleAnswer(id) {
+            const answer = document.getElementById(`answer-${id}`);
+            const icon = answer.previousElementSibling.querySelector('.faq-icon i');
+            
+            // بستن همه پاسخ‌های دیگر
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item.id !== `answer-${id}`) {
+                    item.classList.remove('active');
+                    const otherIcon = item.previousElementSibling.querySelector('.faq-icon i');
+                    otherIcon.className = 'fas fa-chevron-down';
+                }
+            });
+            
+            // باز یا بسته کردن پاسخ فعلی
+            answer.classList.toggle('active');
+            
+            // تغییر آیکون
+            if (answer.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+        
+        // باز کردن اولین سوال به صورت پیش‌فرض
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAnswer(1);
+        });
+    </script>
+</body>
+</html>
