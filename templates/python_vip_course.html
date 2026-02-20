@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره VIP پایتون - آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* استایل‌های مخصوص صفحه دوره */
+        .course-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(52, 152, 219, 0.2));
+            border-radius: 20px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/static/images/doreh1.jpg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .course-title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        .course-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .course-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all var(--transition-fast);
+        }
+        
+        .content-section:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .section-title i {
+            color: var(--accent-blue);
+        }
+        
+        .highlight-text {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all var(--transition-fast);
+        }
+        
+        .feature-item:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .feature-item i {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+        
+        .important-note {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(52, 152, 219, 0.1));
+            border-right: 4px solid var(--accent-red);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .course-image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .course-main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--accent-blue);
+        }
+        
+        /* بخش ورود به دوره */
+        .access-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            border: 2px solid var(--accent-blue);
+        }
+        
+        .access-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all var(--transition-fast);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent-green), #27ae60);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+        }
+        
+        .access-instruction {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .instruction-title {
+            color: var(--accent-red);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            transition: all var(--transition-fast);
+        }
+        
+        .back-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateX(-10px);
+        }
+                /* بهبود چیدمان برای موبایل */
+                @media (max-width: 768px) {
+            .course-hero {
+                padding: 40px 15px;
+                margin-bottom: 30px;
+                border-radius: 15px;
+            }
+            
+            .course-title {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .course-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+            
+            .back-link {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+            
+            .course-content {
+                padding: 0 10px;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title i {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+                text-align: justify;
+            }
+            
+            .important-note {
+                padding: 18px;
+                margin: 20px 0;
+            }
+            
+            .important-note h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .feature-list {
+                margin: 15px 0;
+            }
+            
+            .feature-item {
+                padding: 10px;
+                margin-bottom: 10px;
+                font-size: 0.95rem;
+            }
+            
+            .feature-item i {
+                font-size: 1rem;
+                min-width: 24px;
+            }
+            
+            .course-image-container {
+                margin: 20px 0;
+            }
+            
+            .course-main-image {
+                border: 2px solid var(--accent-blue);
+                border-radius: 10px;
+            }
+            
+            .access-section {
+                padding: 25px 20px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-label {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+            
+            .form-input {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            
+            .submit-btn {
+                padding: 16px;
+                font-size: 1.1rem;
+            }
+            
+            .access-instruction {
+                padding: 18px;
+                margin-top: 25px;
+            }
+            
+            .instruction-title {
+                font-size: 1.1rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .course-hero {
+                padding: 35px 12px;
+            }
+            
+            .course-title {
+                font-size: 1.8rem;
+            }
+            
+            .course-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 22px 18px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .highlight-text {
+                font-size: 1.1rem;
+            }
+            
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .access-form {
+                width: 100%;
+            }
+            
+            .feature-list {
+                padding: 0 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .course-hero {
+                padding: 30px 10px;
+            }
+            
+            .course-title {
+                font-size: 1.6rem;
+            }
+            
+            .course-subtitle {
+                font-size: 1rem;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            p {
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+            
+            .important-note {
+                padding: 15px;
+            }
+            
+            .access-instruction p {
+                text-align: center;
+            }
+            
+            .feature-list {
+                padding: 0 5px;
+            }
+        }
+        
+        /* بهبود انیمیشن‌ها در موبایل */
+        @media (max-width: 768px) {
+            .content-section:hover {
+                transform: translateY(-3px);
+            }
+            
+            .feature-item:hover {
+                transform: translateX(5px);
+            }
+            
+            .submit-btn:hover {
+                transform: translateY(-2px);
+            }
+            
+            .back-link:hover {
+                transform: translateX(-5px);
+            }
+        }
+        
+        /* بهبود تصاویر در موبایل */
+        @media (max-width: 768px) {
+            .course-main-image {
+                max-width: 95%;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        /* بهبود فاصله‌ها در موبایل */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-content {
+                padding: 0;
+            }
+            
+            .course-content > * {
+                margin-bottom: 25px;
+            }
+        }
+        
+        /* بهبود خوانایی لینک‌ها در موبایل */
+        @media (max-width: 768px) {
+            .back-link {
+                font-size: 0.9rem;
+                padding: 10px 18px;
+            }
+            
+            .highlight-text {
+                word-break: keep-all;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="main-content">
+            <!-- هدر دوره -->
+            <section class="course-hero">
+                <h1 class="course-title">
+                    <i class="fab fa-python"></i>
+                    دوره VIP برنامه نویسی با پایتون
+                </h1>
+                <p class="course-subtitle">
+                    آموزش اصول برنامه نویسی از پایه تا پیشرفته با زبان قدرتمند پایتون
+                </p>
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </section>
+
+            <!-- محتوای دوره -->
+            <div class="course-content">
+                <!-- بخش معرفی دوره -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-rocket"></i>
+                        معرفی دوره
+                    </h2>
+                    <p>
+                        در <span class="highlight-text">آکادمی برنامه نویسی بردیا فاتحی</span>، باور داریم که یادگیری برنامه نویسی باید برای همه افراد قابل دسترس و لذت‌بخش باشد. دوره VIP پایتون با این فلسفه طراحی شده است که شما بتوانید <span class="highlight-text">مفاهیم اساسی برنامه نویسی</span> را به ساده‌ترین و مؤثرترین روش ممکن فرا بگیرید.
+                    </p>
+                    
+                    <div class="important-note">
+                        <h3>ویژگی‌های منحصربه‌فرد این دوره:</h3>
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>آموزش کاملاً حرفه ای و بدون محدودیت زمانی</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>شروع از مقدماتی و بدون نیاز به پیش‌زمینه</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>بهترین انتخاب برای آغاز مسیر برنامه نویسی</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p>
+                        سفر به دنیای برنامه نویسی با دوره پایتون آکادمی فاتحی آغاز می‌شود! ما این مسیر را برای شما هموار کرده‌ایم تا بتوانید با اعتماد به نفس بالا اولین قدم‌های خود را بردارید. این دوره به گونه‌ای طراحی شده که حتی اگر هیچ آشنایی قبلی با برنامه نویسی ندارید، بتوانید به راحتی مفاهیم را درک کنید.
+                    </p>
+                    
+                    <p>
+                        در این دوره آموزشی، ما زبان پایتون را از پایه‌ترین مباحث آغاز کرده و گام به گام پیش می‌رویم. هدف اصلی ما این است که <span class="highlight-text">مفاهیم برنامه نویسی</span> را به روان‌ترین شکل ممکن به شما آموزش دهیم. بنابراین فارغ از اینکه به کدام حوزه برنامه نویسی (توسعه وب، موبایل، دسکتاپ، هوش مصنوعی یا ...) علاقه دارید، این دوره پایه محکمی برای شما خواهد بود.
+                    </p>
+                    
+                    <p>
+                        اگر مفاهیم پایه را به درستی فرا بگیرید، یادگیری سایر زبان‌های برنامه نویسی برای شما بسیار ساده‌تر خواهد شد. پس از اتمام این دوره، می‌توانید با اطمینان خاطر مسیر تخصصی خود را انتخاب کرده و در آن زمینه پیشرفت کنید.
+                    </p>
+                </section>
+
+                <!-- بخش چرا پایتون -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-question-circle"></i>
+                        چرا زبان برنامه نویسی پایتون را انتخاب کنیم؟
+                    </h2>
+                    <p>
+                        انتخاب زبان پایتون برای شروع یادگیری برنامه نویسی یک تصمیم هوشمندانه است. پایتون زبانی است که ویژگی‌های منحصربه‌فردی دارد:
+                    </p>
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <span><strong>سادگی و خوانایی بالا:</strong> ساختار تمیز و ساده پایتون باعث می‌شود مفاهیم برنامه نویسی را راحت‌تر درک کنید</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span><strong>قدرت و انعطاف:</strong> پایتون در عین سادگی، یکی از قدرتمندترین زبان‌های برنامه نویسی دنیاست</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-globe"></i>
+                            <span><strong>کاربردهای گسترده:</strong> از توسعه وب و هوش مصنوعی تا خودکارسازی و تحلیل داده</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <span><strong>جامعه بزرگ:</strong> پشتیبانی از جامعه جهانی برنامه‌نویسان و منابع آموزشی فراوان</span>
+                        </li>
+                    </ul>
+                    
+                    <p>
+                        در آکادمی بردیا فاتحی، ما پایتون را انتخاب کرده‌ایم زیرا معتقدیم این زبان بهترین نقطه شروع برای ورود به دنیای برنامه نویسی است. سادگی آن باعث می‌شود تمرکز شما بر روی یادگیری <span class="highlight-text">مفاهیم برنامه نویسی</span> باشد، نه پیچیدگی‌های زبانی.
+                    </p>
+                </section>
+
+                <!-- بخش پیش‌نیازها -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        پیش‌نیازهای شرکت در دوره
+                    </h2>
+                    
+                    <div class="important-note">
+                        <h3>این دوره برای چه کسانی مناسب است؟</h3>
+                        <p>دوره VIP پایتون به گونه‌ای طراحی شده که هیچ پیش‌نیاز خاصی نیاز ندارد. تنها موارد مورد نیاز:</p>
+                    </div>
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-laptop"></i>
+                            <span><strong>آشنایی مقدماتی با کامپیوتر:</strong> توانایی انجام کارهای روزمره با کامپیوتر کافی است</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-language"></i>
+                            <span><strong>دانش زبان انگلیسی:</strong> فقط در حد شناخت حروف الفبای انگلیسی نیاز دارید</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-calculator"></i>
+                            <span><strong>مهارت ریاضی:</strong> آشنایی با چهار عمل اصلی ریاضی کافی خواهد بود</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <span><strong>انگیزه و علاقه:</strong> مهم‌ترین پیش‌نیاز، اشتیاق برای یادگیری است!</span>
+                        </li>
+                    </ul>
+                    
+                    <p>
+                        نگران نباشید! در جلسات ابتدایی دوره، حتی این موارد پایه نیز مرور خواهند شد. هدف ما این است که هیچ کس به دلیل نداشتن پیش‌زمینه از یادگیری برنامه نویسی محروم نشود.
+                    </p>
+                </section>
+
+                <!-- بخش سوالات متداول -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-comments"></i>
+                        پاسخ به سوالات متداول
+                    </h2>
+                    
+                    <p>
+                        در بخش‌های ابتدایی دوره VIP پایتون، به رایج‌ترین سوالاتی که ممکن است برای شما پیش بیاید پاسخ داده‌ایم. همچنین در جلسه پایانی دوره، درباره <span class="highlight-text">مسیرهای ادامه یادگیری</span> و <span class="highlight-text">فرصت‌های شغلی</span> به طور کامل صحبت کرده‌ایم.
+                    </p>
+                    
+                    <div class="important-note">
+                        <h3>هنوز سوال دارید؟</h3>
+                        <p>
+                            اگر پس از مشاهده دوره همچنان ابهامی برای شما باقی مانده است، می‌توانید از طریق <span class="highlight-text">سیستم پشتیبانی آکادمی</span> با ما در ارتباط باشید و به صورت کاملاً رایگان مشاوره دریافت کنید. تیم پشتیبانی آکادمی فاتحی همیشه آماده پاسخگویی به سوالات شما است.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- بخش ورود به دوره -->
+<section class="content-section access-section">
+    <h2 class="section-title">
+        <i class="fas fa-lock"></i>
+        ورود به محتوای دوره
+    </h2>
+    
+    <p>
+        برای دسترسی به ویدیوهای آموزشی و محتوای کامل دوره VIP پایتون، لطفاً کد دسترسی خود را وارد نمایید.
+    </p>
+    
+    <!-- نمایش پیام خطا اگر وجود دارد -->
+    {% if request.args.get('error') %}
+    <div class="error-message" style="background: rgba(231, 76, 60, 0.2); border: 2px solid #e74c3c; color: white; padding: 15px; border-radius: 10px; margin: 20px 0;">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ request.args.get('error') }}
+    </div>
+    {% endif %}
+    
+    <div class="access-form">
+        <!-- فرم ساده با POST -->
+        <form method="POST" action="/verify-code">
+            <div class="form-group">
+                <label for="code" class="form-label">
+                    <i class="fas fa-key"></i>
+                    کد دسترسی دوره
+                </label>
+                <input 
+                    type="text" 
+                    id="code" 
+                    name="code" 
+                    class="form-input" 
+                    placeholder="کد دریافتی خود را وارد کنید"
+                    required
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                ورود به دوره
+            </button>
+        </form>
+    </div>
+    
+    <div class="access-instruction">
+        <h3 class="instruction-title">
+            <i class="fas fa-info-circle"></i>
+            نحوه دریافت کد دسترسی
+        </h3>
+        <p>
+            کد دسترسی منحصربه‌فرد پس از <span class="highlight-text">تکمیل فرآیند خرید دوره</span> برای شما ارسال می‌گردد.
+        </p>
+        <p>
+            برای خرید دوره VIP پایتون:
+        </p>
+        <ul class="feature-list">
+            <li class="feature-item">
+                <i class="fab fa-telegram"></i>
+                <span>از طریق تلگرام <strong>@BardiyaFatehi</strong> با ما در ارتباط باشید</span>
+            </li>
+            <li class="feature-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>یا به پشتیبانی روبیکا در <strong>rubika.ir/BardiyaFatehi</strong> پیام دهید</span>
+            </li>
+        </ul>
+        <p>
+            پس از واریز مبلغ دوره، کد دسترسی منحصربه‌فرد شما در کمتر از ۱۲ ساعت ارسال خواهد شد.
+        </p>
+        <p style="color: var(--accent-red); font-weight: 600; margin-top: 15px;">
+            توجه: کدهای دسترسی یکبار مصرف بوده و برای یک نفر قابل استفاده می‌باشند.
+        </p>
+    </div>
+</section>
+
+<script>
+    // کنترل فرم ورود به دوره
+    document.getElementById('accessForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const accessCode = document.getElementById('accessCode').value;
+        
+        // نمایش لودینگ
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال بررسی...';
+        submitBtn.disabled = true;
+        
+        try {
+            const response = await fetch('/verify-access-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ accessCode: accessCode })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // هدایت به صفحه محتوای دوره
+                window.location.href = result.redirect;
+            } else {
+                // نمایش پیام خطا
+                showError(result.message || 'کد وارد شده معتبر نمی‌باشد.');
+                
+                // ریست کردن اینپوت
+                document.getElementById('accessCode').value = '';
+                document.getElementById('accessCode').focus();
+                
+                // اضافه کردن کلاس خطا
+                document.getElementById('accessCode').classList.add('error');
+                setTimeout(() => {
+                    document.getElementById('accessCode').classList.remove('error');
+                }, 2000);
+            }
+        } catch (error) {
+            showError('خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.');
+            console.error('Error:', error);
+        } finally {
+            // بازگرداندن دکمه به حالت اول
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+    
+    // تابع نمایش خطا
+    function showError(message) {
+        // حذف پیام قبلی اگر وجود دارد
+        const oldError = document.querySelector('.error-message');
+        if (oldError) {
+            oldError.remove();
+        }
+        
+        // ایجاد پیام خطا
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.innerHTML = `
+            <i class="fas fa-exclamation-circle"></i>
+            <span>${message}</span>
+        `;
+        errorDiv.style.cssText = `
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+            border: 2px solid var(--accent-red);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeIn 0.3s ease;
+        `;
+        
+        // اضافه کردن به فرم
+        const form = document.getElementById('accessForm');
+        form.parentNode.insertBefore(errorDiv, form);
+        
+        // حذف خودکار بعد از 5 ثانیه
+        setTimeout(() => {
+            if (errorDiv.parentNode) {
+                errorDiv.style.opacity = '0';
+                errorDiv.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.remove();
+                    }
+                }, 300);
+            }
+        }, 5000);
+    }
+    
+    // اضافه کردن استایل برای حالت خطا
+    const errorStyle = document.createElement('style');
+    errorStyle.textContent = `
+        .form-input.error {
+            border-color: var(--accent-red) !important;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3) !important;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fa-spinner {
+            animation: fa-spin 1s linear infinite;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(errorStyle);
+</script>
+</body>
+</html>
