@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۱۲: پروژه ماشین حساب ساده | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+
+        .output-box {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: left;
+            position: relative;
+        }
+
+        .output-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2ecc71;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 2px solid #2ecc71;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 30px 0;
+        }
+
+        .project-title {
+            color: #2ecc71;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-box {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border-right: 5px solid #3498db;
+        }
+
+        .step-number {
+            color: #3498db;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: rgba(241,196,15,0.1);
+            border: 1px solid #f1c40f;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .tip-box i {
+            color: #f1c40f;
+            font-size: 1.5rem;
+        }
+
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(52,152,219,0.1));
+            border: 2px solid #9b59b6;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+
+        .challenge-title {
+            color: #9b59b6;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .tip-box { flex-direction: column; text-align: center; }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۱۲</div>
+                <h1 class="session-title">
+                    <i class="fas fa-calculator"></i>
+                    پروژه: ماشین حساب ساده
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">تبریک میگم! به اولین پروژه عملی رسیدی!</span>
+                    توی جلسات قبل با عملگرهای ریاضی آشنا شدی و توی جلسه ۱۱ کلی تمرین کردی.
+                    حالا وقتشه که <span class="highlight-blue">اولین پروژه واقعی</span> خودت رو بنویسی.
+                </p>
+                <p>
+                    این پروژه ماشین حساب هست. شاید ساده به نظر بیاد، اما تمام چیزهایی که تا الان یاد گرفتی رو جمع میکنه.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- ========== مرحله ۱: مرور داشته‌ها ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i>
+                    مرحله ۱: مرور داشته‌ها
+                </h2>
+
+                <p>
+                    برای ساختن ماشین حساب، به این چیزها نیاز داریم:
+                </p>
+
+                <div class="grid-2">
+                    <div class="step-box" style="border-right-color: #3498db;">
+                        <div class="step-number">✅ از جلسه ۵</div>
+                        <ul style="color: #e0e0e0; list-style: none;">
+                            <li><i class="fas fa-print" style="color: #2ecc71;"></i> print برای خروجی</li>
+                            <li><i class="fas fa-code" style="color: #2ecc71;"></i> کاراکترهای خاص مثل \n</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box" style="border-right-color: #e74c3c;">
+                        <div class="step-number">✅ از جلسه ۶</div>
+                        <ul style="color: #e0e0e0; list-style: none;">
+                            <li><i class="fas fa-box" style="color: #2ecc71;"></i> متغیرها</li>
+                            <li><i class="fas fa-database" style="color: #2ecc71;"></i> انواع داده (int, float)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box" style="border-right-color: #f1c40f;">
+                        <div class="step-number">✅ از جلسه ۷</div>
+                        <ul style="color: #e0e0e0; list-style: none;">
+                            <li><i class="fas fa-keyboard" style="color: #2ecc71;"></i> input برای گرفتن اعداد</li>
+                            <li><i class="fas fa-exchange-alt" style="color: #2ecc71;"></i> تبدیل نوع (int/float)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box" style="border-right-color: #2ecc71;">
+                        <div class="step-number">✅ از جلسه ۹</div>
+                        <ul style="color: #e0e0e0; list-style: none;">
+                            <li><i class="fas fa-plus-circle" style="color: #2ecc71;"></i> عملگرهای ریاضی</li>
+                            <li><i class="fas fa-sort-numeric-up" style="color: #2ecc71;"></i> اولویت عملگرها</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== مرحله ۲: قدم به قدم ========== -->
+            <div class="project-card">
+                <h2 class="project-title">
+                    <i class="fas fa-calculator"></i>
+                    ساخت ماشین حساب قدم به قدم
+                </h2>
+
+                <!-- قدم ۱ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۱: گرفتن اعداد از کاربر</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="comment"># دو عدد از کاربر می‌گیریم</span></span>
+                        <span class="code-line">num1 = <span class="keyword">float</span>(<span class="keyword">input</span>(<span class="string">"عدد اول را وارد کنید: "</span>))</span>
+                        <span class="code-line">num2 = <span class="keyword">float</span>(<span class="keyword">input</span>(<span class="string">"عدد دوم را وارد کنید: "</span>))</span>
+                    </div>
+                    <p style="color: #b3b3b3; margin-top: 10px;">
+                        از float استفاده کردیم تا کاربر بتونه عدد اعشاری هم وارد کنه.
+                    </p>
+                </div>
+
+                <!-- قدم ۲ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۲: انجام عملیات ریاضی</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="comment"># متغیرهای مختلف برای هر عملیات</span></span>
+                        <span class="code-line">sum_result = num1 + num2</span>
+                        <span class="code-line">sub_result = num1 - num2</span>
+                        <span class="code-line">mul_result = num1 * num2</span>
+                        <span class="code-line">div_result = num1 / num2</span>
+                        <span class="code-line">floor_div = num1 // num2</span>
+                        <span class="code-line">remainder = num1 % num2</span>
+                        <span class="code-line">power = num1 ** num2</span>
+                    </div>
+                </div>
+
+                <!-- قدم ۳ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۳: نمایش نتایج</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="comment"># نمایش با خط جداکننده</span></span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span>*40)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"نتایج محاسبات:"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"جمع: {num1} + {num2} = {sum_result}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تفریق: {num1} - {num2} = {sub_result}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"ضرب: {num1} * {num2} = {mul_result}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تقسیم: {num1} / {num2} = {div_result}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تقسیم صحیح: {num1} // {num2} = {floor_div}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"باقیمانده: {num1} % {num2} = {remainder}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"توان: {num1} ** {num2} = {power}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== کد نهایی ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    کد نهایی ماشین حساب
+                </h2>
+
+                <div class="code-block">
+                    <span class="code-line"><span class="comment"># ماشین حساب ساده - پروژه جلسه ۱۲</span></span>
+                    <span class="code-line"><span class="comment"># آکادمی برنامه نویسی بردیا فاتحی</span></span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># گرفتن اعداد از کاربر</span></span>
+                    <span class="code-line">num1 = <span class="keyword">float</span>(<span class="keyword">input</span>(<span class="string">"عدد اول را وارد کنید: "</span>))</span>
+                    <span class="code-line">num2 = <span class="keyword">float</span>(<span class="keyword">input</span>(<span class="string">"عدد دوم را وارد کنید: "</span>))</span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># انجام عملیات</span></span>
+                    <span class="code-line">sum_result = num1 + num2</span>
+                    <span class="code-line">sub_result = num1 - num2</span>
+                    <span class="code-line">mul_result = num1 * num2</span>
+                    <span class="code-line">div_result = num1 / num2</span>
+                    <span class="code-line">floor_div = num1 // num2</span>
+                    <span class="code-line">remainder = num1 % num2</span>
+                    <span class="code-line">power = num1 ** num2</span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># نمایش نتایج</span></span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span>*40)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"نتایج محاسبات:"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"جمع: {num1} + {num2} = {sum_result}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تفریق: {num1} - {num2} = {sub_result}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"ضرب: {num1} * {num2} = {mul_result}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تقسیم: {num1} / {num2} = {div_result}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"تقسیم صحیح: {num1} // {num2} = {floor_div}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"باقیمانده: {num1} % {num2} = {remainder}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"توان: {num1} ** {num2} = {power}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                </div>
+
+                <div class="output-box">
+                    <span class="output-label">نمونه خروجی</span>
+                    <div class="output-content">
+                        عدد اول را وارد کنید: 10<br>
+                        عدد دوم را وارد کنید: 3<br>
+                        <br>
+                        ========================================<br>
+                        نتایج محاسبات:<br>
+                        ========================================<br>
+                        جمع: 10.0 + 3.0 = 13.0<br>
+                        تفریق: 10.0 - 3.0 = 7.0<br>
+                        ضرب: 10.0 * 3.0 = 30.0<br>
+                        تقسیم: 10.0 / 3.0 = 3.3333333333333335<br>
+                        تقسیم صحیح: 10.0 // 3.0 = 3.0<br>
+                        باقیمانده: 10.0 % 3.0 = 1.0<br>
+                        توان: 10.0 ** 3.0 = 1000.0<br>
+                        ========================================
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== نکات مهم ========== -->
+            <div class="tip-box">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4 style="color: #f1c40f;">نکات مهم پروژه</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>از float استفاده کردیم تا اعشار هم کار کنه</li>
+                        <li>خط جداکننده (===) باعث میشه خروجی مرتب‌تر بشه</li>
+                        <li>از f-string برای نمایش مرتب استفاده کردیم</li>
+                        <li>برنامه رو با اعداد مختلف تست کن</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== خطاهای احتمالی ========== -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4 style="color: #e74c3c;">خطاهای احتمالی</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li><span class="highlight-red">ZeroDivisionError:</span> اگه عدد دوم رو ۰ بدی، تقسیم و باقیمانده خطا میدن</li>
+                        <li><span class="highlight-red">ValueError:</span> اگه به جای عدد، حرف وارد کنی</li>
+                        <li><span class="highlight-red">عدد خیلی بزرگ:</span> توان اعداد بزرگ نتیجه خیلی بزرگی میده</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== تمرینات اضافه ========== -->
+            <div class="challenge-box">
+                <h3 class="challenge-title">
+                    <i class="fas fa-star"></i>
+                    تمرینات اضافه (اختیاری)
+                </h3>
+
+                <div class="step-box" style="margin-bottom: 20px;">
+                    <div class="step-number">✨ تمرین ۱: ماشین حساب با اعشار</div>
+                    <p style="color: #e0e0e0;">
+                        برنامه رو طوری تغییر بده که فقط دو رقم اعشار نشون بده.
+                        (راهنمایی: از {result:.2f} استفاده کن)
+                    </p>
+                </div>
+
+                <div class="step-box" style="margin-bottom: 20px;">
+                    <div class="step-number">✨ تمرین ۲: ماشین حساب هوشمند</div>
+                    <p style="color: #e0e0e0;">
+                        اگه عدد دوم صفر بود، به جای خطا، پیغام "تقسیم بر صفر ممکن نیست" چاپ کن.
+                    </p>
+                </div>
+
+                <div class="step-box" style="margin-bottom: 20px;">
+                    <div class="step-number">✨ تمرین ۳: ماشین حساب سه عددی</div>
+                    <p style="color: #e0e0e0;">
+                        برنامه رو طوری تغییر بده که سه عدد از کاربر بگیره و عملیات رو روی هر سه انجام بده.
+                    </p>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">✨ تمرین ۴: ماشین حساب با منو</div>
+                    <p style="color: #e0e0e0;">
+                        (پروژه پیشرفته) یه منو بساز که کاربر انتخاب کنه کدوم عملیات انجام بشه.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ========== پشتیبانی ========== -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    پروژه رو تحویل دادی؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه توی پروژه مشکل داشتی یا می‌خوای کدت رو چک کنم، به پشتیبانی بفرست.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== فوتر ========== -->
+            <div class="session-footer">
+                <a href="/course/session/13" class="nav-btn">
+                    جلسه بعدی: if ساده
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

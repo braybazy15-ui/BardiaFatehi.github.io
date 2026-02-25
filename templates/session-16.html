@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۱۶: پروژه حدس سن - پروژه عملی | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .indent { padding-right: 20px; display: block; }
+        .output-box {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: left;
+            position: relative;
+        }
+        .output-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2ecc71;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .project-card {
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 2px solid #2ecc71;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 30px 0;
+        }
+        .project-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .step-box {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border-right: 5px solid #3498db;
+        }
+        .step-number {
+            color: #3498db;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .tip-box {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .tip-box i {
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+        }
+        .exercise-section {
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+            border: 1px solid #2ecc71;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0 40px;
+        }
+        .exercise-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .exercise-item {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .exercise-number {
+            color: #3498db;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .tip-box { flex-direction: column; text-align: center; }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۱۶</div>
+                <h1 class="session-title">
+                    <i class="fas fa-gamepad"></i>
+                    پروژه: تشخیص رده سنی
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">تبریک میگم! به دومین پروژه عملی رسیدی!</span>
+                    توی سه جلسه قبل با if، if-else و if-elif-else آشنا شدی.
+                    حالا وقتشه که <span class="highlight-blue">یه پروژه واقعی و کاربردی</span> با شرط‌ها بنویسی.
+                </p>
+                <p>
+                    توی این پروژه، یه برنامه تشخیص رده سنی می‌نویسم که بر اساس سن کاربر، 
+                    <span class="highlight-yellow">رده سنی</span> و <span class="highlight-yellow">توصیه‌های مناسب</span> رو نشون بده.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- ========== مرحله ۱: شرح پروژه ========== -->
+            <div class="project-card">
+                <h2 class="project-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    شرح پروژه
+                </h2>
+
+                <p style="color: #e0e0e0; margin-bottom: 20px;">
+                    برنامه‌ای می‌نویسیم که سن کاربر رو بگیره و موارد زیر رو مشخص کنه:
+                </p>
+
+                <div class="grid-2">
+                    <div class="step-box" style="border-right-color: #3498db;">
+                        <div class="step-number">📊 رده سنی</div>
+                        <ul style="color: #e0e0e0;">
+                            <li>۰-۲ : نوزاد</li>
+                            <li>۳-۱۲ : کودک</li>
+                            <li>۱۳-۱۹ : نوجوان</li>
+                            <li>۲۰-۳۵ : جوان</li>
+                            <li>۳۶-۶۰ : میانسال</li>
+                            <li>۶۰+ : سالمند</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box" style="border-right-color: #2ecc71;">
+                        <div class="step-number">✅ توصیه‌ها</div>
+                        <ul style="color: #e0e0e0;">
+                            <li>نوزاد: نیاز به مراقبت کامل</li>
+                            <li>کودک: وقت بازی و آموزش</li>
+                            <li>نوجوان: سن یادگیری و کشف استعداد</li>
+                            <li>جوان: سن تحصیل و کار</li>
+                            <li>میانسال: سن تجربه و مسئولیت</li>
+                            <li>سالمند: سن استراحت و تجربه‌اندوزی</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== مرحله ۲: قدم به قدم ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-shoe-prints"></i>
+                    قدم به قدم با پروژه
+                </h2>
+
+                <!-- قدم ۱ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۱: گرفتن سن از کاربر</div>
+                    <div class="code-block">
+                        <span class="code-line">age = <span class="keyword">int</span>(<span class="keyword">input</span>(<span class="string">"لطفاً سن خود را وارد کنید: "</span>))</span>
+                    </div>
+                    <p style="color: #b3b3b3; margin-top: 10px;">
+                        از int استفاده کردیم تا سن به عدد تبدیل بشه.
+                    </p>
+                </div>
+
+                <!-- قدم ۲ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۲: بررسی رده سنی با if-elif-else</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">if</span> age < <span class="number">0</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"نامعتبر"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">2</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"نوزاد"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">12</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"کودک"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">19</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"نوجوان"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">35</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"جوان"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">60</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"میانسال"</span></span></span>
+                        <span class="code-line"><span class="keyword">else</span>:</span>
+                        <span class="code-line"><span class="indent">category = <span class="string">"سالمند"</span></span></span>
+                    </div>
+                </div>
+
+                <!-- قدم ۳ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۳: تعیین توصیه بر اساس رده</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">if</span> category == <span class="string">"نوزاد"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"نیاز به مراقبت کامل"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"کودک"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"وقت بازی و آموزش"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"نوجوان"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"سن یادگیری و کشف استعداد"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"جوان"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"سن تحصیل و کار"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"میانسال"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"سن تجربه و مسئولیت"</span></span></span>
+                        <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"سالمند"</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"سن استراحت و تجربه‌اندوزی"</span></span></span>
+                        <span class="code-line"><span class="keyword">else</span>:</span>
+                        <span class="code-line"><span class="indent">advice = <span class="string">"سن نامعتبر"</span></span></span>
+                    </div>
+                </div>
+
+                <!-- قدم ۴ -->
+                <div class="step-box">
+                    <div class="step-number">قدم ۴: نمایش نتیجه</div>
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span>*40)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"نتیجه بررسی سن:"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"سن شما: {age}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"رده سنی: {category}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"توصیه: {advice}"</span>)</span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== کد نهایی پروژه ========== -->
+            <div class="project-card">
+                <h2 class="project-title">
+                    <i class="fas fa-code"></i>
+                    کد نهایی پروژه
+                </h2>
+
+                <div class="code-block">
+                    <span class="code-line"><span class="comment"># پروژه تشخیص رده سنی</span></span>
+                    <span class="code-line"><span class="comment"># آکادمی برنامه نویسی بردیا فاتحی</span></span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># گرفتن سن از کاربر</span></span>
+                    <span class="code-line">age = <span class="keyword">int</span>(<span class="keyword">input</span>(<span class="string">"لطفاً سن خود را وارد کنید: "</span>))</span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># تشخیص رده سنی</span></span>
+                    <span class="code-line"><span class="keyword">if</span> age < <span class="number">0</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"نامعتبر"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">2</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"نوزاد"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">12</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"کودک"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">19</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"نوجوان"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">35</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"جوان"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> age <= <span class="number">60</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"میانسال"</span></span></span>
+                    <span class="code-line"><span class="keyword">else</span>:</span>
+                    <span class="code-line"><span class="indent">category = <span class="string">"سالمند"</span></span></span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># تعیین توصیه بر اساس رده</span></span>
+                    <span class="code-line"><span class="keyword">if</span> category == <span class="string">"نوزاد"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"نیاز به مراقبت کامل"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"کودک"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"وقت بازی و آموزش"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"نوجوان"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"سن یادگیری و کشف استعداد"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"جوان"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"سن تحصیل و کار"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"میانسال"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"سن تجربه و مسئولیت"</span></span></span>
+                    <span class="code-line"><span class="keyword">elif</span> category == <span class="string">"سالمند"</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"سن استراحت و تجربه‌اندوزی"</span></span></span>
+                    <span class="code-line"><span class="keyword">else</span>:</span>
+                    <span class="code-line"><span class="indent">advice = <span class="string">"سن نامعتبر"</span></span></span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># نمایش نتیجه</span></span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span>*40)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"نتیجه بررسی سن:"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"سن شما: {age}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"رده سنی: {category}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">f"توصیه: {advice}"</span>)</span>
+                    <span class="code-line"><span class="keyword">print</span>(<span class="string">"="</span>*40)</span>
+                </div>
+
+                <div class="output-box" style="margin-top: 30px;">
+                    <span class="output-label">نمونه خروجی ۱</span>
+                    <div class="output-content">
+                        لطفاً سن خود را وارد کنید: 7<br>
+                        <br>
+                        ========================================<br>
+                        نتیجه بررسی سن:<br>
+                        ========================================<br>
+                        سن شما: 7<br>
+                        رده سنی: کودک<br>
+                        توصیه: وقت بازی و آموزش<br>
+                        ========================================
+                    </div>
+                </div>
+
+                <div class="output-box" style="margin-top: 20px;">
+                    <span class="output-label">نمونه خروجی ۲</span>
+                    <div class="output-content">
+                        لطفاً سن خود را وارد کنید: 25<br>
+                        <br>
+                        ========================================<br>
+                        نتیجه بررسی سن:<br>
+                        ========================================<br>
+                        سن شما: 25<br>
+                        رده سنی: جوان<br>
+                        توصیه: سن تحصیل و کار<br>
+                        ========================================
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== نکات مهم پروژه ========== -->
+            <div class="tip-box">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4 style="color: #3498db;">نکات مهم پروژه</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>از float استفاده نکردیم چون سن معمولاً عدد صحیحه</li>
+                        <li>حالت سن منفی رو هم بررسی کردیم</li>
+                        <li>از دو if-elif-else جدا استفاده کردیم (یکی برای رده، یکی برای توصیه)</li>
+                        <li>خروجی رو با خط جداکننده مرتب کردیم</li>
+                        <li>f-string برای چاپ تمیزتر</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== خطاهای احتمالی ========== -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4 style="color: #e74c3c;">خطاهای احتمالی</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li><span class="highlight-red">ValueError:</span> اگه کاربر به جای عدد، حرف وارد کنه</li>
+                        <li><span class="highlight-red">سن خیلی زیاد:</span> برنامه تا هر سنی کار میکنه، ولی توصیه ممکنه مناسب نباشه</li>
+                        <li><span class="highlight-red">سن منفی:</span> بررسی کردیم و "نامعتبر" برمی‌گردونه</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== تمرینات اضافه ========== -->
+            <div class="exercise-section">
+                <h2 class="exercise-title">
+                    <i class="fas fa-star"></i>
+                    تمرینات اضافه (اختیاری)
+                </h2>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">✨ تمرین ۱:</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        به برنامه اضافه کن که اگر سن بین ۱۸ تا ۳۰ بود، پیام "میتونی گواهینامه بگیری" هم چاپ کنه.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">✨ تمرین ۲:</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        برنامه رو طوری تغییر بده که سن رو به ماه و روز هم تبدیل کنه.
+                        <br>مثال: ۲۵ سال = ۳۰۰ ماه و ۹۱۲۵ روز
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">✨ تمرین ۳:</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه منو اضافه کن که کاربر بتونه انتخاب کنه:
+                        <br>1. تشخیص رده سنی
+                        <br>2. تبدیل سن به ماه
+                        <br>3. خروج
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">✨ تمرین ۴ (پروژه پیشرفته):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه برنامه کامل بنویس که:
+                        <br>• سن رو بگیره
+                        <br>• رده سنی رو مشخص کنه
+                        <br>• بر اساس رده، فعالیت‌های پیشنهادی بده
+                        <br>• اگه سن زیر ۱۸ بود، اخطار بده که "نیاز به همراه والدین"
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== پشتیبانی ========== -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    پروژه رو تحویل دادی؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه توی پروژه مشکل داشتی یا می‌خوای کدت رو چک کنم، به پشتیبانی بفرست.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== فوتر ========== -->
+            <div class="session-footer">
+                <a href="/course/session/17" class="nav-btn">
+                    جلسه بعدی: حلقه while
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

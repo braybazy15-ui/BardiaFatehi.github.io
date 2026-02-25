@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۱۱: تمرین عملیات ریاضی | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; }
+        .number { color: #b5cea8; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .review-card {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid #3498db;
+            border-radius: 24px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .review-card h4 {
+            color: #3498db;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .operator-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .operator-badge {
+            background: rgba(52,152,219,0.2);
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .exercise-section {
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+            border: 1px solid #2ecc71;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0 40px;
+        }
+
+        .exercise-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .exercise-item {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-number {
+            color: #3498db;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .answer-box {
+            background: #1e1e1e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .show-answer {
+            background: rgba(52,152,219,0.2);
+            color: #3498db;
+            border: 1px solid #3498db;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .show-answer:hover {
+            background: rgba(52,152,219,0.3);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .easy { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        .medium { background: rgba(241,196,15,0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+        .hard { background: rgba(231,76,60,0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+        }
+
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۱۱</div>
+                <h1 class="session-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرین عملیات ریاضی
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">به جلسه یازدهم خوش اومدی!</span>
+                    توی جلسه ۹ با عملگرهای ریاضی آشنا شدی. حالا وقتشه با تمرین کردن، این مفاهیم رو 
+                    <span class="highlight-blue">کامل تثبیت کنیم</span>.
+                </p>
+                <p>
+                    توی این جلسه ۱۵ تمرین متنوع برات آماده کردم از ساده تا پیشرفته. 
+                    سعی کن اول خودت حل کنی، بعد جواب رو ببین.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- مرور سریع عملگرها -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i>
+                    مرور سریع عملگرهای ریاضی
+                </h2>
+
+                <div class="grid-2">
+                    <div class="review-card">
+                        <h4>عملگرهای اصلی</h4>
+                        <div class="operator-row">
+                            <span class="operator-badge">+</span>
+                            <span class="operator-badge">-</span>
+                            <span class="operator-badge">*</span>
+                            <span class="operator-badge">/</span>
+                        </div>
+                        <p style="color: #b3b3b3;">جمع، تفریق، ضرب، تقسیم</p>
+                    </div>
+
+                    <div class="review-card">
+                        <h4>عملگرهای ویژه</h4>
+                        <div class="operator-row">
+                            <span class="operator-badge">//</span>
+                            <span class="operator-badge">%</span>
+                            <span class="operator-badge">**</span>
+                        </div>
+                        <p style="color: #b3b3b3;">تقسیم صحیح، باقیمانده، توان</p>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <h4>اولویت عملگرها</h4>
+                    <p style="color: #e0e0e0;">پرانتز > توان > ضرب و تقسیم > جمع و تفریق</p>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <span class="code-line">2 + 3 * 4 = 14</span>
+                        <span class="code-line">(2 + 3) * 4 = 20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تمرینات -->
+            <div class="exercise-section">
+                <h2 class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرینات عملیات ریاضی (۱۵ تمرین)
+                </h2>
+
+                <!-- تمرین ۱ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱</span>
+                    <span class="difficulty-badge easy">آسان</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        حاصل عبارات زیر را بدون اجرا کردن، حدس بزن:
+                        <div style="direction: ltr; text-align: left; margin-top: 10px; background: #1e1e1e; padding: 15px; border-radius: 12px;">
+                            15 + 3<br>
+                            20 - 8<br>
+                            7 * 6<br>
+                            81 / 9
+                        </div>
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(1)">مشاهده جواب</div>
+                    <div id="answer-1" class="answer-box">
+                        <div class="code-block">
+                            15 + 3 = 18<br>
+                            20 - 8 = 12<br>
+                            7 * 6 = 42<br>
+                            81 / 9 = 9.0
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۲ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۲</span>
+                    <span class="difficulty-badge easy">آسان</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        حاصل عبارات زیر چنده؟
+                        <div style="direction: ltr; text-align: left; margin-top: 10px; background: #1e1e1e; padding: 15px; border-radius: 12px;">
+                            17 // 5<br>
+                            17 % 5<br>
+                            4 ** 3<br>
+                            25 // 4
+                        </div>
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(2)">مشاهده جواب</div>
+                    <div id="answer-2" class="answer-box">
+                        <div class="code-block">
+                            17 // 5 = 3<br>
+                            17 % 5 = 2<br>
+                            4 ** 3 = 64<br>
+                            25 // 4 = 6
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۳ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۳</span>
+                    <span class="difficulty-badge easy">آسان</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که دو عدد از کاربر بگیره و حاصل جمعشون رو چاپ کنه.
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(3)">مشاهده جواب</div>
+                    <div id="answer-3" class="answer-box">
+                        <div class="code-block">
+                            a = int(input("عدد اول: "))<br>
+                            b = int(input("عدد دوم: "))<br>
+                            print("جمع:", a + b)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۴ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۴</span>
+                    <span class="difficulty-badge easy">آسان</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که شعاع دایره رو بگیره و قطر رو حساب کنه. (قطر = ۲ × شعاع)
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(4)">مشاهده جواب</div>
+                    <div id="answer-4" class="answer-box">
+                        <div class="code-block">
+                            r = float(input("شعاع: "))<br>
+                            diameter = 2 * r<br>
+                            print("قطر:", diameter)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۵ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۵</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        اولویت عملگرها: حاصل این عبارات چنده؟
+                        <div style="direction: ltr; text-align: left; margin-top: 10px; background: #1e1e1e; padding: 15px; border-radius: 12px;">
+                            5 + 3 * 2<br>
+                            (5 + 3) * 2<br>
+                            10 + 20 / 5<br>
+                            2 ** 3 + 4
+                        </div>
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(5)">مشاهده جواب</div>
+                    <div id="answer-5" class="answer-box">
+                        <div class="code-block">
+                            5 + 3 * 2 = 5 + 6 = 11<br>
+                            (5 + 3) * 2 = 8 * 2 = 16<br>
+                            10 + 20 / 5 = 10 + 4.0 = 14.0<br>
+                            2 ** 3 + 4 = 8 + 4 = 12
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۶ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۶</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که طول و عرض مستطیل رو بگیره و محیط و مساحت رو حساب کنه.
+                        <br>محیط = ۲ × (طول + عرض)
+                        <br>مساحت = طول × عرض
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(6)">مشاهده جواب</div>
+                    <div id="answer-6" class="answer-box">
+                        <div class="code-block">
+                            length = float(input("طول: "))<br>
+                            width = float(input("عرض: "))<br>
+                            perimeter = 2 * (length + width)<br>
+                            area = length * width<br>
+                            print("محیط:", perimeter)<br>
+                            print("مساحت:", area)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۷ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۷</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که یه عدد از کاربر بگیره و نشون بده که:<br>
+                        - باقیمانده تقسیم بر ۲ چنده<br>
+                        - باقیمانده تقسیم بر ۳ چنده<br>
+                        - باقیمانده تقسیم بر ۵ چنده
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(7)">مشاهده جواب</div>
+                    <div id="answer-7" class="answer-box">
+                        <div class="code-block">
+                            num = int(input("عدد: "))<br>
+                            print("باقیمانده بر ۲:", num % 2)<br>
+                            print("باقیمانده بر ۳:", num % 3)<br>
+                            print("باقیمانده بر ۵:", num % 5)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۸ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۸</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که یه عدد دقیقه از کاربر بگیره و بگه معادل چند ساعت و چند دقیقه است.
+                        <br>مثال: ۱۳۰ دقیقه = ۲ ساعت و ۱۰ دقیقه
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(8)">مشاهده جواب</div>
+                    <div id="answer-8" class="answer-box">
+                        <div class="code-block">
+                            minutes = int(input("دقیقه: "))<br>
+                            hours = minutes // 60<br>
+                            remaining_minutes = minutes % 60<br>
+                            print(hours, "ساعت و", remaining_minutes, "دقیقه")
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۹ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۹</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که سه عدد از کاربر بگیره و میانگینشون رو حساب کنه.
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(9)">مشاهده جواب</div>
+                    <div id="answer-9" class="answer-box">
+                        <div class="code-block">
+                            a = float(input("عدد اول: "))<br>
+                            b = float(input("عدد دوم: "))<br>
+                            c = float(input("عدد سوم: "))<br>
+                            average = (a + b + c) / 3<br>
+                            print("میانگین:", average)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۰ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱۰</span>
+                    <span class="difficulty-badge medium">متوسط</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که دما رو از سلسیوس به کلوین تبدیل کنه.
+                        <br>فرمول: K = C + 273.15
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(10)">مشاهده جواب</div>
+                    <div id="answer-10" class="answer-box">
+                        <div class="code-block">
+                            celsius = float(input("دمای سلسیوس: "))<br>
+                            kelvin = celsius + 273.15<br>
+                            print("کلوین:", kelvin)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۱ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱۱</span>
+                    <span class="difficulty-badge hard">سخت</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که یه عدد سه رقمی از کاربر بگیره و ارقام اون رو جدا کنه.
+                        <br>مثال: ۳۲۵ → ۳, ۲, ۵
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(11)">مشاهده جواب</div>
+                    <div id="answer-11" class="answer-box">
+                        <div class="code-block">
+                            num = int(input("عدد سه رقمی: "))<br>
+                            a = num // 100<br>
+                            b = (num // 10) % 10<br>
+                            c = num % 10<br>
+                            print("صدگان:", a)<br>
+                            print("دهگان:", b)<br>
+                            print("یکان:", c)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۲ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱۲</span>
+                    <span class="difficulty-badge hard">سخت</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که یه عدد ثانیه از کاربر بگیره و بگه معادل چند ساعت، چند دقیقه و چند ثانیه است.
+                        <br>مثال: ۳۶۶۵ ثانیه = ۱ ساعت و ۱ دقیقه و ۵ ثانیه
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(12)">مشاهده جواب</div>
+                    <div id="answer-12" class="answer-box">
+                        <div class="code-block">
+                            seconds = int(input("ثانیه: "))<br>
+                            hours = seconds // 3600<br>
+                            minutes = (seconds % 3600) // 60<br>
+                            secs = seconds % 60<br>
+                            print(hours, "ساعت و", minutes, "دقیقه و", secs, "ثانیه")
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۳ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱۳</span>
+                    <span class="difficulty-badge hard">سخت</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که مبلغ و درصد تخفیف رو از کاربر بگیره و مبلغ نهایی رو حساب کنه.
+                        <br>مثال: مبلغ ۱۰۰۰، تخفیف ۲۰٪ → مبلغ نهایی = ۸۰۰
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(13)">مشاهده جواب</div>
+                    <div id="answer-13" class="answer-box">
+                        <div class="code-block">
+                            price = float(input("مبلغ: "))<br>
+                            discount_percent = float(input("درصد تخفیف: "))<br>
+                            discount_amount = price * (discount_percent / 100)<br>
+                            final_price = price - discount_amount<br>
+                            print("مبلغ نهایی:", final_price)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۴ -->
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱۴</span>
+                    <span class="difficulty-badge hard">سخت</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        برنامه‌ای بنویس که فاصله بر حسب کیلومتر رو از کاربر بگیره و به مایل تبدیل کنه.
+                        <br>هر کیلومتر = ۰.۶۲۱۳۷۱ مایل
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(14)">مشاهده جواب</div>
+                    <div id="answer-14" class="answer-box">
+                        <div class="code-block">
+                            km = float(input("کیلومتر: "))<br>
+                            miles = km * 0.621371<br>
+                            print("مایل:", miles)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین ۱۵ - پروژه -->
+                <div class="exercise-item" style="border: 2px solid gold;">
+                    <span class="exercise-number">✨ پروژه</span>
+                    <span class="difficulty-badge hard">پروژه</span>
+                    <div style="color: #e0e0e0; margin: 10px 0;">
+                        یه ماشین حساب پیشرفته بنویس که:<br>
+                        ۱. دو عدد از کاربر بگیره<br>
+                        ۲. همه عملیات زیر رو انجام بده:<br>
+                        &nbsp;&nbsp;• جمع (+)<br>
+                        &nbsp;&nbsp;• تفریق (-)<br>
+                        &nbsp;&nbsp;• ضرب (*)<br>
+                        &nbsp;&nbsp;• تقسیم (/)<br>
+                        &nbsp;&nbsp;• تقسیم صحیح (//)<br>
+                        &nbsp;&nbsp;• باقیمانده (%)<br>
+                        &nbsp;&nbsp;• توان (**)<br>
+                        ۳. نتایج رو به صورت مرتب چاپ کنه
+                    </div>
+                    <div class="show-answer" onclick="toggleAnswer(15)">مشاهده جواب</div>
+                    <div id="answer-15" class="answer-box">
+                        <div class="code-block">
+                            a = float(input("عدد اول: "))<br>
+                            b = float(input("عدد دوم: "))<br>
+                            print("=" * 30)<br>
+                            print("جمع:", a + b)<br>
+                            print("تفریق:", a - b)<br>
+                            print("ضرب:", a * b)<br>
+                            print("تقسیم:", a / b)<br>
+                            print("تقسیم صحیح:", a // b)<br>
+                            print("باقیمانده:", a % b)<br>
+                            print("توان:", a ** b)<br>
+                            print("=" * 30)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نکات مهم -->
+            <div class="warning-box">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4 style="color: #f1c40f;">📌 نکات مهم این جلسه:</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>همیشه یادت باشه input رو به عدد تبدیل کنی (int یا float)</li>
+                        <li>اولویت عملگرها رو فراموش نکن: پرانتز > توان > ضرب و تقسیم > جمع و تفریق</li>
+                        <li>از // برای گرفتن خارج قسمت و از % برای باقیمانده استفاده کن</li>
+                        <li>هیچوقت بر صفر تقسیم نکن!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- پشتیبانی -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    به کمک نیاز داری؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه توی تمرینات گیر کردی، از منتورها بپرس.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- فوتر -->
+            <div class="session-footer">
+                <a href="/course/session/12" class="nav-btn">
+                    جلسه بعدی: پروژه ماشین حساب
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(num) {
+            var answer = document.getElementById('answer-' + num);
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+            } else {
+                answer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

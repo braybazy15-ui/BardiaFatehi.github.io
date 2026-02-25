@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره متن‌محور VIP پایتون - آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* متغیرهای رنگی */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --card-bg-hover: rgba(30, 30, 30, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-blue: #3498db;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --accent-yellow: #f1c40f;
+            --accent-purple: #9b59b6;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --transition-slow: 0.5s ease;
+            --transition-fast: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(52, 152, 219, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(46, 204, 113, 0.5); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* هدر دوره */
+        .course-hero {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(52, 152, 219, 0.2));
+            border-radius: 40px;
+            margin-bottom: 50px;
+            border: 1px solid var(--border-color);
+            animation: floatIn 0.8s ease-out;
+        }
+
+        .course-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .course-title i {
+            color: var(--accent-green);
+            margin-left: 15px;
+        }
+
+        .course-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .course-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            padding: 12px 25px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            transition: all var(--transition-fast);
+        }
+
+        .back-link:hover {
+            background: rgba(52, 152, 219, 0.3);
+            transform: translateX(-10px);
+        }
+
+        /* محتوای اصلی */
+        .course-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* بخش‌های محتوا */
+        .content-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: floatIn 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, var(--accent-blue), var(--accent-green), transparent) 1;
+        }
+
+        .section-title i {
+            color: var(--accent-green);
+            font-size: 2rem;
+        }
+
+        .highlight-green {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .highlight-blue {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .highlight-yellow {
+            color: var(--accent-yellow);
+            font-weight: 700;
+        }
+
+        .highlight-red {
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+
+        /* کارت‌های آمار */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* گرید ویژگی‌ها */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .feature-item i {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .feature-item span {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .feature-item strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* باکس نکته مهم */
+        .important-note {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            border: 2px solid var(--accent-blue);
+            border-radius: 24px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .important-note h3 {
+            color: var(--accent-blue);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* جدول مقایسه */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-col {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .comparison-col h4 {
+            color: var(--accent-yellow);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .comparison-col ul {
+            list-style: none;
+        }
+
+        .comparison-col li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .comparison-col i.fa-check {
+            color: var(--accent-green);
+        }
+
+        .comparison-col i.fa-times {
+            color: var(--accent-red);
+        }
+
+        /* بخش ساختار جلسات */
+        .sessions-structure {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .session-part {
+            margin-bottom: 25px;
+        }
+
+        .session-part h4 {
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .session-part ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .session-part li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+
+        .session-part li i {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+        }
+
+        /* بخش پرسش و پاسخ */
+        .faq-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .faq-question i {
+            color: var(--accent-green);
+            transition: transform var(--transition-fast);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px;
+            max-height: 200px;
+        }
+
+        /* بخش ورود به دوره */
+        .access-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(46, 204, 113, 0.2));
+            border: 2px solid var(--accent-blue);
+        }
+
+        .access-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent-green), #27ae60);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+        }
+
+        .access-instruction {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .contact-btn.telegram {
+            background: linear-gradient(135deg, #0088cc, #006699);
+        }
+
+        .contact-btn.rubika {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            
+            .session-part ul {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-title {
+                font-size: 2.2rem;
+            }
+            
+            .course-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="main-content">
+            <!-- هدر دوره -->
+            <section class="course-hero">
+                <h1 class="course-title">
+                    <i class="fab fa-python"></i>
+                    دوره متن‌محور VIP برنامه نویسی با پایتون
+                </h1>
+                <p class="course-subtitle">
+                    اولین دوره کاملاً متن‌محور پایتون در ایران | بدون ویدیو، با جزوه‌های خط به خط
+                </p>
+                <div class="course-badge">
+                    <i class="fas fa-crown"></i>
+                    دوره ویژه و منحصربه‌فرد
+                </div>
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+            </section>
+
+            <!-- محتوای دوره - توضیحات کامل و مفصل -->
+            <div class="course-content">
+                
+                <!-- ========== بخش ۱: معرفی کامل دوره ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        معرفی کامل دوره
+                    </h2>
+                    
+                    <p style="font-size: 1.2rem; margin-bottom: 25px;">
+                        <span class="highlight-green">دوره متن‌محور VIP پایتون</span> یک دوره کاملاً متفاوت و منحصربه‌فرد است که در آکادمی بردیا فاتحی طراحی شده. این دوره <span class="highlight-blue">هیچ ویدیویی ندارد</span> و کاملاً بر اساس <span class="highlight-yellow">متن، جزوه، مثال و تمرین</span> طراحی شده است.
+                    </p>
+                    
+                    <p style="margin-bottom: 20px;">
+                        چرا متن‌محور؟ چون معتقدیم وقتی خودت متن رو می‌خونی، مجبوری تمرکز کنی، یادداشت برداری کنی، و عمیقاً یاد بگیری. توی ویدیوها معمولاً دانشجو منفعل میشه و فقط نگاه می‌کنه، اما توی دوره متن‌محور، <span class="highlight-green">فعّالانه یاد می‌گیری</span>.
+                    </p>
+                    
+                    <!-- آمار دوره -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-book-open"></i>
+                            <div class="stat-number">۲۸</div>
+                            <div class="stat-label">جلسه آموزشی</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="stat-number">+۲۰۰</div>
+                            <div class="stat-label">صفحه جزوه</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-code"></i>
+                            <div class="stat-number">+۱۵۰</div>
+                            <div class="stat-label">مثال کد</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-tasks"></i>
+                            <div class="stat-number">+۱۲۰</div>
+                            <div class="stat-label">تمرین و پروژه</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-headset"></i>
+                            <div class="stat-number">۳۰</div>
+                            <div class="stat-label">روز پشتیبانی</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-infinity"></i>
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">دسترسی مادام‌العمر</div>
+                        </div>
+                    </div>
+                    
+                    <div class="important-note">
+                        <h3><i class="fas fa-star"></i> خلاصه‌ای از آنچه دریافت می‌کنید:</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="color: var(--text-secondary);"> ۲۸ جلسه آموزشی خط به خط</div>
+                            <div style="color: var(--text-secondary);"> بیش از ۱۵۰ مثال کد عملی</div>
+                            <div style="color: var(--text-secondary);"> ۱۲۰ تمرین طبقه‌بندی شده</div>
+                            <div style="color: var(--text-secondary);"> پاسخنامه تشریحی تمرینات</div>
+                            <div style="color: var(--text-secondary);"> یک ماه پشتیبانی تخصصی</div>
+                            <div style="color: var(--text-secondary);"> دسترسی مادام‌العمر به محتوا</div>
+                            <div style="color: var(--text-secondary);"> ۴ پروژه عملی بزرگ</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۲: این دوره چه فرقی با بقیه داره؟ ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-balance-scale"></i>
+                        تفاوت دوره متن‌محور با دوره‌های ویدیویی
+                    </h2>
+                    
+                    <div class="comparison-table">
+                        <div class="comparison-col">
+                            <h4>📹 دوره‌های ویدیویی</h4>
+                            <ul>
+                                <li><i class="fas fa-times"></i> یادگیری منفعل و یک‌طرفه</li>
+                                <li><i class="fas fa-times"></i> نیاز به replay مدام</li>
+                                <li><i class="fas fa-times"></i> معمولاً تمرین کافی ندارند</li>
+                                <li><i class="fas fa-times"></i> جزوه جداگانه نیاز هست</li>
+                                <li><i class="fas fa-times"></i> وابسته به اینترنت پرسرعت</li>
+                                <li><i class="fas fa-times"></i> خستگی چشم و گوش</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-col">
+                            <h4>📘 دوره متن‌محور VIP ما</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> یادگیری فعال و عمیق</li>
+                                <li><i class="fas fa-check"></i> با سرعت خودت پیش می‌ری</li>
+                                <li><i class="fas fa-check"></i> بیش از ۱۲۰ تمرین هدفمند</li>
+                                <li><i class="fas fa-check"></i> جزوه کامل داخل خود دوره</li>
+                                <li><i class="fas fa-check"></i> آفلاین قابل استفاده است</li>
+                                <li><i class="fas fa-check"></i> امکان یادداشت‌برداری آسان</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="important-note" style="margin-top: 20px;">
+                        <h3 style="font-size: 1.3rem;"><i class="fas fa-lightbulb"></i> چرا این روش مؤثرتر است؟</h3>
+                        <p>
+                            تحقیقات آموزشی نشان داده که <span class="highlight-yellow">یادگیری فعال</span> (مثل خوندن و حل تمرین) نسبت به یادگیری منفعل (مثل تماشای ویدیو) بازدهی بسیار بالاتری داره. توی این دوره، هر جلسه رو مثل یه <span class="highlight-green">کتاب کوچک</span> در نظر بگیر که باید بخونیش، مثال‌هاش رو اجرا کنی، و تمریناتش رو حل کنی. اینجوری مطلب ملکه ذهنت میشه.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۳: پیش‌نیازها و تجهیزات مورد نیاز ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-laptop"></i>
+                        پیش‌نیازها و تجهیزات مورد نیاز
+                    </h2>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>لپ‌تاپ یا کامپیوتر</strong> - حتماً نیاز داری! با گوشی موبایل نمی‌تونی برنامه‌نویسی کنی. ویندوز، مک یا لینوکس فرقی نمی‌کنه.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>اینترنت</strong> - برای دانلود محتوای دوره و دریافت پشتیبانی نیاز داری. بعد از دانلود، می‌تونی آفلاین بخونی.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>علاقه و انگیزه</strong> - مهم‌ترین پیش‌نیاز! اگه واقعاً می‌خوای یاد بگیری، این دوره دقیقاً برای تو ساخته شده.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>هیچ پیش‌زمینه‌ای لازم نیست</strong> - از صفر مطلق شروع می‌کنیم. حتی نصب پایتون رو قدم به قدم یاد می‌دی.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="important-note" style="margin-top: 20px; border-color: var(--accent-yellow);">
+                        <h3 style="color: var(--accent-yellow);"><i class="fas fa-exclamation-triangle"></i> نکته مهم:</h3>
+                        <p>
+                            این دوره <span class="highlight-red">کاملاً مبتدی‌پسند</span> طراحی شده. حتی اگه تا حالا یه خط هم کد ننوشتی، نگران نباش. از نصب پایتون شروع می‌کنیم و قدم به قدم پیش میریم تا به پروژه‌های نهایی برسیم.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۴: ساختار دوره (۲۸ جلسه در ۷ بخش) ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-sitemap"></i>
+                        ساختار دوره: ۲۸ جلسه در ۷ بخش
+                    </h2>
+                    
+                    <p style="margin-bottom: 25px;">
+                        دوره به <span class="highlight-green">۷ بخش اصلی</span> تقسیم شده که هر بخش شامل ۴ جلسه است. بعد از هر ۳-۴ جلسه، یه <span class="highlight-yellow">جلسه تمرین و مرور</span> داریم تا مطالب تثبیت بشه.
+                    </p>
+                    
+                    <div class="sessions-structure">
+                        <div class="session-part">
+                            <h4><i class="fas fa-hand-peace"></i> بخش ۱: شروع کار (جلسات ۱-۴)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۱: برنامه‌نویسی یعنی چی؟</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲: پایتون چیه و چرا یادش می‌گیریم؟</li>
+                                <li><i class="fas fa-check"></i> جلسه ۳: نصب پایتون روی ویندوز</li>
+                                <li><i class="fas fa-check"></i> جلسه ۴: نصب VS Code و اولین برنامه</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-print"></i> بخش ۲: چاپ و متغیرها (جلسات ۵-۸)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۵: دستور print - خروجی گرفتن</li>
+                                <li><i class="fas fa-check"></i> جلسه ۶: متغیرها - ظرف‌های اطلاعات</li>
+                                <li><i class="fas fa-check"></i> جلسه ۷: دریافت از کاربر با input</li>
+                                <li><i class="fas fa-check"></i> جلسه ۸: تمرین و مرور جلسات ۵-۷</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-calculator"></i> بخش ۳: عملیات ریاضی (جلسات ۹-۱۲)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۹: عملگرهای ریاضی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۰: عملگرهای مقایسه‌ای</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۱: تمرین عملیات ریاضی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۲: پروژه ماشین حساب ساده</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-code-branch"></i> بخش ۴: شرط‌ها (جلسات ۱۳-۱۶)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۱۳: if ساده</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۴: if-else - دو راهی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۵: if-elif-else - چند راهی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۶: پروژه تشخیص رده سنی</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-redo-alt"></i> بخش ۵: حلقه‌ها (جلسات ۱۷-۲۰)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۱۷: حلقه while</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۸: حلقه for</li>
+                                <li><i class="fas fa-check"></i> جلسه ۱۹: حلقه‌های تو در تو</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۰: تمرین و مرور حلقه‌ها</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-list"></i> بخش ۶: لیست‌ها (جلسات ۲۱-۲۴)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۲۱: لیست‌ها - معرفی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۲: کار با لیست (متدها)</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۳: پیمایش لیست با حلقه</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۴: تمرین لیست‌ها</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="session-part">
+                            <h4><i class="fas fa-cube"></i> بخش ۷: توابع (جلسات ۲۵-۲۸)</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> جلسه ۲۵: توابع - مقدماتی</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۶: پارامتر و return</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۷: تمرین توابع</li>
+                                <li><i class="fas fa-check"></i> جلسه ۲۸: پروژه نهایی - بازی حدس عدد</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۵: تمرینات و پروژه‌ها ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-tasks"></i>
+                        تمرینات و پروژه‌ها
+                    </h2>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>تمرینات طبقه‌بندی شده</strong> - هر جلسه بین ۳ تا ۸ تمرین داره که از ساده تا پیشرفته دسته‌بندی شدن.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>پاسخنامه تشریحی</strong> - همه تمرینات جواب دارند. می‌تونی کدت رو با جواب مقایسه کنی.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>۴ پروژه عملی</strong> - ماشین حساب، تشخیص سن، مدیریت مخاطبین، بازی حدس عدد</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>تمرینات ترکیبی</strong> - بعد از هر بخش، تمرینات ترکیبی داریم تا همه چی رو یاد بگیری.</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(46, 204, 113, 0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                        <p style="color: var(--text-secondary);">
+                            <span class="highlight-green">✨ نکته ویژه:</span> تمرینات طوری طراحی شدن که اولاً <span class="highlight-yellow">ترس از کدنویسی رو از بین ببرن</span>، ثانیاً <span class="highlight-yellow">مفاهیم رو عمیقاً تثبیت کنن</span>. هر تمرین هدف مشخصی داره و بی‌هدف نیست.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۶: پشتیبانی ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-headset"></i>
+                        پشتیبانی یک ماهه رایگان
+                    </h2>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>۳۰ روز پشتیبانی تخصصی</strong> - از روز خرید، ۳۰ روز می‌تونی هر سوالی داری بپرسی.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>پاسخگویی در کمتر از ۱۲ ساعت</strong> - تیم پشتیبانی ما سریع پاسخ می‌دن.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>رفع اشکال کد</strong> - اگه کدت کار نمی‌کنه، برامون بفرست تا راهنماییت کنیم.</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>تلگرام و روبیکا</strong> - از هر دو پیامرسان می‌تونی سوال بپرسی.</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(52, 152, 219, 0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                        <p style="color: var(--text-secondary);">
+                            <span class="highlight-blue">📢 توجه:</span> پشتیبانی فقط مخصوص سوالات مربوط به دوره است. سوالات خارج از دوره مشاوره رایگان محسوب میشه که اونم داریم!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ۷: پرسش و پاسخ ========== -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-question-circle"></i>
+                        پرسش‌های متداول
+                    </h2>
+                    
+                    <div class="faq-item active" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>آیا واقعاً هیچ ویدیویی توی دوره نیست؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            بله! این دوره ۱۰۰٪ متن‌محور هست. ما معتقدیم که خوندن و تمرین کردن خیلی مؤثرتر از تماشای ویدیو هست. البته این به معنی خشک بودن دوره نیست؛ هر جلسه مثل یه گفتگوی دوستانه با شما نوشته شده.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>چقدر طول میکشه تا دوره تموم بشه؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            اگه روزی ۲ ساعت وقت بذاری، حدود یک ماهه تموم میکنی. اما پیشنهاد من اینه که با تمرین و تکرار، ۲ ماه براش وقت بذاری تا کامل تثبیت بشه.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>بعد از این دوره میتونم پروژه بزنم؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            قطعاً! بعد از این دوره می‌تونی پروژه‌های ساده تا متوسط بزنی. ماشین حساب، بازی حدس عدد، برنامه مدیریت مخاطبین و ... از جمله پروژه‌هایی هستن که خودت می‌تونی انجام بدی.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>آیا با گوشی میشه از دوره استفاده کرد؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            برای <span class="highlight-red">خوندن</span> مطالب، بله. اما برای <span class="highlight-red">کدنویسی</span> حتماً به لپ‌تاپ یا کامپیوتر نیاز داری. برنامه‌نویسی با گوشی ممکن نیست و اصلاً توصیه نمیشه.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>اگه توی تمرینات مشکل داشتم چیکار کنم؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            اولاً همه تمرینات پاسخنامه دارن. ثانیاً ۳۰ روز پشتیبانی داری و می‌تونی سوالاتت رو بپرسی. ثالثاً توی کانال پشتیبانی، دانشجوهای دیگه هم هستن که شاید سوالت رو قبلاً پرسیده باشن.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <span>آیا مدرک داره؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            خیر. ما معتقدیم اون چیزی که شما در پایان یاد می گیرید بهتره تا یک تکه کاغذ
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========== بخش ورود به دوره ========== -->
+                <section class="content-section access-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-lock"></i>
+                        ورود به محتوای دوره
+                    </h2>
+                    
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary);">
+                        اگه قبلاً دوره رو خریداری کردی، با کد دسترسی که برات ارسال شده وارد شو.
+                    </p>
+                    
+                    <!-- نمایش پیام خطا اگر وجود دارد -->
+                    {% if request.args.get('error') %}
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ request.args.get('error') }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="access-form">
+                        <form method="POST" action="/verify-code">
+                            <div class="form-group">
+                                <label for="code" class="form-label">
+                                    <i class="fas fa-key"></i>
+                                    کد دسترسی دوره
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="code" 
+                                    name="code" 
+                                    class="form-input" 
+                                    placeholder="کد ورود خود را وارد نمایید:"
+                                    required
+                                    autocomplete="off"
+                                >
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-sign-in-alt"></i>
+                                ورود به دوره
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="access-instruction">
+                        <h3 class="instruction-title">
+                            <i class="fas fa-info-circle"></i>
+                            نحوه دریافت کد دسترسی
+                        </h3>
+                        <p>
+                            برای خرید دوره و دریافت کد دسترسی، از طریق راه‌های زیر با ما تماس بگیرید:
+                        </p>
+                        
+                        <div class="contact-buttons">
+                            <a href="https://t.me/BardiyaFatehi" target="_blank" class="contact-btn telegram">
+                                <i class="fab fa-telegram"></i>
+                                تلگرام: @BardiyaFatehi
+                            </a>
+                            <a href="https://rubika.ir/BardiyaFatehi" target="_blank" class="contact-btn rubika">
+                                <i class="fas fa-comment-dots"></i>
+                                روبیکا: rubika.ir/BardiyaFatehi
+                            </a>
+                        </div>
+                        
+                        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 15px;">
+                            پس از واریز، کد دسترسی در کمتر از <span class="highlight-yellow">۶ ساعت</span> برات ارسال میشه.
+                        </p>
+                        <p style="color: var(--accent-red); font-weight: 700; margin-top: 15px;">
+                            توجه: هر کد فقط برای یک نفر و یک دستگاه قابل استفاده است.
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // تابع نمایش/مخفی کردن سوالات متداول
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+        
+        // کنترل فرم ورود به دوره
+        document.querySelector('form')?.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال بررسی...';
+            submitBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>

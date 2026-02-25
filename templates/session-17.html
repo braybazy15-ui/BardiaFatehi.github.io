@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۱۷: حلقه while - تکرار شرطی | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .indent { padding-right: 20px; display: block; }
+        .output-box {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: left;
+            position: relative;
+        }
+        .output-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2ecc71;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .flowchart-box {
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #3498db;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+        }
+        .flowchart-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .flowchart-item {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        .condition-box { background: #3498db; color: white; }
+        .action-box { background: #2ecc71; color: white; }
+        .arrow { font-size: 2rem; color: #b3b3b3; }
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .tip-box {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .tip-box i {
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        .exercise-section {
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+            border: 1px solid #2ecc71;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0 40px;
+        }
+        .exercise-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .exercise-item {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .exercise-number {
+            color: #3498db;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .flowchart-row { flex-direction: column; }
+            .arrow { transform: rotate(90deg); }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۱۷</div>
+                <h1 class="session-title">
+                    <i class="fas fa-redo-alt"></i>
+                    حلقه while - تکرار شرطی
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">به جلسه هفدهم خوش اومدی!</span>
+                    تا الان برنامه‌هامون یه بار اجرا میشدن و تموم. اما توی دنیای واقعی، 
+                    خیلی وقت‌ها نیاز داریم یه کار رو <span class="highlight-blue">چند بار تکرار کنیم</span>.
+                </p>
+                <p>
+                    مثلاً تا وقتی که رمز رو اشتباه میزنی، دوباره ازت بپرسه. اینجاست که 
+                    <span class="highlight-yellow">حلقه while</span> به کمکمون میاد.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- ========== بخش ۱: حلقه while یعنی چی؟ ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-question-circle"></i>
+                    حلقه while یعنی چی؟
+                </h2>
+
+                <p>
+                    <span class="highlight-blue">while</span> یه کلمه کلیدی توی پایتونه که به ما اجازه میده 
+                    <span class="highlight-green">یع قطعه کد رو چند بار تکرار کنیم</span>.
+                </p>
+
+                <div class="tip-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>مثال روزمره:</strong> تا وقتی که تشنه‌ای، آب بخور.<br>
+                            توی برنامه‌نویسی میشه: <span class="highlight-blue">while</span> thirsty: drink()
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flowchart-box">
+                    <div class="flowchart-row">
+                        <div class="flowchart-item condition-box">شرط</div>
+                        <div class="arrow">⬇️</div>
+                        <div class="flowchart-item action-box">اجرای کدهای حلقه</div>
+                    </div>
+                    <div class="flowchart-row">
+                        <div class="arrow">⬆️</div>
+                        <span style="color: #b3b3b3;">برگشت به شرط</span>
+                    </div>
+                </div>
+
+                <div class="code-block" style="margin-top: 30px;">
+                    <span class="code-line"><span class="keyword">while</span> شرط:</span>
+                    <span class="code-line"><span class="indent"><span class="comment"># کدهایی که تکرار میشن</span></span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"این خط تکرار میشه"</span>)</span></span>
+                </div>
+
+                <p style="margin-top: 20px;">
+                    <span class="highlight-red">⚠️ خیلی مهم:</span>
+                </p>
+                <ul style="color: #e0e0e0; margin-right: 20px;">
+                    <li>تا وقتی شرط <span class="highlight-green">True</span> باشه، حلقه ادامه پیدا میکنه</li>
+                    <li>به محض اینکه شرط <span class="highlight-red">False</span> بشه، حلقه تموم میشه</li>
+                    <li>باید حواست باشه که شرط بالاخره یه روز False بشه، وگرنه <span class="highlight-red">حلقه بی‌نهایت</span> داریم</li>
+                </ul>
+            </div>
+
+            <!-- ========== بخش ۲: ساختار while ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    ساختار while
+                </h2>
+
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: #2ecc71;">اجزای حلقه:</h3>
+                        <ul style="color: #e0e0e0;">
+                            <li>کلمه کلیدی while</li>
+                            <li>یک شرط (مثل x < 5)</li>
+                            <li>دو نقطه :</li>
+                            <li>کدهای با indent که تکرار میشن</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: #3498db;">مثال ساده:</h3>
+                        <div class="code-block">
+                            <span class="code-line">counter = <span class="number">1</span></span>
+                            <span class="code-line"><span class="keyword">while</span> counter <= <span class="number">3</span>:</span>
+                            <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"بار"</span>, counter)</span></span>
+                            <span class="code-line"><span class="indent">counter = counter + <span class="number">1</span></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <span class="output-label">خروجی</span>
+                    <div class="output-content">
+                        بار 1<br>
+                        بار 2<br>
+                        بار 3
+                    </div>
+                </div>
+
+                <div class="tip-box" style="margin-top: 20px;">
+                    <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>چطوری کار میکنه؟</strong>
+                            <br>۱. counter=1, شرط 1<=3 هست؟ بله → چاپ "بار 1"، counter میشه 2
+                            <br>۲. counter=2, شرط 2<=3 هست؟ بله → چاپ "بار 2"، counter میشه 3
+                            <br>۳. counter=3, شرط 3<=3 هست؟ بله → چاپ "بار 3"، counter میشه 4
+                            <br>۴. counter=4, شرط 4<=3 هست؟ خیر → حلقه تموم
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۳: مثال‌های ساده ========== -->
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثال ۱: اعداد ۱ تا ۵</h3>
+                    <div class="code-block">
+                        <span class="code-line">i = <span class="number">1</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i <= <span class="number">5</span>:</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(i)</span></span>
+                        <span class="code-line"><span class="indent">i = i + <span class="number">1</span></span></span>
+                    </div>
+                    <div class="output-box" style="margin-top: 10px;">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">1 2 3 4 5</div>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثال ۲: اعداد زوج ۲ تا ۱۰</h3>
+                    <div class="code-block">
+                        <span class="code-line">i = <span class="number">2</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i <= <span class="number">10</span>:</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(i)</span></span>
+                        <span class="code-line"><span class="indent">i = i + <span class="number">2</span></span></span>
+                    </div>
+                    <div class="output-box" style="margin-top: 10px;">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">2 4 6 8 10</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۴: مثال با input ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-keyboard"></i>
+                    مثال: تا وقتی رمز درسته
+                </h2>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line">password = <span class="string">""</span></span>
+                        <span class="code-line"><span class="keyword">while</span> password != <span class="string">"secret"</span>:</span>
+                        <span class="code-line"><span class="indent">password = <span class="keyword">input</span>(<span class="string">"رمز رو وارد کن: "</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">if</span> password != <span class="string">"secret"</span>:</span></span>
+                        <span class="code-line"><span class="indent"><span class="indent"><span class="keyword">print</span>(<span class="string">"رمز اشتباهه!"</span>)</span></span></span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"ورود موفق!"</span>)</span>
+                    </div>
+
+                    <div class="output-box">
+                        <span class="output-label">نمونه اجرا</span>
+                        <div class="output-content">
+                            رمز رو وارد کن: 123<br>
+                            رمز اشتباهه!<br>
+                            رمز رو وارد کن: admin<br>
+                            رمز اشتباهه!<br>
+                            رمز رو وارد کن: secret<br>
+                            ورود موفق!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۵: هشدار حلقه بی‌نهایت ========== -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4 style="color: #e74c3c;">⚠️ خطر: حلقه بی‌نهایت (Infinite Loop)</h4>
+                    <p style="color: #e0e0e0; margin: 15px 0;">
+                        اگه شرط هیچوقت False نشه، حلقه تا ابد ادامه پیدا میکنه و برنامه هنگ میکنه!
+                    </p>
+                    <div class="code-block">
+                        <span class="code-line">i = <span class="number">1</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i > <span class="number">0</span>:  <span class="comment"># همیشه True</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(i)</span></span>
+                        <span class="code-line"><span class="indent">i = i + <span class="number">1</span></span>  <span class="comment"># i همیشه بزرگتر میشه، هیچوقت شرط False نمیشه</span></span>
+                    </div>
+                    <p style="color: #f1c40f; margin-top: 15px;">
+                        ✅ راه حل: همیشه مطمئن شو یه جایی شرط False میشه.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۶: مثال جمع اعداد ========== -->
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثال ۳: جمع اعداد ۱ تا ۱۰</h3>
+                    <div class="code-block">
+                        <span class="code-line">i = <span class="number">1</span></span>
+                        <span class="code-line">sum_numbers = <span class="number">0</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i <= <span class="number">10</span>:</span>
+                        <span class="code-line"><span class="indent">sum_numbers = sum_numbers + i</span></span>
+                        <span class="code-line"><span class="indent">i = i + <span class="number">1</span></span></span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">"جمع:"</span>, sum_numbers)</span>
+                    </div>
+                    <div class="output-box" style="margin-top: 10px;">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">جمع: 55</div>
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثال ۴: فاکتوریل</h3>
+                    <div class="code-block">
+                        <span class="code-line">n = <span class="number">5</span></span>
+                        <span class="code-line">factorial = <span class="number">1</span></span>
+                        <span class="code-line">i = <span class="number">1</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i <= n:</span>
+                        <span class="code-line"><span class="indent">factorial = factorial * i</span></span>
+                        <span class="code-line"><span class="indent">i = i + <span class="number">1</span></span></span>
+                        <span class="code-line"><span class="keyword">print</span>(<span class="string">f"{n}! = {factorial}"</span>)</span>
+                    </div>
+                    <div class="output-box" style="margin-top: 10px;">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">5! = 120</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۷: مثال منو ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-bars"></i>
+                    مثال: منو با while
+                </h2>
+
+                <div class="code-block">
+                    <span class="code-line">choice = <span class="string">""</span></span>
+                    <span class="code-line"><span class="keyword">while</span> choice != <span class="string">"3"</span>:</span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"\n1. سلام"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"2. وقت"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"3. خروج"</span>)</span></span>
+                    <span class="code-line"><span class="indent">choice = <span class="keyword">input</span>(<span class="string">"انتخاب کن: "</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">if</span> choice == <span class="string">"1"</span>:</span></span>
+                    <span class="code-line"><span class="indent"><span class="indent"><span class="keyword">print</span>(<span class="string">"سلام دوست من!"</span>)</span></span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">elif</span> choice == <span class="string">"2"</span>:</span></span>
+                    <span class="code-line"><span class="indent"><span class="indent"><span class="keyword">print</span>(<span class="string">"وقت بخیر!"</span>)</span></span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">elif</span> choice == <span class="string">"3"</span>:</span></span>
+                    <span class="code-line"><span class="indent"><span class="indent"><span class="keyword">print</span>(<span class="string">"خدانگهدار!"</span>)</span></span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">else</span>:</span></span>
+                    <span class="code-line"><span class="indent"><span class="indent"><span class="keyword">print</span>(<span class="string">"انتخاب نامعتبر"</span>)</span></span></span>
+                </div>
+            </div>
+
+            <!-- ========== خلاصه جلسه ========== -->
+            <div class="tip-box">
+                <i class="fas fa-clipboard-check"></i>
+                <div>
+                    <h4 style="color: #3498db;">خلاصه جلسه ۱۷</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>while برای تکرار تا وقتی که شرط برقراره استفاده میشه</li>
+                        <li>ساختار: while شرط: (با دو نقطه)</li>
+                        <li>کدهای داخل حلقه باید indent داشته باشن</li>
+                        <li>تا وقتی شرط True هست، حلقه ادامه پیدا میکنه</li>
+                        <li>باید مطمئن بشیم شرط بالاخره False میشه (نه حلقه بی‌نهایت)</li>
+                        <li>کاربردها: منوها، اعتبارسنجی، شمارنده‌ها</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== تمرینات ========== -->
+            <div class="exercise-section">
+                <h2 class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرینات جلسه ۱۷
+                </h2>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱ (ساده):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        با while اعداد ۱ تا ۲۰ رو چاپ کن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۲ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        با while اعداد زوج ۲ تا ۵۰ رو چاپ کن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۳ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        برنامه‌ای بنویس که مرتب از کاربر عدد بگیره و جمعشون کنه. وقتی کاربر ۰ وارد کرد، برنامه تموم بشه و جمع کل رو چاپ کنه.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۴ (چالشی):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        برنامه‌ای بنویس که رمز رو از کاربر بگیره و تا وقتی درست وارد نکنه، اجازه نده ادامه بده. (حداکثر ۳ بار اشتباه)
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۵ (پروژه):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه منوی رستوران با while بساز که:
+                        <br>1. پیتزا
+                        <br>2. برگر
+                        <br>3. سالاد
+                        <br>4. خروج
+                        <br>کاربر انتخاب کنه و برنامه بر اساس انتخاب، قیمت رو اعلام کنه.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۶ (خطایابی):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        کد زیر مشکل داره. مشکلش چیه؟ چطور درستش کنیم؟
+                        <div class="code-block" style="margin-top: 10px;">
+                        i = 1<br>
+                        while i < 5:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(i)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== پشتیبانی ========== -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    سوال داری؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه مفهوم حلقه بی‌نهایت رو متوجه نشدی، حتماً بپرس.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== فوتر ========== -->
+            <div class="session-footer">
+                <a href="/course/session/18" class="nav-btn">
+                    جلسه بعدی: حلقه for
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

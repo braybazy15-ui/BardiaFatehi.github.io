@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۱۹: حلقه‌های تو در تو - رسم اشکال | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .indent { padding-right: 20px; display: block; }
+        .indent2 { padding-right: 40px; display: block; }
+        .output-box {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        .output-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2ecc71;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .shape-output {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .tip-box {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .tip-box i {
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+        }
+        .exercise-section {
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+            border: 1px solid #2ecc71;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0 40px;
+        }
+        .exercise-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .exercise-item {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .exercise-number {
+            color: #3498db;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .tip-box { flex-direction: column; text-align: center; }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۱۹</div>
+                <h1 class="session-title">
+                    <i class="fas fa-layer-group"></i>
+                    حلقه‌های تو در تو - رسم اشکال
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">به جلسه نوزدهم خوش اومدی!</span>
+                    توی دو جلسه قبل با while و for آشنا شدیم. اما گاهی نیاز داریم یه حلقه رو 
+                    <span class="highlight-blue">داخل یه حلقه دیگه</span> قرار بدیم.
+                </p>
+                <p>
+                    مثلاً برای رسم یه مستطیل، به دو حلقه نیاز داریم: یکی برای سطرها و یکی برای ستون‌ها.
+                    به این می‌گیم <span class="highlight-yellow">حلقه‌های تو در تو (Nested Loops)</span>.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- ========== بخش ۱: حلقه تو در تو یعنی چی؟ ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-question-circle"></i>
+                    حلقه تو در تو یعنی چی؟
+                </h2>
+
+                <p>
+                    <span class="highlight-blue">حلقه تو در تو</span> وقتی هست که یه حلقه رو داخل حلقه دیگه قرار می‌دیم.
+                    برای هر بار اجرای حلقه بیرونی، حلقه داخلی <span class="highlight-green">کامل اجرا میشه</span>.
+                </p>
+
+                <div class="code-block">
+                    <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):  <span class="comment"># حلقه بیرونی</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(<span class="number">2</span>):  <span class="comment"># حلقه داخلی</span></span></span>
+                    <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">f"i={i}, j={j}"</span>)</span></span>
+                </div>
+
+                <div class="output-box">
+                    <span class="output-label">خروجی</span>
+                    <div class="output-content">
+                        i=0, j=0<br>
+                        i=0, j=1<br>
+                        i=1, j=0<br>
+                        i=1, j=1<br>
+                        i=2, j=0<br>
+                        i=2, j=1
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px;">
+                    <span class="highlight-green">✅ چطوری کار میکنه؟</span>
+                </p>
+                <ul style="color: #e0e0e0;">
+                    <li>i=0 → حلقه داخلی ۲ بار اجرا میشه (j=0 و j=1)</li>
+                    <li>i=1 → حلقه داخلی ۲ بار اجرا میشه (j=0 و j=1)</li>
+                    <li>i=2 → حلقه داخلی ۲ بار اجرا میشه (j=0 و j=1)</li>
+                    <li>مجموعاً ۳ × ۲ = ۶ بار چاپ انجام شده</li>
+                </ul>
+            </div>
+
+            <!-- ========== بخش ۲: رسم مستطیل با ستاره ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-square"></i>
+                    رسم مستطیل با ستاره
+                </h2>
+
+                <p>
+                    می‌خوایم یه مستطیل ۳×۵ (۳ سطر و ۵ ستون) با ستاره رسم کنیم.
+                </p>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):  <span class="comment"># ۳ سطر</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(<span class="number">5</span>):  <span class="comment"># ۵ ستون</span></span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">"*"</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()  <span class="comment"># رفتن به خط بعدی</span></span></span>
+                    </div>
+
+                    <div class="shape-output">
+                        *****<br>
+                        *****<br>
+                        *****
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>نکته:</strong> <span class="highlight-blue">end=""</span> باعث میشه print به آخر خط نره و ستاره‌ها پشت سر هم چاپ بشن.
+                            بعد از اتمام حلقه داخلی، یه print خالی می‌زنیم تا بریم خط بعدی.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۳: رسم مثلث قائم‌الزاویه ========== -->
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثلث قائم‌الزاویه</h3>
+                    <div class="code-block">
+                        <span class="code-line">n = <span class="number">5</span></span>
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(i):</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">"*"</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()</span></span>
+                    </div>
+                </div>
+
+                <div class="shape-output">
+                    *<br>
+                    **<br>
+                    ***<br>
+                    ****<br>
+                    *****
+                </div>
+            </div>
+
+            <!-- ========== بخش ۴: رسم مثلث معکوس ========== -->
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثلث معکوس</h3>
+                    <div class="code-block">
+                        <span class="code-line">n = <span class="number">5</span></span>
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(n, <span class="number">0</span>, -<span class="number">1</span>):</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(i):</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">"*"</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()</span></span>
+                    </div>
+                </div>
+
+                <div class="shape-output">
+                    *****<br>
+                    ****<br>
+                    ***<br>
+                    **<br>
+                    *
+                </div>
+            </div>
+
+            <!-- ========== بخش ۵: رسم هرم ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-pyramid"></i>
+                    رسم هرم
+                </h2>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line">n = <span class="number">5</span></span>
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span>
+                        <span class="code-line"><span class="indent"><span class="comment"># چاپ فاصله</span></span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(n - i):</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">" "</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="comment"># چاپ ستاره</span></span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(<span class="number">2</span>*i - <span class="number">1</span>):</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">"*"</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()</span></span>
+                    </div>
+
+                    <div class="shape-output">
+                        &nbsp;&nbsp;&nbsp;&nbsp;*<br>
+                        &nbsp;&nbsp;&nbsp;***<br>
+                        &nbsp;&nbsp;*****<br>
+                        &nbsp;*******<br>
+                        *********
+                    </div>
+                </div>
+
+                <div class="tip-box" style="margin-top: 20px;">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>توضیح:</strong> توی هر سطر، اول به اندازه (n-i) فاصله می‌ذاریم،
+                            بعد به اندازه (2i-1) ستاره. این فرمول باعث میشه هرم متقارن بشه.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۶: جدول ضرب با حلقه تو در تو ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-times"></i>
+                    جدول ضرب با حلقه تو در تو
+                </h2>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span></span>
+                        <span class="code-line"><span class="indent2">result = i * j</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">f"{result:4}"</span>, end=<span class="string">""</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()</span></span>
+                    </div>
+
+                    <div class="shape-output">
+                        1   2   3   4   5<br>
+                        2   4   6   8  10<br>
+                        3   6   9  12  15<br>
+                        4   8  12  16  20<br>
+                        5  10  15  20  25
+                    </div>
+                </div>
+
+                <p style="color: #b3b3b3; margin-top: 10px;">
+                    <span class="highlight-yellow">f"{result:4}"</span> یعنی عدد رو در ۴ کاراکتر چاپ کن (راست‌چین).
+                </p>
+            </div>
+
+            <!-- ========== بخش ۷: مثال با while تو در تو ========== -->
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: #3498db;">مثال با while تو در تو</h3>
+                    <div class="code-block">
+                        <span class="code-line">i = <span class="number">1</span></span>
+                        <span class="code-line"><span class="keyword">while</span> i <= <span class="number">3</span>:</span>
+                        <span class="code-line"><span class="indent">j = <span class="number">1</span></span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">while</span> j <= <span class="number">4</span>:</span></span>
+                        <span class="code-line"><span class="indent2"><span class="keyword">print</span>(<span class="string">f"({i},{j})"</span>, end=<span class="string">" "</span>)</span></span>
+                        <span class="code-line"><span class="indent2">j += <span class="number">1</span></span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>()</span></span>
+                        <span class="code-line"><span class="indent">i += <span class="number">1</span></span></span>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <span class="output-label">خروجی</span>
+                    <div class="output-content">
+                        (1,1) (1,2) (1,3) (1,4)<br>
+                        (2,1) (2,2) (2,3) (2,4)<br>
+                        (3,1) (3,2) (3,3) (3,4)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۸: خطاهای رایج ========== -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4 style="color: #e74c3c;">⚠️ خطاهای رایج:</h4>
+                    <ul style="color: #e0e0e0; margin-top: 15px;">
+                        <li><span class="highlight-red">Indent اشتباه:</span> حلقه داخلی باید نسبت به بیرونی indent داشته باشه</li>
+                        <li><span class="highlight-red">استفاده از یه متغیر تکراری:</span> مثلاً هر دو حلقه از i استفاده کنن</li>
+                        <li><span class="highlight-red">فراموش کردن reset متغیر در while:</span> توی while باید متغیر حلقه داخلی رو دوباره مقداردهی کنی</li>
+                        <li><span class="highlight-red">پیچیدگی بیش از حد:</span> حلقه‌های خیلی عمیق (بیش از ۳ سطح) برنامه رو کند میکنن</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== خلاصه جلسه ========== -->
+            <div class="tip-box">
+                <i class="fas fa-clipboard-check"></i>
+                <div>
+                    <h4 style="color: #3498db;">خلاصه جلسه ۱۹</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>حلقه تو در تو = حلقه‌ای داخل حلقه دیگه</li>
+                        <li>برای هر بار اجرای حلقه بیرونی، حلقه داخلی کامل اجرا میشه</li>
+                        <li>کاربردها: رسم اشکال، کار با ماتریس‌ها، جدول‌ها</li>
+                        <li>از حلقه‌های for و while میشه تو در تو استفاده کرد</li>
+                        <li>توی رسم اشکال، از end="" برای چاپ پشت سر هم استفاده میکنیم</li>
+                        <li>حواست به indent باشه</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== تمرینات ========== -->
+            <div class="exercise-section">
+                <h2 class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرینات جلسه ۱۹
+                </h2>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱ (ساده):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        برنامه‌ای بنویس که شکل زیر رو چاپ کنه:
+                        <div class="shape-output" style="margin-top: 10px;">
+                            *****<br>
+                            *****<br>
+                            *****<br>
+                            *****
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۲ (ساده):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        مثلث قائم‌الزاویه با ۷ سطر رسم کن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۳ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        شکل زیر رو رسم کن (لوزی):
+                        <div class="shape-output" style="margin-top: 10px;">
+                            &nbsp;&nbsp;&nbsp;*<br>
+                            &nbsp;&nbsp;***<br>
+                            &nbsp;*****<br>
+                            *******<br>
+                            &nbsp;*****<br>
+                            &nbsp;&nbsp;***<br>
+                            &nbsp;&nbsp;&nbsp;*
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۴ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        جدول ضرب ۱۰×۱۰ رو با حلقه تو در تو چاپ کن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۵ (چالشی):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        برنامه‌ای بنویس که اعداد ۱ تا ۲۰ رو به صورت زیر چاپ کنه:
+                        <div class="shape-output" style="margin-top: 10px;">
+                            1  2  3  4  5<br>
+                            6  7  8  9 10<br>
+                            11 12 13 14 15<br>
+                            16 17 18 19 20
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۶ (پروژه):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه ماشین حساب ماتریسی ساده بنویس که دو ماتریس ۲×۲ از کاربر بگیره و جمعشون رو چاپ کنه.
+                        <br>(راهنمایی: از حلقه‌های تو در تو برای پیمایش سطر و ستون استفاده کن)
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۷ (خطایابی):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        کد زیر مشکل داره. مشکلش چیه؟ چطور درستش کنیم؟
+                        <div class="code-block" style="margin-top: 10px;">
+                        for i in range(3):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;for j in range(3):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print("*", end="")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== پشتیبانی ========== -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    سوال داری؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه توی رسم هرم یا حلقه‌های تو در تو مشکل داری، حتماً بپرس.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== فوتر ========== -->
+            <div class="session-footer">
+                <a href="/course/session/20" class="nav-btn">
+                    جلسه بعدی: تمرین حلقه‌ها
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

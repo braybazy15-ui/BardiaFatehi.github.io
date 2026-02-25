@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۲۵: توابع - مقدماتی | آکادمی بردیا فاتحی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+            color: #fff;
+            line-height: 1.9;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+        .back-link:hover {
+            background: rgba(52,152,219,0.2);
+            border-color: #3498db;
+            transform: translateX(-8px);
+        }
+        .session-card {
+            background: rgba(20,20,20,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52,152,219,0.3);
+            border-radius: 40px;
+            padding: 45px 40px;
+            animation: fadeInUp 0.7s;
+        }
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+        .session-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 15px 30px rgba(52,152,219,0.4);
+        }
+        .session-title {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 800;
+            flex: 1;
+        }
+        .session-title i {
+            color: #3498db;
+            margin-left: 15px;
+            background: rgba(52,152,219,0.2);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .mentor-message {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .mentor-message p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .mentor-name {
+            color: #2ecc71;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .highlight-blue { color: #3498db; font-weight: 700; background: rgba(52,152,219,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-green { color: #2ecc71; font-weight: 700; background: rgba(46,204,113,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-red { color: #e74c3c; font-weight: 700; background: rgba(231,76,60,0.15); padding: 2px 8px; border-radius: 6px; }
+        .highlight-yellow { color: #f1c40f; font-weight: 700; background: rgba(241,196,15,0.15); padding: 2px 8px; border-radius: 6px; }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: #3498db;
+            background: rgba(52,152,219,0.15);
+            padding: 10px;
+            border-radius: 16px;
+        }
+        .content-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 35px;
+            margin: 25px 0;
+        }
+        .content-box p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: block;
+            line-height: 2.2;
+            color: #d4d4d4;
+        }
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .function { color: #dcdcaa; }
+        .indent { padding-right: 20px; display: block; }
+        .output-box {
+            background: #0f0f0f;
+            border: 1px solid #2ecc71;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            direction: ltr;
+            text-align: left;
+            position: relative;
+        }
+        .output-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2ecc71;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .tip-box {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+        .tip-box i {
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        .warning-box {
+            background: rgba(231,76,60,0.1);
+            border: 1px solid #e74c3c;
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .warning-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+        }
+        .exercise-section {
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+            border: 1px solid #2ecc71;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 50px 0 40px;
+        }
+        .exercise-title {
+            color: #2ecc71;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .exercise-item {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .exercise-number {
+            color: #3498db;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .support-section {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(46,204,113,0.15));
+            border: 1px solid #3498db;
+            border-radius: 30px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .support-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); color: white; }
+        .support-btn.rubika { background: linear-gradient(135deg, #dc3545, #c82333); color: white; }
+        .support-btn:hover { transform: translateY(-5px); }
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(52,152,219,0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(46,204,113,0.2));
+            border: 1px solid rgba(52,152,219,0.4);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            transform: translateX(-8px);
+        }
+        .date { color: #b3b3b3; display: flex; align-items: center; gap: 8px; }
+        @media (max-width: 768px) {
+            .session-card { padding: 30px 20px; }
+            .session-header { flex-direction: column; text-align: center; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .tip-box { flex-direction: column; text-align: center; }
+            .warning-box { flex-direction: column; text-align: center; }
+            .support-buttons { flex-direction: column; }
+            .session-footer { flex-direction: column; }
+            .nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card">
+            <div class="session-header">
+                <div class="session-number">۲۵</div>
+                <h1 class="session-title">
+                    <i class="fas fa-cube"></i>
+                    توابع - مقدماتی (Functions - Introduction)
+                </h1>
+            </div>
+
+            <div class="mentor-message">
+                <p>
+                    <span class="highlight-green">به جلسه بیست و پنجم خوش اومدی!</span>
+                    تا الان برنامه‌هامون رو به صورت خط به خط می‌نوشتیم. اما توی دنیای واقعی، برنامه‌ها خیلی بزرگتر از این حرفان.
+                </p>
+                <p>
+                    <span class="highlight-blue">توابع (Functions)</span> به ما کمک می‌کنن کدمون رو <span class="highlight-yellow">تکه‌تکه کنیم</span>، هر تکه یه کار مشخص انجام بده، و هر جا نیاز داشتیم ازش استفاده کنیم.
+                </p>
+                <div class="mentor-name">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    بردیا فاتحی
+                </div>
+            </div>
+
+            <!-- ========== بخش ۱: تابع یعنی چی؟ ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-question-circle"></i>
+                    تابع یعنی چی؟
+                </h2>
+
+                <p>
+                    <span class="highlight-blue">تابع</span> یه بلوک از کد هست که یه کار مشخص رو انجام میده. 
+                    مثل یه <span class="highlight-green">دستگاه</span> می‌مونه که بهش یه چیزی میدی، یه کاری روش انجام میده، و بهت برمی‌گردونه.
+                </p>
+
+                <div class="tip-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>مثال روزمره:</strong> دستگاه قهوه‌ساز رو در نظر بگیر. بهش آب و قهوه میدی، برات قهوه درست میکنه.<br>
+                            توی برنامه‌نویسی: <span class="highlight-blue">def make_coffee(water, coffee):</span>
+                        </p>
+                    </div>
+                </div>
+
+                <h3 style="color: #3498db; margin: 30px 0 15px;">✅ چرا از تابع استفاده می‌کنیم؟</h3>
+                <ul style="color: #e0e0e0; margin-right: 20px;">
+                    <li><span class="highlight-green">تکرار نکردن کد (DRY - Don't Repeat Yourself):</span> یه بار می‌نویسی، چند بار استفاده می‌کنی</li>
+                    <li><span class="highlight-green">خواناتر شدن کد:</span> کد به بخش‌های کوچیک و مشخص تقسیم میشه</li>
+                    <li><span class="highlight-green">دیباگ آسان‌تر:</span> اگه مشکلی پیش بیاد، فقط یه تابع رو چک می‌کنی</li>
+                    <li><span class="highlight-green">قابلیت استفاده مجدد:</span> می‌تونی تابع رو توی برنامه‌های دیگه هم استفاده کنی</li>
+                </ul>
+            </div>
+
+            <!-- ========== بخش ۲: ساختار تابع ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    ساختار تابع در پایتون
+                </h2>
+
+                <p>
+                    توی پایتون، تابع با کلمه کلیدی <span class="highlight-blue">def</span> تعریف میشه.
+                </p>
+
+                <div class="code-block">
+                    <span class="code-line"><span class="keyword">def</span> <span class="function">نام_تابع</span>():</span>
+                    <span class="code-line"><span class="indent"><span class="comment"># بدنه تابع - کاری که باید انجام بده</span></span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"سلام از تابع"</span>)</span></span>
+                </div>
+
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div>
+                        <h4 style="color: #2ecc71;">اجزای تابع:</h4>
+                        <ul style="color: #e0e0e0;">
+                            <li>کلمه <span class="highlight-blue">def</span></li>
+                            <li><span class="highlight-blue">نام تابع</span> (خودت انتخاب می‌کنی)</li>
+                            <li><span class="highlight-blue">پرانتز ( )</span></li>
+                            <li><span class="highlight-blue">دو نقطه :</span></li>
+                            <li><span class="highlight-blue">بدنه تابع</span> با indent</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #e74c3c;">نکات مهم:</h4>
+                        <ul style="color: #e0e0e0;">
+                            <li>اسم تابع باید معنی‌دار باشه</li>
+                            <li>بعد از def و نام تابع، حتماً پرانتز بذار</li>
+                            <li>دو نقطه رو فراموش نکن</li>
+                            <li>بدنه تابع باید indent داشته باشه</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۳: اولین تابع ما ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-play"></i>
+                    اولین تابع ما
+                </h2>
+
+                <p>
+                    بیا یه تابع ساده بنویسیم که فقط یه پیغام چاپ کنه.
+                </p>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="comment"># تعریف تابع</span></span>
+                        <span class="code-line"><span class="keyword">def</span> <span class="function">say_hello</span>():</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"سلام! به دنیای توابع خوش اومدی"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"این اولین تابع منه"</span>)</span></span>
+                        <span class="code-line"> </span>
+                        <span class="code-line"><span class="comment"># صدا زدن تابع</span></span>
+                        <span class="code-line"><span class="function">say_hello</span>()</span>
+                    </div>
+
+                    <div class="output-box">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">
+                            سلام! به دنیای توابع خوش اومدی<br>
+                            این اولین تابع منه
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box" style="margin-top: 20px;">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>توضیح خط به خط:</strong>
+                            <br>• <span class="highlight-blue">def say_hello(): </span> - تابعی به اسم say_hello تعریف می‌کنیم
+                            <br>• <span class="highlight-blue">print(...) </span> - بدنه تابع (دو خط)
+                            <br>• <span class="highlight-blue">say_hello() </span> - تابع رو صدا می‌زنیم تا اجرا بشه
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۴: تابع با چند خط ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    تابع با چند خط
+                </h2>
+
+                <p>
+                    توابع می‌تونن چند خط کد داشته باشن. هر چی توی بدنه تابع با indent نوشته بشه، جزو اون تابع محسوب میشه.
+                </p>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">def</span> <span class="function">show_info</span>():</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"*" * 30</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"نام: بردیا فاتحی"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"شغل: مدرس برنامه‌نویسی"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"*" * 30</span>)</span></span>
+                        <span class="code-line"> </span>
+                        <span class="code-line"><span class="function">show_info</span>()</span>
+                    </div>
+
+                    <div class="output-box">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">
+                            ******************************<br>
+                            نام: بردیا فاتحی<br>
+                            شغل: مدرس برنامه‌نویسی<br>
+                            ******************************
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>توضیح:</strong> تابع <span class="highlight-blue">show_info</span> چهار تا print داره. وقتی تابع رو صدا می‌زنیم، هر چهار خط اجرا میشن.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۵: تابع چند بار صدا زدن ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-repeat"></i>
+                    چند بار صدا زدن تابع
+                </h2>
+
+                <p>
+                    یکی از مهم‌ترین مزایای تابع اینه که می‌تونی <span class="highlight-green">چند بار</span> ازش استفاده کنی.
+                </p>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">def</span> <span class="function">welcome</span>():</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"به آکادمی خوش آمدید!"</span>)</span></span>
+                        <span class="code-line"> </span>
+                        <span class="code-line"><span class="comment"># سه بار صدا می‌زنیم</span></span>
+                        <span class="code-line"><span class="function">welcome</span>()</span>
+                        <span class="code-line"><span class="function">welcome</span>()</span>
+                        <span class="code-line"><span class="function">welcome</span>()</span>
+                    </div>
+
+                    <div class="output-box">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">
+                            به آکادمی خوش آمدید!<br>
+                            به آکادمی خوش آمدید!<br>
+                            به آکادمی خوش آمدید!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>توضیح:</strong> اگه سه بار تابع رو صدا بزنیم، سه بار اجرا میشه. بدون تابع باید سه بار کد رو می‌نوشتیم.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۶: مثال کاربردی ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    مثال کاربردی: منوی رستوران
+                </h2>
+
+                <p>
+                    فرض کن می‌خوایم یه برنامه برای رستوران بنویسیم که منو رو نشون بده.
+                </p>
+
+                <div class="code-block">
+                    <span class="code-line"><span class="keyword">def</span> <span class="function">show_menu</span>():</span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span>*30)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"منوی رستوران"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"="</span>*30)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"1. پیتزا - 120,000 تومان"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"2. برگر - 80,000 تومان"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"3. سالاد - 50,000 تومان"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"4. نوشابه - 15,000 تومان"</span>)</span></span>
+                    <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"="</span>*30)</span></span>
+                    <span class="code-line"> </span>
+                    <span class="code-line"><span class="comment"># نمایش منو</span></span>
+                    <span class="code-line"><span class="function">show_menu</span>()</span>
+                </div>
+
+                <div class="output-box">
+                    <span class="output-label">خروجی</span>
+                    <div class="output-content">
+                        ==============================<br>
+                        منوی رستوران<br>
+                        ==============================<br>
+                        1. پیتزا - 120,000 تومان<br>
+                        2. برگر - 80,000 تومان<br>
+                        3. سالاد - 50,000 تومان<br>
+                        4. نوشابه - 15,000 تومان<br>
+                        ==============================
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p style="color: #e0e0e0;">
+                            <strong>توضیح:</strong> ما تابع <span class="highlight-blue">show_menu</span> رو ساختیم که منو رو چاپ می‌کنه. 
+                            هر وقت نیاز به نمایش منو داشتیم، فقط کافیه این تابع رو صدا بزنیم.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۷: تابع داخل حلقه ========== -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-sync-alt"></i>
+                    صدا زدن تابع داخل حلقه
+                </h2>
+
+                <p>
+                    می‌تونیم تابع رو داخل حلقه هم صدا بزنیم.
+                </p>
+
+                <div class="grid-2">
+                    <div class="code-block">
+                        <span class="code-line"><span class="keyword">def</span> <span class="function">count_down</span>():</span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"۳"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"۲"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"۱"</span>)</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"بریم!"</span>)</span></span>
+                        <span class="code-line"> </span>
+                        <span class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):</span>
+                        <span class="code-line"><span class="indent"><span class="function">count_down</span>()</span></span>
+                        <span class="code-line"><span class="indent"><span class="keyword">print</span>(<span class="string">"-"</span>*10)</span></span>
+                    </div>
+
+                    <div class="output-box">
+                        <span class="output-label">خروجی</span>
+                        <div class="output-content">
+                            ۳<br>۲<br>۱<br>بریم!<br>----------<br>
+                            ۳<br>۲<br>۱<br>بریم!<br>----------<br>
+                            ۳<br>۲<br>۱<br>بریم!<br>----------
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== بخش ۸: خطاهای رایج ========== -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4 style="color: #e74c3c;">⚠️ خطاهای رایج:</h4>
+                    <ul style="color: #e0e0e0; margin-top: 15px;">
+                        <li><span class="highlight-red">فراموش کردن پرانتز:</span> say_hello (بدون پرانتز) تابع رو صدا نمیزنه، فقط به خود تابع اشاره میکنه</li>
+                        <li><span class="highlight-red">فراموش کردن دو نقطه:</span> بعد از def باید : بذاری</li>
+                        <li><span class="highlight-red">indent اشتباه:</span> کدهای داخل تابع باید فاصله داشته باشن</li>
+                        <li><span class="highlight-red">تعریف تابع بعد از صدا زدن:</span> باید اول تابع رو تعریف کنی، بعد صدا بزنی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== خلاصه جلسه ========== -->
+            <div class="tip-box">
+                <i class="fas fa-clipboard-check"></i>
+                <div>
+                    <h4 style="color: #3498db;">خلاصه جلسه ۲۵</h4>
+                    <ul style="color: #e0e0e0; margin-top: 10px;">
+                        <li>تابع یه بلوک کد برای انجام یه کار مشخص</li>
+                        <li>تعریف تابع: <span class="highlight-blue">def name():</span></li>
+                        <li>بدنه تابع باید <span class="highlight-blue">indent</span> داشته باشه</li>
+                        <li>صدا زدن تابع: <span class="highlight-blue">name()</span></li>
+                        <li>توابع باعث میشن کد <span class="highlight-green">خواناتر، قابل استفاده مجدد و سازماندهی‌شده‌تر</span> بشه</li>
+                        <li>می‌تونیم تابع رو چند بار صدا بزنیم</li>
+                        <li>می‌تونیم تابع رو داخل حلقه صدا بزنیم</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== تمرینات ========== -->
+            <div class="exercise-section">
+                <h2 class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرینات جلسه ۲۵
+                </h2>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۱ (ساده):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        تابعی به اسم <span class="highlight-blue">say_name</span> بنویس که اسمت رو چاپ کنه. بعد تابع رو صدا بزن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۲ (ساده):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        تابعی بنویس که ۳ تا از علاقه‌مندی‌هات رو هر کدام توی یه خط چاپ کنه.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۳ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        تابعی بنویس که یه خط جداکننده (مثلاً ۴۰ تا =) چاپ کنه. بعد ۵ بار تابع رو توی یه حلقه صدا بزن.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۴ (متوسط):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        تابعی به اسم <span class="highlight-blue">show_time</span> بنویس که ساعت و تاریخ فعلی رو چاپ کنه.
+                        (میتونی از <span class="highlight-yellow">import datetime</span> استفاده کنی)
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۵ (چالشی):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه تابع برای نمایش منوی رستوران بنویس (مثل همونی که توی مثال زدیم).
+                        بعد یه حلقه while بذار که تا وقتی کاربر گزینه خروج رو انتخاب نکرده، منو رو نشون بده.
+                    </div>
+                </div>
+
+                <div class="exercise-item">
+                    <span class="exercise-number">تمرین ۶ (پروژه):</span>
+                    <div style="color: #e0e0e0; margin-top: 10px;">
+                        یه برنامه ماشین حساب ساده با توابع بنویس که:
+                        <br>• تابعی برای نمایش منو
+                        <br>• تابعی برای جمع
+                        <br>• تابعی برای تفریق
+                        <br>• تابعی برای ضرب
+                        <br>• تابعی برای تقسیم
+                        <br>کاربر از منو انتخاب کنه و برنامه تا وقتی ادامه پیدا کنه که کاربر گزینه خروج رو انتخاب کنه.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== پشتیبانی ========== -->
+            <div class="support-section">
+                <h4 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    سوال داری؟
+                </h4>
+                <p style="color: #e0e0e0;">
+                    اگه مفهوم تابع یا نحوه تعریفش رو متوجه نشدی، حتماً بپرس.
+                </p>
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i> پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i> پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== فوتر ========== -->
+            <div class="session-footer">
+                <a href="/course/session/26" class="nav-btn">
+                    جلسه بعدی: پارامتر و return
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="date">
+                    <i class="fas fa-calendar-alt" style="color: #3498db;"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

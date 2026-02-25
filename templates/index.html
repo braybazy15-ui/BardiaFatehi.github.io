@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آکادمی برنامه نویسی بردیا فاتحی</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* استایل‌های فوتر - کاملاً هماهنگ با سایت */
+      .footer-section {
+        margin-top: 80px;
+        padding: 60px 0 20px;
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        border-top: 2px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          transparent,
+          rgba(52, 152, 219, 0.05),
+          transparent
+        );
+        pointer-events: none;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-title {
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--accent-blue);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-title i {
+        color: var(--accent-blue);
+        font-size: 1.3rem;
+      }
+
+      .footer-description {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+        text-align: justify;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .footer-social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        transition: all var(--transition-fast);
+        text-decoration: none;
+        border: 1px solid var(--border-color);
+      }
+
+      .footer-social-link:hover {
+        background: var(--accent-blue);
+        transform: translateY(-5px);
+        border-color: var(--accent-blue);
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+      }
+
+      .footer-link i {
+        color: var(--accent-green);
+        font-size: 0.8rem;
+        transition: all var(--transition-fast);
+      }
+
+      .footer-link:hover {
+        color: var(--accent-blue);
+        transform: translateX(-5px);
+      }
+
+      .footer-link:hover i {
+        color: var(--accent-blue);
+      }
+
+      .footer-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .footer-contact-item i {
+        width: 35px;
+        height: 35px;
+        background: rgba(52, 152, 219, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-blue);
+        font-size: 1rem;
+      }
+
+      .footer-contact-text {
+        direction: ltr;
+        text-align: right;
+        font-family: monospace;
+      }
+
+      .footer-copyright {
+        text-align: center;
+        margin-top: 50px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .footer-copyright i {
+        color: var(--accent-red);
+        margin: 0 5px;
+      }
+
+      .footer-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--accent-green), #27ae60);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-right: 10px;
+      }
+
+      /* استایل‌های تایمر و تخفیف */
+      .discount-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--accent-red), #c0392b);
+        color: white;
+        padding: 12px 15px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        width: 70px;
+        height: 70px;
+        animation: pulse 2s infinite;
+        z-index: 10;
+      }
+
+      .discount-badge small {
+        font-size: 0.7rem;
+        font-weight: 400;
+        margin-top: 2px;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+        }
+      }
+
+      .timer-container {
+        background: linear-gradient(
+          135deg,
+          rgba(231, 76, 60, 0.15),
+          rgba(192, 57, 43, 0.15)
+        );
+        border: 2px solid var(--accent-red);
+        border-radius: 15px;
+        padding: 15px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .timer-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: var(--accent-red);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .timer-label i {
+        font-size: 1.2rem;
+        animation: tick 1s infinite;
+      }
+
+      @keyframes tick {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(5deg);
+        }
+        75% {
+          transform: rotate(-5deg);
+        }
+      }
+
+      .timer-grid {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      .timer-box {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        padding: 10px 5px;
+        min-width: 60px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(5px);
+      }
+
+      .timer-value {
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--accent-red);
+        line-height: 1.2;
+        font-family: monospace;
+        direction: ltr;
+      }
+
+      .timer-unit {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 5px;
+      }
+
+      .timer-separator {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent-red);
+        margin: 0 2px;
+      }
+
+      .saved-amount {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 8px;
+        background: rgba(46, 204, 113, 0.1);
+        border-radius: 8px;
+        color: var(--accent-green);
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .saved-amount i {
+        color: var(--accent-green);
+      }
+
+      /* رسپانسیو برای تایمر */
+      @media (max-width: 768px) {
+        .timer-grid {
+          gap: 3px;
+        }
+
+        .timer-box {
+          min-width: 50px;
+          padding: 8px 3px;
+        }
+
+        .timer-value {
+          font-size: 1.4rem;
+        }
+
+        .timer-unit {
+          font-size: 0.7rem;
+        }
+
+        .timer-separator {
+          font-size: 1.5rem;
+        }
+
+        .discount-badge {
+          width: 60px;
+          height: 60px;
+          font-size: 1rem;
+          top: 15px;
+          right: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .timer-box {
+          min-width: 45px;
+        }
+
+        .timer-value {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* رسپانسیو فوتر */
+      @media (max-width: 992px) {
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .footer-section {
+          margin-top: 60px;
+          padding: 40px 0 20px;
+        }
+
+        .footer-container {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .footer-column {
+          text-align: center;
+        }
+
+        .footer-title {
+          justify-content: center;
+        }
+
+        .footer-social {
+          justify-content: center;
+        }
+
+        .footer-link {
+          justify-content: center;
+        }
+
+        .footer-contact-item {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .footer-section {
+          margin-top: 40px;
+          padding: 30px 0 15px;
+        }
+
+        .footer-title {
+          font-size: 1.3rem;
+        }
+
+        .footer-description {
+          font-size: 0.9rem;
+        }
+
+        .footer-social-link {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <main class="main-content">
+        <!-- بخش اصلی -->
+        <header class="header-section">
+          <div class="title-wrapper">
+            <h1 class="main-title">
+              <span class="title-text">آکادمی برنامه نویسی</span>
+              <span class="highlight">بردیا فاتحی</span>
+            </h1>
+
+            <h2 class="sub-title">یادگیری برنامه نویسی از صفر تا صد</h2>
+
+            <div class="description-box">
+              <p class="description-text">
+                در آکادمی برنامه‌نویسی بردیا فاتحی، باور داریم که یادگیری
+                برنامه‌نویسی نباید پیچیده و زمان‌بر باشد. ما مسیری سریع، کاربردی
+                و پروژه‌محور طراحی کرده‌ایم که شما را در کمترین زمان از مبتدی به
+                برنامه‌نویس حرفه‌ای تبدیل می‌کند.
+              </p>
+              <p class="description-text">
+                دیگر نیازی نیست سال‌ها وقت صرف آموزش‌های تئوری کنید. اینجا هر
+                درس یک قدم به سمت درآمد است
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <section class="actions-section">
+          <div class="actions-container">
+            <div
+              class="action-card action-guide"
+              onclick="window.location.href='/guide'"
+            >
+              <div class="action-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <div class="action-content">
+                <h3 class="action-title">راهنمایی شروع برنامه نویسی</h3>
+                <p class="action-desc">مسیر یادگیری صحیح را انتخاب کنید</p>
+              </div>
+              <div class="action-hover-effect"></div>
+            </div>
+
+            <div
+              class="action-card action-consult"
+              onclick="window.location.href='/consultation'"
+            >
+              <div class="action-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <div class="action-content">
+                <h3 class="action-title">مشاوره رایگان</h3>
+                <p class="action-desc">پاسخ سوالات شما توسط متخصصان</p>
+              </div>
+              <div class="action-hover-effect"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- بخش دوره‌ها و پشتیبانی -->
+        <section class="courses-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-graduation-cap"></i>
+              دوره‌ها و خدمات تخصصی
+            </h2>
+            <p class="section-subtitle">
+              با بهترین کیفیت و مناسب‌ترین قیمت یادگیری را شروع کنید
+            </p>
+          </div>
+
+          <div class="courses-container">
+            <!-- دوره VIP پایتون با تخفیف ویژه و تایمر ثابت - فقط متن‌ها تغییر کرده -->
+            <div class="course-card">
+              <div class="course-image-container">
+                <img
+                  src="/static/images/doreh1.jpg"
+                  alt="دوره متن‌محور VIP برنامه نویسی با پایتون"
+                  class="course-image"
+                />
+                <div class="course-badge">
+                  <i class="fas fa-crown"></i>
+                  دوره VIP
+                </div>
+                <!-- برچسب درصد تخفیف -->
+                <div class="discount-badge">
+                  <span>70%</span>
+                  <small>تخفیف ویژه</small>
+                </div>
+              </div>
+
+              <div class="course-content">
+                <!-- عنوان با کلمه "متن‌محور" -->
+                <h3 class="course-title">
+                  <i class="fab fa-python"></i>
+                  دوره متن‌محور VIP برنامه نویسی با پایتون
+                </h3>
+
+                <!-- تایمر شمارش معکوس ثابت (بدون تغییر) -->
+                <div class="timer-container">
+                  <div class="timer-label">
+                    <i class="fas fa-clock"></i>
+                    <span>تا پایان تخفیف ویژه:</span>
+                  </div>
+                  <div class="timer-grid">
+                    <div class="timer-box">
+                      <span class="timer-value" id="days">۰۰</span>
+                      <span class="timer-unit">روز</span>
+                    </div>
+                    <div class="timer-separator">:</div>
+                    <div class="timer-box">
+                      <span class="timer-value" id="hours">۰۰</span>
+                      <span class="timer-unit">ساعت</span>
+                    </div>
+                    <div class="timer-separator">:</div>
+                    <div class="timer-box">
+                      <span class="timer-value" id="minutes">۰۰</span>
+                      <span class="timer-unit">دقیقه</span>
+                    </div>
+                    <div class="timer-separator">:</div>
+                    <div class="timer-box">
+                      <span class="timer-value" id="seconds">۰۰</span>
+                      <span class="timer-unit">ثانیه</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- توضیحات کوتاه جدید - کاملاً متن‌محور -->
+                <p class="course-description">
+                   <strong>کاملاً متن‌محور</strong> - این دوره هیچ ویدیویی ندارد و مانند یک جزوه کامل و بی‌نقص طراحی شده است. هر جلسه شامل توضیحات خط به خط، مثال‌های متعدد و تمرینات متنوع است تا مفاهیم را عمیقاً یاد بگیرید.
+                </p>
+
+                <!-- ویژگی‌های جدید دوره -->
+                <div class="course-features">
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> ۲۸ جلسه آموزش متن‌محور (بدون ویدیو)</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> جزوه‌های دقیق و خط به خط</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> بیش از ۱۲۰ تمرین و پروژه عملی</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> یک ماه پشتیبانی تخصصی رایگان</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> از صفر مطلق تا پروژه‌های واقعی</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span> تمرکز بر مفاهیم پایه و از بین بردن ترس</span>
+                  </div>
+                </div>
+
+                <div class="course-pricing">
+                  <div class="original-price">
+                    <span class="price-text">قیمت اصلی:</span>
+                    <span class="price-value line-through"
+                      >۵۰۰,۰۰۰ تومان</span
+                    >
+                  </div>
+                  <div class="discounted-price">
+                    <span class="price-text">با تخفیف ویژه:</span>
+                    <span class="price-value highlight-price"
+                      >۱۵۰,۰۰۰ تومان</span
+                    >
+                  </div>
+                  <!-- متن ذخیره شده -->
+                  <div class="saved-amount">
+                    <i class="fas fa-gift"></i>
+                    <span>شما ۳۵۰,۰۰۰ تومان صرفه‌جویی می‌کنید!</span>
+                  </div>
+                </div>
+
+                <a href="/course/python-vip" class="course-button">
+                  <i class="fas fa-shopping-cart"></i>
+                  خرید دوره با تخفیف
+                </a>
+              </div>
+            </div>
+
+            <!-- پشتیبانی تخصصی (کاملاً بدون تغییر) -->
+            <div class="course-card">
+              <div class="course-image-container">
+                <img
+                  src="/static/images/doreh6.jpg"
+                  alt="پشتیبانی اختصاصی یک ماهه"
+                  class="course-image"
+                />
+                <div class="course-badge support-badge">
+                  <i class="fas fa-headset"></i>
+                  پشتیبانی
+                </div>
+              </div>
+
+              <div class="course-content">
+                <h3 class="course-title">
+                  <i class="fas fa-life-ring"></i>
+                  پشتیبانی اختصاصی یک ماهه
+                </h3>
+                <p class="course-description">
+                  پاسخگویی تخصصی به سوالات برنامه‌نویسی و راهنمایی در پروژه‌ها.
+                  مناسب برای کسانی که قبلاً از ما دوره‌های پشتیبانی دار خریداری
+                  کردن و زمان پشتیبانی اختصاصیشون به پایان رسیده.
+                </p>
+
+                <div class="course-features">
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>پاسخگویی سریع در کمتر از ۱۲ ساعت</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>رفع خطاهای کدنویسی</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>راهنمایی در انجام پروژه‌ها</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>مشاوره مسیر یادگیری</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>پشتیبانی از طریق روبیکا و تلگرام</span>
+                  </div>
+                </div>
+
+                <div class="course-pricing single-price">
+                  <div class="discounted-price">
+                    <span class="price-text">قیمت:</span>
+                    <span class="price-value highlight-price"
+                      >۲۰۰,۰۰۰ تومان</span
+                    >
+                  </div>
+                </div>
+
+                <a
+                  href="/support/one-month"
+                  class="course-button support-button"
+                >
+                  <i class="fas fa-calendar-check"></i>
+                  خرید پشتیبانی
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- بخش درباره مدرس (بدون تغییر) -->
+        <section class="about-instructor-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-chalkboard-teacher"></i>
+              درباره مدرس
+            </h2>
+            <p class="section-subtitle">با مربی و مؤسس آکادمی آشنا شوید</p>
+          </div>
+
+          <div class="instructor-container">
+            <div class="instructor-profile">
+              <div class="profile-image-wrapper">
+                <img
+                  src="/static/images/MyProfile.jpg"
+                  alt="بردیا فاتحی"
+                  class="profile-image"
+                />
+                <div class="profile-badge">
+                  <i class="fas fa-award"></i>
+                  مؤسس آکادمی
+                </div>
+              </div>
+
+              <div class="profile-info">
+                <h3 class="instructor-name">بردیا فاتحی</h3>
+                <p class="instructor-title">
+                  مدرس برنامه‌نویسی، طراح وب و مؤسس آکادمی فاتحی
+                </p>
+
+                <div class="social-links">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                  </a>
+                  <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="#" class="social-link">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="instructor-content">
+              <div class="instructor-bio">
+                <h4 class="bio-title">
+                  <i class="fas fa-user-graduate"></i>
+                  معرفی
+                </h4>
+                <p class="bio-text">
+                  سلام، من بردیا فاتحی هستم. بیش از 1 سال است که در زمینه
+                  برنامه‌نویسی و طراحی وب فعالیت می‌کنم و عاشق اشتراک‌گذاری دانش
+                  و تجربیاتم با دیگران هستم.
+                </p>
+                <p class="bio-text">
+                  به عنوان مؤسس آکادمی فاتحی، مأموریت من این است که برنامه‌نویسی
+                  را به ساده‌ترین و کاربردی‌ترین روش به دانشجویان آموزش دهم. من
+                  معتقدم که هر کسی با انگیزه کافی می‌تواند برنامه‌نویس شود و در
+                  این مسیر پیشرفت کند.
+                </p>
+                <p class="bio-text">
+                  تاکنون بیش از 50 ساعت ویدیو آموزشی تولید کرده‌ام که چندین نفر
+                  از طریق آنها وارد دنیای برنامه‌نویسی شده‌اند. رویکرد آموزشی من
+                  پروژه‌محور و کاربردی است، به طوری که دانشجویان پس از پایان هر
+                  دوره می‌توانند پروژه‌های واقعی انجام دهند.
+                </p>
+              </div>
+
+              <div class="instructor-expertise">
+                <h4 class="expertise-title">
+                  <i class="fas fa-tools"></i>
+                  تخصص‌ها
+                </h4>
+                <div class="skills-container">
+                  <div class="skill-item">
+                    <div class="skill-icon">
+                      <i class="fab fa-python"></i>
+                    </div>
+                    <span class="skill-name">پایتون (Python)</span>
+                  </div>
+                  <div class="skill-item">
+                    <div class="skill-icon">
+                      <i class="fab fa-html5"></i>
+                    </div>
+                    <span class="skill-name">HTML5 & CSS3</span>
+                  </div>
+                  <div class="skill-item">
+                    <div class="skill-icon">
+                      <i class="fab fa-js"></i>
+                    </div>
+                    <span class="skill-name">JavaScript</span>
+                  </div>
+                  <div class="skill-item">
+                    <div class="skill-icon">
+                      <i class="fas fa-code"></i>
+                    </div>
+                    <span class="skill-name">Front-End Development</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="instructor-achievements">
+                <h4 class="achievements-title">
+                  <i class="fas fa-trophy"></i>
+                  دستاوردها
+                </h4>
+                <div class="achievements-list">
+                  <div class="achievement-item">
+                    <i class="fas fa-university"></i>
+                    <span>مؤسس آکادمی برنامه نویسی بردیا فاتحی</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>مؤسس سایت کدآموز</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-video"></i>
+                    <span>تولید بیش از 50 ساعت ویدیو آموزشی</span>
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-users"></i>
+                    <span>آموزش به چندین دانشجو</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- بخش ارتباطات و شبکه‌های اجتماعی (بدون تغییر) -->
+        <section class="contact-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-network-wired"></i>
+              ارتباط با ما
+            </h2>
+            <p class="section-subtitle">
+              از طریق شبکه‌های اجتماعی با ما در ارتباط باشید
+            </p>
+          </div>
+
+          <div class="contact-container">
+            <!-- بخش تلگرام -->
+            <div class="contact-category">
+              <h3 class="category-title">
+                <i class="fab fa-telegram"></i>
+                تلگرام
+              </h3>
+              <div class="contact-items">
+                <a
+                  href="https://t.me/BardiyaFatehi"
+                  target="_blank"
+                  class="contact-item telegram-channel"
+                >
+                  <div class="contact-icon">
+                    <i class="fas fa-broadcast-tower"></i>
+                  </div>
+                  <div class="contact-content">
+                    <h4 class="contact-item-title">کانال تلگرام</h4>
+                    <p class="contact-item-desc">
+                      آخرین آموزش‌ها و اخبار آکادمی
+                    </p>
+                    <span class="contact-link">@BardiyaFatehi</span>
+                  </div>
+                  <div class="contact-arrow">
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </a>
+
+                <a
+                  href="https://t.me/BardiyaFatehiBot"
+                  target="_blank"
+                  class="contact-item telegram-bot"
+                >
+                  <div class="contact-icon">
+                    <i class="fas fa-robot"></i>
+                  </div>
+                  <div class="contact-content">
+                    <h4 class="contact-item-title">ربات تلگرام</h4>
+                    <p class="contact-item-desc">دستیار هوشمند آکادمی</p>
+                    <span class="contact-link">@BardiyaFatehiBot</span>
+                  </div>
+                  <div class="contact-arrow">
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- بخش روبیکا -->
+            <div class="contact-category">
+              <h3 class="category-title">
+                <i class="fas fa-comment-dots"></i>
+                روبیکا
+              </h3>
+              <div class="contact-items">
+                <a
+                  href="https://rubika.ir/BardiyaFatehi"
+                  target="_blank"
+                  class="contact-item rubika"
+                >
+                  <div class="contact-icon">
+                    <i class="fas fa-video"></i>
+                  </div>
+                  <div class="contact-content">
+                    <h4 class="contact-item-title">کانال روبیکا</h4>
+                    <p class="contact-item-desc">محتوای ویدیویی و تعاملی</p>
+                    <span class="contact-link">rubika.ir/BardiyaFatehi</span>
+                  </div>
+                  <div class="contact-arrow">
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- بخش آپارات -->
+            <div class="contact-category">
+              <h3 class="category-title">
+                <i class="fas fa-play-circle"></i>
+                آپارات
+              </h3>
+              <div class="contact-items">
+                <a
+                  href="https://www.aparat.com/BardiyaFatehi"
+                  target="_blank"
+                  class="contact-item aparat"
+                >
+                  <div class="contact-icon">
+                    <i class="fas fa-film"></i>
+                  </div>
+                  <div class="contact-content">
+                    <h4 class="contact-item-title">کانال آپارات</h4>
+                    <p class="contact-item-desc">آموزش‌های ویدیویی رایگان</p>
+                    <span class="contact-link">aparat.com/BardiyaFatehi</span>
+                  </div>
+                  <div class="contact-arrow">
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- بخش پشتیبانی -->
+            <div class="contact-category">
+              <h3 class="category-title">
+                <i class="fas fa-headset"></i>
+                پشتیبانی
+              </h3>
+              <div class="contact-items">
+                <div class="contact-item support">
+                  <div class="contact-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </div>
+                  <div class="contact-content">
+                    <h4 class="contact-item-title">
+                      آیدی پشتیبانی و مشاوره رایگان
+                    </h4>
+                    <p class="contact-item-desc">
+                      پاسخگویی به سوالات و راهنمایی
+                    </p>
+                    <div class="support-id">
+                      <span class="contact-id">@Fatehi_Academy_Support</span>
+                      <button
+                        class="copy-btn"
+                        onclick="copyToClipboard('@Fatehi_Academy_Support')"
+                      >
+                        <i class="far fa-copy"></i>
+                        کپی
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- فوتر سایت (بدون تغییر) -->
+        <footer class="footer-section">
+          <div class="footer-container">
+            <!-- ستون اول: درباره ما -->
+            <div class="footer-column">
+              <h3 class="footer-title">
+                <i class="fas fa-code"></i>
+                آکادمی بردیا فاتحی
+              </h3>
+              <p class="footer-description">
+                هر چیزی که برای یادگیری برنامه‌نویسی نیاز دارید، ما براتون آماده
+                کردیم! از دوره‌های آموزشی حرفه‌ای گرفته تا پشتیبانی تخصصی و
+                مشاوره رایگان. هدف ما اینه که شما رو در سریع‌ترین زمان ممکن از
+                یه مبتدی به یه برنامه‌نویس حرفه‌ای تبدیل کنیم.
+              </p>
+              <div class="footer-social">
+                <a
+                  href="https://t.me/BardiyaFatehi"
+                  target="_blank"
+                  class="footer-social-link"
+                >
+                  <i class="fab fa-telegram"></i>
+                </a>
+                <a
+                  href="https://rubika.ir/BardiyaFatehi"
+                  target="_blank"
+                  class="footer-social-link"
+                >
+                  <i class="fas fa-comment-dots"></i>
+                </a>
+                <a
+                  href="https://www.aparat.com/BardiyaFatehi"
+                  target="_blank"
+                  class="footer-social-link"
+                >
+                  <i class="fas fa-play-circle"></i>
+                </a>
+                <a href="#" class="footer-social-link">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="footer-social-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- ستون دوم: لینک‌های سریع -->
+            <div class="footer-column">
+              <h3 class="footer-title">
+                <i class="fas fa-link"></i>
+                دسترسی سریع
+              </h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="/" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> صفحه اصلی</a
+                  >
+                </li>
+                <li>
+                  <a href="/guide" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> راهنمای شروع</a
+                  >
+                </li>
+                <li>
+                  <a href="/consultation" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> مشاوره رایگان</a
+                  >
+                </li>
+                <li>
+                  <a href="/course/python-vip" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> دوره VIP پایتون</a
+                  >
+                </li>
+                <li>
+                  <a href="/support/one-month" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> پشتیبانی یک ماهه</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- ستون سوم: دوره‌ها -->
+            <div class="footer-column">
+              <h3 class="footer-title">
+                <i class="fas fa-graduation-cap"></i>
+                دوره‌های ویژه
+              </h3>
+              <ul class="footer-links">
+                <li>
+                  <a href="/course/python-vip" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> پایتون VIP</a
+                  >
+                </li>
+                <li>
+                  <a href="/course/python-vip" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> دوره VIP پایتون
+                    <span class="footer-badge">ویژه</span></a
+                  >
+                </li>
+                <li>
+                  <a href="/support/one-month" class="footer-link"
+                    ><i class="fas fa-angle-left"></i> پشتیبانی یک ماهه</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- ستون چهارم: اطلاعات تماس -->
+            <div class="footer-column">
+              <h3 class="footer-title">
+                <i class="fas fa-envelope"></i>
+                ارتباط با ما
+              </h3>
+              <div class="footer-contact-item">
+                <i class="fab fa-telegram"></i>
+                <span class="footer-contact-text">@BardiyaFatehi</span>
+              </div>
+              <div class="footer-contact-item">
+                <i class="fas fa-comment-dots"></i>
+                <span class="footer-contact-text">rubika.ir/BardiyaFatehi</span>
+              </div>
+              <div class="footer-contact-item">
+                <i class="fas fa-headset"></i>
+                <span class="footer-contact-text">@Fatehi_Academy_Support</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-copyright">
+            <p>
+              تمامی حقوق برای
+              <strong>آکادمی برنامه نویسی بردیا فاتحی</strong> محفوظ است.
+              <i class="fas fa-heart"></i>
+              هر کسی می‌تونه برنامه‌نویس بشه، فقط کافیه درست یاد بگیره!
+            </p>
+            <p style="margin-top: 10px; font-size: 0.85rem">
+              © ۱۴۰۴ - آکادمی برنامه نویسی بردیا فاتحی
+            </p>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      // تابع کپی برای فوتر
+      function copyToClipboard(text) {
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            const copyBtn = event.target.closest(".copy-btn");
+            if (copyBtn) {
+              const originalText = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+              copyBtn.classList.add("copied");
+
+              setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.classList.remove("copied");
+              }, 2000);
+            }
+
+            showNotification("آیدی با موفقیت کپی شد!");
+          })
+          .catch(function (err) {
+            showNotification("خطا در کپی کردن!", "error");
+          });
+      }
+
+      function showNotification(message, type = "success") {
+        const oldNotification = document.querySelector(".notification");
+        if (oldNotification) {
+          oldNotification.remove();
+        }
+
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+                <i class="fas fa-${
+                  type === "success" ? "check-circle" : "exclamation-circle"
+                }"></i>
+                <span>${message}</span>
+            `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.classList.add("show");
+        }, 10);
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.remove();
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      // ✅ تایمر ثابت برای گیت‌هاب - تاریخ پایان: 27 فوریه 2026
+      function startFixedCountdown() {
+        // تاریخ پایان ثابت: 27 فوریه 2026 ساعت 23:59:59
+        // توجه: ماه‌ها در JavaScript از 0 شروع میشن (0 = January, 1 = February)
+        const targetDate = new Date(2026, 2, 4, 23, 59, 59).getTime();
+
+        function updateTimer() {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+
+          if (distance < 0) {
+            document.getElementById("days").textContent = "۰۰";
+            document.getElementById("hours").textContent = "۰۰";
+            document.getElementById("minutes").textContent = "۰۰";
+            document.getElementById("seconds").textContent = "۰۰";
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById("days").textContent = days
+            .toString()
+            .padStart(2, "0");
+          document.getElementById("hours").textContent = hours
+            .toString()
+            .padStart(2, "0");
+          document.getElementById("minutes").textContent = minutes
+            .toString()
+            .padStart(2, "0");
+          document.getElementById("seconds").textContent = seconds
+            .toString()
+            .padStart(2, "0");
+        }
+
+        // اجرای اولیه
+        updateTimer();
+
+        // آپدیت هر ثانیه
+        return setInterval(updateTimer, 1000);
+      }
+
+      // شروع تایمر ثابت
+      startFixedCountdown();
+    </script>
+  </body>
+</html>

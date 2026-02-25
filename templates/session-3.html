@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلسه ۳: نصب پایتون روی ویندوز | آکادمی بردیا فاتحی</title>
+    <!-- فونت وزیرمتن با وزن‌های مختلف -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+            color: #fff;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* انیمیشن‌های بسیار سبک */
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(52, 152, 219, 0.4);
+            }
+        }
+
+        .animate-float {
+            animation: floatIn 0.6s ease-out forwards;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        /* لینک بازگشت با انیمیشن */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 12px 22px;
+            background: rgba(52, 152, 219, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: floatIn 0.5s ease-out;
+        }
+
+        .back-link:hover {
+            background: rgba(52, 152, 219, 0.15);
+            border-color: #3498db;
+            transform: translateX(-5px) scale(1.02);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        .back-link:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* کارت اصلی */
+        .session-card {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 36px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: floatIn 0.7s ease-out, glowPulse 4s infinite;
+        }
+
+        /* هدر جلسه */
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #3498db, #2ecc71, transparent) 1;
+            flex-wrap: wrap;
+        }
+
+        .session-number {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            flex-shrink: 0;
+            animation: glowPulse 3s infinite;
+        }
+
+        .session-title {
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            font-weight: 700;
+            color: white;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .session-title i {
+            color: #3498db;
+            margin-left: 12px;
+            background: rgba(52, 152, 219, 0.15);
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+        }
+
+        /* بخش معرفی */
+        .intro-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.12), rgba(46, 204, 113, 0.12));
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 28px;
+            padding: 30px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+
+        .intro-section:hover {
+            border-color: #2ecc71;
+        }
+
+        .intro-section p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+            line-height: 1.9;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-green {
+            color: #2ecc71;
+            font-weight: 700;
+            background: rgba(46, 204, 113, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .highlight-blue {
+            color: #3498db;
+            font-weight: 700;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .highlight-red {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+
+        /* شبکه دو ستونی */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        /* کارت‌های محتوا */
+        .content-card {
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(52, 152, 219, 0.25);
+            border-radius: 28px;
+            padding: 28px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: fit-content;
+        }
+
+        .content-card:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.45);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .card-title i {
+            color: #2ecc71;
+            font-size: 1.4rem;
+        }
+
+        /* لیست مراحل */
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+            line-height: 1.8;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            font-weight: 700;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+            box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .steps-list strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .steps-list i {
+            color: #2ecc71;
+            margin-left: 8px;
+        }
+
+        /* باکس نکته مهم */
+        .important-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(52, 152, 219, 0.1));
+            border: 1px solid #e74c3c;
+            border-radius: 20px;
+            padding: 22px;
+            margin: 30px 0;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            transition: all 0.3s;
+        }
+
+        .important-box:hover {
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(231, 76, 60, 0.15));
+        }
+
+        .important-box i {
+            color: #e74c3c;
+            font-size: 2rem;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .important-box p {
+            color: #e0e0e0;
+            line-height: 1.9;
+        }
+
+        .important-box strong {
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        /* باکس کد */
+        .code-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-box pre {
+            color: #d4d4d4;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .code-box .comment {
+            color: #6a9955;
+        }
+
+        .code-box .command {
+            color: #569cd6;
+        }
+
+        /* باکس نوتیفیکیشن */
+        .note-box {
+            background: rgba(52, 152, 219, 0.08);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 20px;
+            padding: 22px;
+            margin: 25px 0;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .note-box:hover {
+            background: rgba(52, 152, 219, 0.12);
+            border-color: #3498db;
+        }
+
+        .note-box i {
+            color: #3498db;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .note-box p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        /* باکس عکس (شبیه‌ساز نصب) */
+        .image-box {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border: 2px dashed #3498db;
+            border-radius: 12px;
+            padding: 40px 20px;
+            color: #b3b3b3;
+        }
+
+        .image-placeholder i {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .image-placeholder p {
+            color: #b3b3b3;
+        }
+
+        /* تمرینات */
+        .exercises-section {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.08), rgba(52, 152, 219, 0.08));
+            border: 1px solid #2ecc71;
+            border-radius: 28px;
+            padding: 35px;
+            margin: 45px 0 30px;
+        }
+
+        .exercises-title {
+            color: #2ecc71;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .exercises-title i {
+            background: rgba(46, 204, 113, 0.15);
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        .exercise-item {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            transition: all 0.3s;
+        }
+
+        .exercise-item:hover {
+            border-color: #2ecc71;
+            transform: translateX(-5px);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .exercise-number {
+            color: #3498db;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+
+        /* فوتر جلسه */
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(52, 152, 219, 0.3);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(46, 204, 113, 0.15));
+            border: 1px solid rgba(52, 152, 219, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-color: transparent;
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-btn i {
+            transition: transform 0.3s;
+        }
+
+        .nav-btn:hover i {
+            transform: translateX(-5px);
+        }
+
+        .date {
+            color: #b3b3b3;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .date i {
+            color: #3498db;
+        }
+
+        /* ===== ریسپانسیو کامل ===== */
+        
+        @media (max-width: 992px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .session-card {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px 12px;
+            }
+
+            .session-card {
+                padding: 25px 18px;
+                border-radius: 28px;
+            }
+
+            .session-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .session-number {
+                width: 65px;
+                height: 65px;
+                font-size: 2rem;
+            }
+
+            .session-title {
+                font-size: 1.8rem;
+            }
+
+            .intro-section {
+                padding: 22px 18px;
+            }
+
+            .intro-section p {
+                font-size: 1rem;
+            }
+
+            .content-card {
+                padding: 22px 18px;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .important-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .note-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .exercises-section {
+                padding: 25px 18px;
+            }
+
+            .exercises-title {
+                font-size: 1.4rem;
+            }
+
+            .session-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-btn {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .session-card {
+                padding: 20px 15px;
+            }
+
+            .session-number {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+            }
+
+            .session-title {
+                font-size: 1.5rem;
+            }
+
+            .session-title i {
+                font-size: 1.5rem;
+                padding: 8px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .steps-list li {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-right: 0;
+            }
+
+            .steps-list li::before {
+                margin-bottom: 8px;
+            }
+
+            .exercise-item {
+                padding: 18px;
+                text-align: center;
+            }
+
+            .back-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .date {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .session-title {
+                font-size: 1.3rem;
+            }
+
+            .intro-section p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .steps-list li {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* اسکرول‌بار زیبا */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2ecc71, #3498db);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- لینک بازگشت -->
+        <a href="/course/python-vip-content" class="back-link animate-float">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <!-- کارت اصلی -->
+        <div class="session-card">
+            <!-- هدر -->
+            <div class="session-header">
+                <div class="session-number">۳</div>
+                <h1 class="session-title">
+                    <i class="fas fa-download"></i>
+                    نصب پایتون روی ویندوز
+                </h1>
+            </div>
+
+            <!-- معرفی -->
+            <div class="intro-section">
+                <p>
+                    <span class="highlight-green">تبریک میگم!</span> بالاخره رسیدیم به اولین قدم عملی. تا اینجا فهمیدیم برنامه‌نویسی چیه، پایتون کیه و چرا باید یادش بگیریم. حالا وقتشه که 
+                    <span class="highlight-blue">پایتون رو روی کامپیوتر خودمون نصب کنیم</span> و آماده بشیم برای نوشتن اولین برنامه.
+                </p>
+                <p>
+                    <span class="highlight-green">نگران نباش!</span> این کار خیلی سادست. من قدم به قدم کنارت هستم تا هیچ مشکلی پیش نیاد. اگه جاییتو درست نفهمیدی، می‌تونی برگردی و دوباره بخونی.
+                </p>
+            </div>
+
+            <!-- دو ستون: پیش‌نیازها و نکات -->
+            <div class="grid-2">
+                <!-- ستون راست: پیش‌نیازها -->
+                <div class="content-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        قبل از نصب چک کن
+                    </h3>
+                    <ul class="steps-list" style="counter-reset: step-counter 0;">
+                        <li>
+                            <strong>ویندوز آپدیت:</strong> بهتره ویندوزت آخرین آپدیت رو داشته باشه (ویندوز ۱۰ یا ۱۱)
+                        </li>
+                        <li>
+                            <strong>حداقل ۱ گیگ فضای خالی:</strong> پایتون خیلی کم جا می‌گیره، اما برای نصب به چند صد مگ نیاز داریم
+                        </li>
+                        <li>
+                            <strong>اتصال اینترنت:</strong> برای دانلود پایتون نیاز به اینترنت داری
+                        </li>
+                        <li>
+                            <strong>دسترسی ادمین:</strong> باید دسترسی مدیر (ادمین) داشته باشی تا بتونی نصب کنی
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ستون چپ: نکات مهم -->
+                <div class="content-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-lightbulb"></i>
+                        نکات طلایی قبل از نصب
+                    </h3>
+                    <ul class="feature-list" style="list-style: none;">
+                        <li style="display: flex; gap: 12px; margin-bottom: 18px; color: #e0e0e0;">
+                            <i class="fas fa-check-circle" style="color: #2ecc71; font-size: 1.2rem;"></i>
+                            <span><strong>نسخه مناسب:</strong> همیشه آخرین نسخه پایدار رو دانلود کن (الان ۳.۱۳)</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; margin-bottom: 18px; color: #e0e0e0;">
+                            <i class="fas fa-exclamation-triangle" style="color: #e74c3c; font-size: 1.2rem;"></i>
+                            <span><strong>هشدار:</strong> حواست باشه تیک <span class="highlight-red">Add Python to PATH</span> رو فراموش نکنی!</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; margin-bottom: 18px; color: #e0e0e0;">
+                            <i class="fas fa-shield-alt" style="color: #3498db; font-size: 1.2rem;"></i>
+                            <span><strong>آنتی‌ویروس:</strong> ممکنه آنتی‌ویروس اخطار بده، نگران نباش، پایتون امنه</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- مراحل نصب -->
+            <div class="content-card" style="margin: 30px 0;">
+                <h3 class="card-title">
+                    <i class="fas fa-list-ol"></i>
+                    مراحل نصب پایتون (گام به گام)
+                </h3>
+
+                <ul class="steps-list">
+                    <li>
+                        <strong>وارد سایت رسمی پایتون بشو:</strong>
+                        <span style="color: #3498db; display: block; margin-top: 5px;">python.org</span>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">روی دکمه Downloads که زرد رنگه کلیک کن</span>
+                    </li>
+
+                    <li>
+                        <strong>انتخاب نسخه مناسب:</strong>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">سایت به طور خودکار نسخه مناسب ویندوزتو پیشنهاد میده. روی دکمه Python 3.13.1 کلیک کن</span>
+                    </li>
+
+                    <li>
+                        <strong>اجرای فایل نصب:</strong>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">بعد از دانلود، فایل exe رو اجرا کن. اگر پنجره User Account Control اومد، گزینه Yes رو بزن</span>
+                    </li>
+
+                    <li>
+                        <strong>مهم‌ترین قدم:</strong>
+                        <span style="color: #e74c3c; display: block; font-size: 1rem; font-weight: 600;">✅ تیک گزینه "Add Python to PATH" رو حتماً بزن!</span>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">بعدش گزینه "Install Now" رو انتخاب کن</span>
+                    </li>
+
+                    <li>
+                        <strong>صبر کن تا نصب تموم بشه:</strong>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">حدود ۱-۲ دقیقه طول میکشه. آخرش یه پیغام "Setup was successful" می‌بینی</span>
+                    </li>
+
+                    <li>
+                        <strong>تست نصب:</strong>
+                        <span style="color: #b3b3b3; display: block; font-size: 0.95rem;">کلید ویندوز + R رو بزن، cmd بنویس و اینتر کن. تو خط فرمان بنویس:</span>
+                        <div class="code-box">
+                            <pre>python --version</pre>
+                        </div>
+                        <span style="color: #2ecc71; display: block; font-size: 0.95rem;">اگه چیزی شبیه Python 3.13.1 دیدی، یعنی نصب درسته! 🎉</span>
+                    </li>
+                </ul>
+
+                <!-- باکس شبیه‌ساز تصویر -->
+                <div class="image-box">
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>تصویر صفحه نصب پایتون (تیک Add Python to PATH)</p>
+                        <span style="color: #3498db; font-size: 0.9rem;">[ در نسخه نهایی، تصویر واقعی قرار می‌گیره ]</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- باکس هشدار خیلی مهم -->
+            <div class="important-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>⚠️ هشدار خیلی مهم:</strong>
+                    <p style="margin-top: 10px;">
+                        اگر تیک <span class="highlight-red">Add Python to PATH</span> رو فراموش کنی، بعداً تو خط فرمان وقتی python می‌نویسی، ارور می‌خوری. 
+                        اگه فراموش کردی، می‌تونی پایتون رو پاک کنی و دوباره با تیک زدن این گزینه نصب کنی.
+                    </p>
+                </div>
+            </div>
+
+            <!-- تست نصب در ویندوز -->
+            <div class="grid-2">
+                <div class="content-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-terminal"></i>
+                        تست نصب با CMD
+                    </h3>
+                    <p style="color: #e0e0e0; margin-bottom: 15px;">
+                        بعد از نصب، خط فرمان (CMD) رو باز کن و این دستورات رو به ترتیب بزن:
+                    </p>
+                    <div class="code-box">
+                        <pre><span class="comment"># چک کردن نسخه پایتون</span>
+<span class="command">python --version</span>
+
+<span class="comment"># چک کردن pip (مدیریت بسته‌ها)</span>
+<span class="command">pip --version</span>
+
+<span class="comment"># وارد شدن به محیط تعاملی پایتون</span>
+<span class="command">python</span></pre>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        اگر خطا دیدی چیکار کنی؟
+                    </h3>
+                    <ul class="feature-list" style="list-style: none;">
+                        <li style="display: flex; gap: 12px; margin-bottom: 15px;">
+                            <i class="fas fa-times-circle" style="color: #e74c3c;"></i>
+                            <span><strong>'python' not recognized:</strong> یعنی PATH رو تیک نزدی، دوباره نصب کن</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; margin-bottom: 15px;">
+                            <i class="fas fa-shield-alt" style="color: #f39c12;"></i>
+                            <span><strong>Access Denied:</strong> با دسترسی ادمین اجرا کن</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; margin-bottom: 15px;">
+                            <i class="fas fa-globe" style="color: #3498db;"></i>
+                            <span><strong>Download Error:</strong> اینترنتت رو چک کن یا از دانلود منیجر استفاده کن</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- باکس نکته -->
+            <div class="note-box">
+                <i class="fas fa-info-circle"></i>
+                <p>
+                    <strong>نکته جالب:</strong> پایتون روی ویندوز، مک و لینوکس نصب میشه. اگر مک یا لینوکس داری، نگران نباش، توی جلسات بعدی برات توضیح میدم.
+                </p>
+            </div>
+
+            <!-- خلاصه جلسه -->
+            <div class="content-card">
+                <h3 class="card-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    خلاصه جلسه سوم
+                </h3>
+                <ul class="feature-list" style="list-style: none;">
+                    <li style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        <span>از سایت python.org آخرین نسخه پایتون رو دانلود کن</span>
+                    </li>
+                    <li style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        <span>موقع نصب، حتماً تیک <strong>Add Python to PATH</strong> رو بزن</span>
+                    </li>
+                    <li style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        <span>بعد از نصب، با دستور python --version توی CMD تست کن</span>
+                    </li>
+                    <li style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        <span>اگه خطا دیدی، مشکل از PATH هست، دوباره نصب کن</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- تمرینات -->
+            <div class="exercises-section">
+                <h3 class="exercises-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرین‌های جلسه سوم
+                </h3>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۱:</span>
+                        پایتون رو روی ویندوزت نصب کن. بعد از نصب، توی CMD دستور python --version رو بزن و نتیجه رو برام بنویس.
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۲:</span>
+                        توی CMD وارد محیط تعاملی پایتون بشو (با دستور python) و یه پیغام ساده مثل "Hello World" رو چاپ کن.
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۳:</span>
+                        فرض کن یکی از دوستات موقع نصب، تیک Add Python to PATH رو فراموش کرده. بهش توضیح بده چطور می‌تونه مشکلشو حل کنه.
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۴:</span>
+                تحقیق کن ببین pip چیه و چه کاربردی داره. توی CMD دستور pip list رو بزن و ببین چی نشون میده.
+                    </p>
+                </div>
+            </div>
+
+            <!-- فوتر -->
+            <div class="session-footer">
+                <a href="/course/session/4" class="nav-btn">
+                    جلسه بعدی: نصب VS Code
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                
+                <div class="date">
+                    <i class="fas fa-calendar-alt"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

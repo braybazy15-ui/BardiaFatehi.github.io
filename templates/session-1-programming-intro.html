@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>جلسه ۱ - برنامه‌نویسی یعنی چی؟ | آکادمی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* متغیرهای رنگی - دقیقاً مثل سایت اصلی */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --card-bg: rgba(20, 20, 20, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-blue: #3498db;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --border-color: rgba(52, 152, 219, 0.3);
+            --transition-fast: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* انیمیشن بسیار سبک - فقط opacity و transform */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* لینک بازگشت */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 10px 18px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            transition: background-color 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .back-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: var(--border-color);
+        }
+
+        .back-link i {
+            font-size: 0.8rem;
+        }
+
+        /* کارت اصلی جلسه */
+        .session-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 30px 25px;
+            margin-bottom: 25px;
+            transition: border-color 0.2s;
+        }
+
+        .session-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        /* هدر جلسه */
+        .session-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .session-number {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .session-title {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            color: var(--text-primary);
+            margin: 0;
+            flex: 1;
+        }
+
+        .session-title i {
+            color: var(--accent-blue);
+            margin-left: 8px;
+        }
+
+        /* بخش معرفی */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.08), rgba(46, 204, 113, 0.08));
+            border-right: 4px solid var(--accent-green);
+            padding: 22px 20px;
+            border-radius: 16px;
+            margin: 25px 0;
+        }
+
+        .intro-box p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .intro-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .blue-highlight {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* عنوان‌های بخش‌ها */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-blue);
+        }
+
+        .section-title span {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+            background: rgba(46, 204, 113, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        /* محتوای آموزشی */
+        .content-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .content-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .example-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            border-right: 4px solid var(--accent-blue);
+        }
+
+        .example-title {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-desc {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* کدها */
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 15px 0;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            border: 1px solid #333;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .code-line {
+            display: block;
+            line-height: 1.8;
+            color: #d4d4d4;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .keyword {
+            color: #569cd6;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .function {
+            color: #dcdcaa;
+        }
+
+        /* باکس نکته */
+        .note-box {
+            background: rgba(52, 152, 219, 0.08);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 25px 0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .note-box i {
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .note-box p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* لیست‌ها */
+        .custom-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .custom-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .custom-list li:hover {
+            background: rgba(52, 152, 219, 0.08);
+        }
+
+        .custom-list i {
+            color: var(--accent-green);
+            font-size: 1rem;
+            width: 20px;
+        }
+
+        /* تمرین */
+        .exercise-box {
+            background: rgba(46, 204, 113, 0.05);
+            border: 1px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .exercise-title {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .exercise-item p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .exercise-number {
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* دکمه‌های پایین */
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .nav-btn i {
+            color: var(--accent-blue);
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .session-card {
+                padding: 20px 18px;
+            }
+
+            .session-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .intro-box p {
+                font-size: 1rem;
+            }
+
+            .code-block {
+                font-size: 0.85rem;
+                padding: 15px;
+            }
+
+            .note-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .session-footer {
+                flex-direction: column;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .session-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .custom-list li {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .exercise-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/course/python-vip-content" class="back-link fade-in">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به لیست جلسات
+        </a>
+
+        <div class="session-card fade-in">
+            <!-- هدر جلسه -->
+            <div class="session-header">
+                <div class="session-number">۱</div>
+                <h1 class="session-title">
+                    <i class="fas fa-question-circle"></i>
+                    برنامه‌نویسی یعنی چی؟
+                </h1>
+            </div>
+
+            <!-- باکس معرفی و خوش‌آمدگویی -->
+            <div class="intro-box">
+                <p>
+                    <span class="highlight">به اولین جلسه از دوره VIP پایتون خوش آمدی.</span> 
+                    اینجا قراره با هم یه سفر جدید رو شروع کنیم. شاید الان برات سوال باشه که اصلاً برنامه‌نویسی چیه و به چه دردی می‌خوره. 
+                    نگران نباش، این جلسه رو کامل به این موضوع اختصاص دادیم تا هیچ ابهامی برات نمونه.
+                </p>
+                <p>
+                    من <span class="blue-highlight">بردیا فاتحی</span> هستم و کنارت هستم تا این مسیر رو قدم به قدم با هم بریم. 
+                    قول می‌دم که برنامه‌نویسی رو به ساده‌ترین شکل ممکن یاد بگیری.
+                </p>
+            </div>
+
+            <!-- بخش اصلی آموزش -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    برنامه‌نویسی یعنی چی؟ 
+                    <span>مثال روزمره</span>
+                </h2>
+                
+                <p>
+                    بیا با یه مثال ساده شروع کنیم. فرض کن می‌خوای به یه نفر که تا حالا چای درست نکرده، یاد بدی چطور چای درست کنه. 
+                    بهش چی می‌گی؟ احتمالاً یه سری دستور پشت سر هم بهش می‌دی:
+                </p>
+
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-tea"></i>
+                        دستور تهیه چای:
+                    </div>
+                    <div class="code-block">
+                        <span class="code-line">۱. کتری رو پر از آب کن</span>
+                        <span class="code-line">۲. کتری رو بذار روی گاز</span>
+                        <span class="code-line">۳. گاز رو روشن کن</span>
+                        <span class="code-line">۴. صبر کن تا آب جوش بیاد</span>
+                        <span class="code-line">۵. قوری رو آماده کن</span>
+                        <span class="code-line">۶. چای رو داخل قوری بریز</span>
+                        <span class="code-line">۷. آب جوش رو به قوری اضافه کن</span>
+                        <span class="code-line">۸. بذار چای دم بکشه</span>
+                    </div>
+                </div>
+
+                <p>
+                    <span class="highlight">برنامه‌نویسی دقیقاً همینه!</span> 
+                    یعنی به کامپیوتر می‌گیم که چکار کنه. کامپیوتر مثل همون آدمیه که چای درست کردن بلد نیست. 
+                    ما باید <span class="blue-highlight">قدم به قدم</span> بهش بگیم که چکار کنه. به این قدم‌ها می‌گن "کد" یا "برنامه".
+                </p>
+
+                <div class="note-box">
+                    <i class="fas fa-info-circle"></i>
+                    <p>
+                        <strong>نکته مهم:</strong> کامپیوترها خیلی خیلی سریع هستن، اما اصلاً باهوش نیستن! 
+                        اونا دقیقاً همون کاری رو می‌کنن که ما بهشون می‌گیم. پس اگه برنامه درست کار نکرد، 
+                        یعنی ما درست بهش نگفتیم چکار کنه.
+                    </p>
+                </div>
+            </div>
+
+            <!-- مثال دوم -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-robot"></i>
+                    یه مثال دیگه: رستوران
+                </h2>
+
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-utensils"></i>
+                        سفارش دادن غذا:
+                    </div>
+                    <p class="example-desc">
+                        وقتی می‌ری رستوران، به گارسون می‌گی "یک پیتزا می‌خوام". گارسون اینو به آشپز می‌گه، 
+                        آشپز مواد رو آماده می‌کنه و پیتزا رو درست می‌کنه و برات میاره.
+                    </p>
+                    <p class="example-desc">
+                        توی برنامه‌نویسی هم همینطوره:
+                    </p>
+                    <div class="code-block">
+                        <span class="code-line">ما (مشتری) --(سفارش)--> برنامه --(درخواست)--> کامپیوتر</span>
+                        <span class="code-line">کامپیوتر --(نتیجه)--> برنامه --(خروجی)--> ما</span>
+                    </div>
+                </div>
+
+                <p>
+                    به زبان ساده‌تر، برنامه‌نویسی یعنی <span class="highlight">ارتباط برقرار کردن با کامپیوتر</span> به زبونی که خودش می‌فهمه، 
+                    تا کارهایی که ما می‌خوایم رو انجام بده.
+                </p>
+            </div>
+
+            <!-- چرا برنامه‌نویسی یاد بگیریم -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-trophy"></i>
+                    چرا برنامه‌نویسی یاد بگیریم؟
+                </h2>
+
+                <ul class="custom-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>حل مسئله:</strong> برنامه‌نویسی بهت یاد می‌ده چطور مسائل رو به بخش‌های کوچیک تقسیم کنی و حلشون کنی.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>خلاقیت:</strong> می‌تونی ایده‌هات رو به واقعیت تبدیل کنی. هر چی فکر کنی، می‌تونی بسازی!</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>بازار کار:</strong> برنامه‌نویسی یکی از پردرآمدترین شغل‌های دنیاست.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>کار از هر جا:</strong> می‌تونی دورکاری کنی، فریلنسری بزنی یا استخدام بشی.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>تفکر منطقی:</strong> ذهنت مرتب‌تر می‌شه و منطقی‌تر فکر می‌کنی.</span>
+                    </li>
+                </ul>
+
+                <div class="note-box">
+                    <i class="fas fa-heart" style="color: var(--accent-red);"></i>
+                    <p>
+                        <strong>حرف دل:</strong> برنامه‌نویسی مثل دوچرخه‌سواری می‌مونه. اولش شاید زمین بخوری، شاید سخت باشه، 
+                        اما وقتی یاد بگیری، دیگه هیچوقت فراموش نمی‌کنی و می‌تونی ازش لذت ببری.
+                    </p>
+                </div>
+            </div>
+
+            <!-- خلاصه جلسه -->
+            <div class="content-box">
+                <h2 class="section-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    خلاصه جلسه اول
+                </h2>
+
+                <ul class="custom-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>برنامه‌نویسی یعنی دادن دستورات قدم به قدم به کامپیوتر</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>کامپیوترها سریع هستن ولی باهوش نیستن - دقیقاً همون کاری رو می‌کنن که بهشون می‌گیم</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>برنامه‌نویسی به حل مسئله، خلاقیت و تفکر منطقی کمک می‌کنه</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>بازار کار عالی و فرصت‌های شغلی متنوع داره</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- تمرین‌های جلسه -->
+            <div class="exercise-box">
+                <h3 class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرین‌های جلسه اول
+                </h3>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۱:</span>
+                        به نظرت توی زندگی روزمره، چه کارهای دیگه‌ای هستن که بشه مثل برنامه‌نویسی براشون دستور نوشت؟ 
+                        ۳ تا مثال بزن.
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۲:</span>
+                        فرض کن می‌خوای به یه آدم فضایی که هیچی از زندگی روی زمین نمی‌دونه، یاد بدی چطور "نان و پنیر" درست کنه. 
+                        قدم به قدم براش بنویس.
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۳:</span>
+                        به نظرت چرا کامپیوترها علی‌رغم سرعت بالاشون، گاهی اشتباه می‌کنن؟ دلیلش چیه؟
+                    </p>
+                </div>
+
+                <div class="exercise-item">
+                    <p>
+                        <span class="exercise-number">تمرین ۴:</span>
+                        اگه قرار بود تو یه جمله به یه دوستت بگی برنامه‌نویسی یعنی چی، چی می‌گفتی؟
+                    </p>
+                </div>
+            </div>
+
+            <!-- بخش پایانی و حرکت به جلسه بعد -->
+            <div class="session-footer">
+                <div class="nav-buttons">
+                    <a href="/course/session/2" class="nav-btn">
+                        جلسه بعدی
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                    <i class="fas fa-calendar-alt" style="color: var(--accent-blue);"></i>
+                    ۶ اسفند ۱۴۰۴
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

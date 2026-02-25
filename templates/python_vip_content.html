@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>دوره VIP برنامه نویسی با پایتون | آکادمی بردیا فاتحی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* متغیرهای رنگی */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --card-bg: rgba(20, 20, 20, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-blue: #3498db;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --accent-yellow: #f1c40f;
+            --accent-purple: #9b59b6;
+            --border-color: rgba(52, 152, 219, 0.3);
+            --transition-fast: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* هدر */
+        .course-header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(52,152,219,0.2));
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .course-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .course-header h1 i {
+            color: var(--accent-blue);
+            margin-left: 10px;
+        }
+
+        .course-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .course-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(46,204,113,0.15);
+            border: 1px solid var(--accent-green);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-top: 20px;
+            color: var(--accent-green);
+        }
+
+        /* بخش‌بندی */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 50px 0 30px;
+        }
+
+        .section-divider-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .section-divider-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 25px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section-divider-title i {
+            font-size: 1.2rem;
+        }
+
+        /* گرید جلسات */
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        /* کارت جلسه */
+        .session-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 25px 20px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .session-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(52,152,219,0.3);
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(52,152,219,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .session-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .session-number {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .session-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .session-title i {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .session-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .session-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .session-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .session-meta-item i {
+            color: var(--accent-green);
+        }
+
+        /* کارت ویژه برای جلسه آخر */
+        .session-card.special {
+            border: 2px solid var(--accent-green);
+            background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(52,152,219,0.1));
+        }
+
+        .session-card.special .session-number {
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+        }
+
+        /* فوتر */
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding: 30px 0;
+            border-top: 2px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .back-to-course {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 12px 25px;
+            background: rgba(52,152,219,0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all var(--transition-fast);
+        }
+
+        .back-to-course:hover {
+            background: rgba(52,152,219,0.2);
+            transform: translateX(-10px);
+        }
+
+        .support-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: all var(--transition-fast);
+        }
+
+        .support-btn.telegram {
+            background: linear-gradient(135deg, #0088cc, #006699);
+        }
+
+        .support-btn.rubika {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+
+        .support-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .copyright i {
+            color: var(--accent-red);
+            margin: 0 5px;
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .course-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-divider {
+                flex-direction: column;
+            }
+
+            .section-divider-title {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .sessions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+            }
+
+            .support-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .support-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- هدر دوره -->
+        <header class="course-header">
+            <h1>
+                <i class="fab fa-python"></i>
+                دوره VIP برنامه نویسی با پایتون
+            </h1>
+            <p>
+                آموزش کامل و پروژه‌محور از صفر تا صد | ۲۸ جلسه | تمرین و پروژه
+            </p>
+            <div class="course-badge">
+                <i class="fas fa-crown"></i>
+                دوره ویژه با پشتیبانی یک ماهه
+            </div>
+        </header>
+
+        <!-- ========== بخش ۱: شروع کار ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-hand-peace"></i>
+                بخش ۱: شروع کار (جلسات ۱-۴)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۱ -->
+            <div class="session-card" onclick="window.location.href='/course/session/1'">
+                <div class="session-number">۱</div>
+                <h3 class="session-title">
+                    <i class="fas fa-question-circle"></i>
+                    برنامه‌نویسی یعنی چی؟
+                </h3>
+                <p class="session-desc">
+                    آشنایی با مفاهیم پایه برنامه‌نویسی با مثال‌های روزمره (چای درست کردن، کارهای روزانه)
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۳ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲ -->
+            <div class="session-card" onclick="window.location.href='/course/session/2'">
+                <div class="session-number">۲</div>
+                <h3 class="session-title">
+                    <i class="fab fa-python"></i>
+                    پایتون چیه و چرا یادش می‌گیریم؟
+                </h3>
+                <p class="session-desc">
+                    معرفی زبان پایتون، بازار کار، آینده شغلی و مقایسه با زبان‌های دیگه
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۲ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۳ -->
+            <div class="session-card" onclick="window.location.href='/course/session/3'">
+                <div class="session-number">۳</div>
+                <h3 class="session-title">
+                    <i class="fas fa-download"></i>
+                    نصب پایتون روی ویندوز
+                </h3>
+                <p class="session-desc">
+                    نصب گام به گام پایتون با عکس، تنظیم PATH، تست نصب
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۱ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۴ -->
+            <div class="session-card" onclick="window.location.href='/course/session/4'">
+                <div class="session-number">۴</div>
+                <h3 class="session-title">
+                    <i class="fas fa-code"></i>
+                    نصب VS Code و اولین برنامه
+                </h3>
+                <p class="session-desc">
+                    نصب ویرایشگر کد، آشنایی با محیط، نوشتن اولین برنامه "سلام دنیا!"
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۲ تمرین</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۲: چاپ و متغیرها ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-print"></i>
+                بخش ۲: چاپ و متغیرها (جلسات ۵-۸)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۵ -->
+            <div class="session-card" onclick="window.location.href='/course/session/5'">
+                <div class="session-number">۵</div>
+                <h3 class="session-title">
+                    <i class="fas fa-print"></i>
+                    دستور print - خروجی گرفتن
+                </h3>
+                <p class="session-desc">
+                    کار با متن، کاراکترهای خاص مثل \n، چاپ چند خطی
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۶ -->
+            <div class="session-card" onclick="window.location.href='/course/session/6'">
+                <div class="session-number">۶</div>
+                <h3 class="session-title">
+                    <i class="fas fa-box"></i>
+                    متغیرها - ظرف‌های اطلاعات
+                </h3>
+                <p class="session-desc">
+                    انواع داده، قوانین نام‌گذاری، تعریف متغیر
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۶ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۷ -->
+            <div class="session-card" onclick="window.location.href='/course/session/7'">
+                <div class="session-number">۷</div>
+                <h3 class="session-title">
+                    <i class="fas fa-keyboard"></i>
+                    دریافت از کاربر با input
+                </h3>
+                <p class="session-desc">
+                    تعامل با کاربر، تبدیل نوع داده
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۸ -->
+            <div class="session-card" onclick="window.location.href='/course/session/8'">
+                <div class="session-number">۸</div>
+                <h3 class="session-title">
+                    <i class="fas fa-tasks"></i>
+                    تمرین و مرور جلسات ۵-۷
+                </h3>
+                <p class="session-desc">
+                    ۱۰ تمرین متنوع + حل تشریحی برای تثبیت یادگیری
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه تمرین</span>
+                    <span class="session-meta-item"><i class="fas fa-check-circle"></i> پاسخنامه</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۳: عملیات ریاضی ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-calculator"></i>
+                بخش ۳: عملیات ریاضی (جلسات ۹-۱۲)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۹ -->
+            <div class="session-card" onclick="window.location.href='/course/session/9'">
+                <div class="session-number">۹</div>
+                <h3 class="session-title">
+                    <i class="fas fa-plus-circle"></i>
+                    عملگرهای ریاضی
+                </h3>
+                <p class="session-desc">
+                    جمع، تفریق، ضرب، تقسیم، توان، باقیمانده
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۰ -->
+            <div class="session-card" onclick="window.location.href='/course/session/10'">
+                <div class="session-number">۱۰</div>
+                <h3 class="session-title">
+                    <i class="fas fa-balance-scale"></i>
+                    عملگرهای مقایسه‌ای
+                </h3>
+                <p class="session-desc">
+                    بزرگتر، کوچکتر، مساوی، نامساوی
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۱ -->
+            <div class="session-card" onclick="window.location.href='/course/session/11'">
+                <div class="session-number">۱۱</div>
+                <h3 class="session-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    تمرین عملیات ریاضی
+                </h3>
+                <p class="session-desc">
+                    ۸ تمرین ترکیبی از عملگرها
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه تمرین</span>
+                    <span class="session-meta-item"><i class="fas fa-check-circle"></i> پاسخنامه</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۲ -->
+            <div class="session-card" onclick="window.location.href='/course/session/12'">
+                <div class="session-number">۱۲</div>
+                <h3 class="session-title">
+                    <i class="fas fa-calculator"></i>
+                    پروژه: ماشین حساب ساده
+                </h3>
+                <p class="session-desc">
+                    ساخت ماشین حساب با چهار عمل اصلی
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> راهنمای پروژه</span>
+                    <span class="session-meta-item"><i class="fas fa-code"></i> کد نهایی</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۴: شرط‌ها ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-code-branch"></i>
+                بخش ۴: شرط‌ها (جلسات ۱۳-۱۶)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۱۳ -->
+            <div class="session-card" onclick="window.location.href='/course/session/13'">
+                <div class="session-number">۱۳</div>
+                <h3 class="session-title">
+                    <i class="fas fa-code-branch"></i>
+                    if ساده
+                </h3>
+                <p class="session-desc">
+                    تصمیم‌گیری یک‌طرفه در برنامه
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۴ -->
+            <div class="session-card" onclick="window.location.href='/course/session/14'">
+                <div class="session-number">۱۴</div>
+                <h3 class="session-title">
+                    <i class="fas fa-code-branch"></i>
+                    if-else - دو راهی
+                </h3>
+                <p class="session-desc">
+                    تصمیم‌گیری دو طرفه
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۵ -->
+            <div class="session-card" onclick="window.location.href='/course/session/15'">
+                <div class="session-number">۱۵</div>
+                <h3 class="session-title">
+                    <i class="fas fa-code-branch"></i>
+                    if-elif-else - چند راهی
+                </h3>
+                <p class="session-desc">
+                    تصمیم‌گیری با چندین شرط
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۶ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۶ -->
+            <div class="session-card" onclick="window.location.href='/course/session/16'">
+                <div class="session-number">۱۶</div>
+                <h3 class="session-title">
+                    <i class="fas fa-gamepad"></i>
+                    پروژه: حدس سن
+                </h3>
+                <p class="session-desc">
+                    پروژه تشخیص رده سنی با شرط‌ها
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> راهنمای پروژه</span>
+                    <span class="session-meta-item"><i class="fas fa-code"></i> کد نهایی</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۵: حلقه‌ها ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-redo-alt"></i>
+                بخش ۵: حلقه‌ها (جلسات ۱۷-۲۰)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۱۷ -->
+            <div class="session-card" onclick="window.location.href='/course/session/17'">
+                <div class="session-number">۱۷</div>
+                <h3 class="session-title">
+                    <i class="fas fa-redo-alt"></i>
+                    حلقه while
+                </h3>
+                <p class="session-desc">
+                    تکرار تا وقتی شرط برقراره
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۸ -->
+            <div class="session-card" onclick="window.location.href='/course/session/18'">
+                <div class="session-number">۱۸</div>
+                <h3 class="session-title">
+                    <i class="fas fa-sync-alt"></i>
+                    حلقه for
+                </h3>
+                <p class="session-desc">
+                    تکرار روی محدوده مشخص
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۶ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۱۹ -->
+            <div class="session-card" onclick="window.location.href='/course/session/19'">
+                <div class="session-number">۱۹</div>
+                <h3 class="session-title">
+                    <i class="fas fa-layer-group"></i>
+                    حلقه‌های تو در تو
+                </h3>
+                <p class="session-desc">
+                    رسم اشکال با ستاره
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۰ -->
+            <div class="session-card" onclick="window.location.href='/course/session/20'">
+                <div class="session-number">۲۰</div>
+                <h3 class="session-title">
+                    <i class="fas fa-tasks"></i>
+                    تمرین و مرور حلقه‌ها
+                </h3>
+                <p class="session-desc">
+                    ۸ تمرین ترکیبی از حلقه‌ها
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه تمرین</span>
+                    <span class="session-meta-item"><i class="fas fa-check-circle"></i> پاسخنامه</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۶: لیست‌ها ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-list"></i>
+                بخش ۶: لیست‌ها (جلسات ۲۱-۲۴)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۲۱ -->
+            <div class="session-card" onclick="window.location.href='/course/session/21'">
+                <div class="session-number">۲۱</div>
+                <h3 class="session-title">
+                    <i class="fas fa-list"></i>
+                    لیست‌ها - معرفی
+                </h3>
+                <p class="session-desc">
+                    ایجاد لیست، انواع داده در لیست
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۲ -->
+            <div class="session-card" onclick="window.location.href='/course/session/22'">
+                <div class="session-number">۲۲</div>
+                <h3 class="session-title">
+                    <i class="fas fa-edit"></i>
+                    کار با لیست
+                </h3>
+                <p class="session-desc">
+                    ایندکس، برش، متدهای مهم
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۶ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۳ -->
+            <div class="session-card" onclick="window.location.href='/course/session/23'">
+                <div class="session-number">۲۳</div>
+                <h3 class="session-title">
+                    <i class="fas fa-search"></i>
+                    پیمایش لیست با حلقه
+                </h3>
+                <p class="session-desc">
+                    for روی لیست، جستجو در لیست
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۴ -->
+            <div class="session-card" onclick="window.location.href='/course/session/24'">
+                <div class="session-number">۲۴</div>
+                <h3 class="session-title">
+                    <i class="fas fa-tasks"></i>
+                    تمرین لیست‌ها
+                </h3>
+                <p class="session-desc">
+                    ۱۰ تمرین متنوع لیست
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه تمرین</span>
+                    <span class="session-meta-item"><i class="fas fa-check-circle"></i> پاسخنامه</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== بخش ۷: توابع ========== -->
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-title">
+                <i class="fas fa-function"></i>
+                بخش ۷: توابع (جلسات ۲۵-۲۸)
+            </div>
+            <div class="section-divider-line"></div>
+        </div>
+
+        <div class="sessions-grid">
+            <!-- جلسه ۲۵ -->
+            <div class="session-card" onclick="window.location.href='/course/session/25'">
+                <div class="session-number">۲۵</div>
+                <h3 class="session-title">
+                    <i class="fas fa-cube"></i>
+                    توابع - تعریف و صدا زدن
+                </h3>
+                <p class="session-desc">
+                    چرا تابع می‌نویسیم، ساختار تابع
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۴ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۶ -->
+            <div class="session-card" onclick="window.location.href='/course/session/26'">
+                <div class="session-number">۲۶</div>
+                <h3 class="session-title">
+                    <i class="fas fa-exchange-alt"></i>
+                    پارامتر و return
+                </h3>
+                <p class="session-desc">
+                    ورودی دادن به تابع، گرفتن خروجی
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه کامل</span>
+                    <span class="session-meta-item"><i class="fas fa-tasks"></i> ۵ تمرین</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۷ -->
+            <div class="session-card" onclick="window.location.href='/course/session/27'">
+                <div class="session-number">۲۷</div>
+                <h3 class="session-title">
+                    <i class="fas fa-tasks"></i>
+                    تمرین توابع
+                </h3>
+                <p class="session-desc">
+                    ۸ تمرین ترکیبی از توابع
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> جزوه تمرین</span>
+                    <span class="session-meta-item"><i class="fas fa-check-circle"></i> پاسخنامه</span>
+                </div>
+            </div>
+
+            <!-- جلسه ۲۸ - جلسه پایانی ویژه -->
+            <div class="session-card special" onclick="window.location.href='/course/session/28'">
+                <div class="session-number">۲۸</div>
+                <h3 class="session-title">
+                    <i class="fas fa-crown" style="color: var(--accent-green);"></i>
+                    پروژه نهایی: بازی حدس عدد
+                </h3>
+                <p class="session-desc">
+                    پروژه جامع با استفاده از همه مفاهیم (حلقه، شرط، تابع، لیست)
+                </p>
+                <div class="session-meta">
+                    <span class="session-meta-item"><i class="fas fa-file-alt"></i> راهنمای پروژه</span>
+                    <span class="session-meta-item"><i class="fas fa-code"></i> کد نهایی</span>
+                    <span class="session-meta-item"><i class="fas fa-star" style="color: gold;"></i> ویژه</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- فوتر -->
+        <footer>
+            <div class="footer-links">
+                <a href="/course/python-vip" class="back-to-course">
+                    <i class="fas fa-arrow-right"></i>
+                    بازگشت به صفحه اصلی دوره
+                </a>
+
+                <div class="support-buttons">
+                    <a href="https://t.me/Fatehi_Academy_Support" target="_blank" class="support-btn telegram">
+                        <i class="fab fa-telegram"></i>
+                        پشتیبانی تلگرام
+                    </a>
+                    <a href="https://rubika.ir/BardiyaFatehi" target="_blank" class="support-btn rubika">
+                        <i class="fas fa-comment-dots"></i>
+                        پشتیبانی روبیکا
+                    </a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>
+                    تمامی حقوق برای <strong>آکادمی برنامه نویسی بردیا فاتحی</strong> محفوظ است.
+                    <i class="fas fa-heart"></i>
+                    هر کسی می‌تونه برنامه‌نویس بشه، فقط کافیه درست یاد بگیره!
+                </p>
+                <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                    © ۱۴۰۴ - آکادمی برنامه نویسی بردیا فاتحی
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // اسکرول نرم به بالا
+        document.querySelectorAll('.session-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // لینک قبلاً توی onclick هست
+            });
+        });
+    </script>
+</body>
+</html>
